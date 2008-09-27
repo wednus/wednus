@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window title="Example for PEAR::XML_XUL" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <groupbox orient="horizontal">
+    <caption label="Using radiogroups" />
+    <radiogroup>
+      <radio label="This is foo" value="foo" />
+      <radio label="This is bar" value="bar" />
+      <radio label="This is selected" selected="true" value="foo" />
+    </radiogroup>
+  </groupbox>
+</window>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - ex_domlists_1.xul</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('dxul');
+</script>
+<script type='text/javascript'>
+W.event(window, 'onload', function(){
+    W.dxul.render({
+        code: W.$('code').value
+    });
+});
+
+</script>
+</head>
+<body>
+
+<textarea id='code' style='width:500px;height:300px;display:none'>
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window id="example-window" title="Example 7.3.1"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script>
+function addItem()
+{
+  document.getElementById('thelist').appendItem("Thursday", "thu");
+}
+</script>
+
+<listbox id="thelist"/>
+<button label="Add" oncommand="addItem();"/>
+</window>
+</textarea>
+
+</body>
+</html>

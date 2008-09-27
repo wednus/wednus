@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window title="Example for PEAR::XML_XUL" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <groupbox orient="vertical">
+    <caption label="Using input fields" />
+    <hbox>
+      <label control="name" value="Please enter your name:" />
+      <textbox id="name" size="20" />
+    </hbox>
+    <hbox>
+      <label control="comment" value="Please enter your comment:" />
+      <textbox id="comment" multiline="true" size="20" />
+    </hbox>
+  </groupbox>
+</window>

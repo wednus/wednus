@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wom.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+W.load('module/scavenger', 'wps,wom', 'module');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.wom == 'function', 'check wom module loading');
+//<-----------------------------------
+//<-----------------------------------
+
+//-----------------------------------> W.add (simple addition)
+var womObj = document.createElement('div');
+womObj.style.background = 'red';
+womObj.wps = '100,100,xcenter:0,ycenter:0';
+womObj = W.add(womObj);
+W.test(womObj.body.style.position == 'absolute', 'checking assigning default wps value');
+//<-----------------------------------
+timer.finish();
+</script>
+</head>
+
+<body>
+<textarea id='links' style='display:none;'>
+<hr>
+<a href="#" onclick="womObj.moveTo(0, 0)">womObj.moveTo(0, 0)</a><br><br>
+<a href="#" onclick="womObj.moveBy(100, 100)">womObj.moveBy(100, 100)</a><br><br>
+<a href="#" onclick="womObj.resizeTo(400, 300)">womObj.resizeTo(400, 300)</a><br><br>
+<a href="#" onclick="womObj.resizeBy(20, -20)">womObj.resizeBy(20, -20)</a><br><br>
+<a href="#" onclick="womObj.close()">womObj.close()</a>
+<a href="#" onclick="womObj.open();">womObj.open()</a><br><br>
+<a href="#" onclick="womObj.hide();">womObj.hide()</a>
+<a href="#" onclick="womObj.show();">womObj.show()</a><br><br>
+<hr>
+<a href="#" onclick="womObj.move('100,100,xcenter:0,ycenter:0');">womObj.move('100,100,xcenter:0,ycenter:0')</a><br><br>
+<hr>
+<a href="#" onclick="eventDispatch()">event dispatch start</a><br><br>
+</textarea>
+
+<textarea id='event_links' style='display:none;'>
+womObj.onclick = function(){alert('clicked!');};<br>
+womObj.onmouseout = function(){alert('mouseout!');};<br>
+womObj.onmove = function(){alert('moved!');};<br>
+womObj.onresize = function(){alert('resized!');};<br>
+</textarea>
+
+<script type='text/javascript'>
+var box = document.getElementById('_wednus_platform_');
+box.innerHTML += document.getElementById('links').value;
+
+function eventDispatch(){
+	womObj.onclick = function(){alert('clicked!');};
+	womObj.onmouseout = function(){alert('mouseout!');};
+	womObj.onmove = function(){alert('moved!');};
+	womObj.onresize = function(){alert('resized!');};
+	box.innerHTML += document.getElementById('event_links').value;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - interpreter.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('dxul');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+function parse(url){
+    var dom = new W.URL2DOM(url, function(dom, xml){
+        W.$('code').value = xml;
+    });
+};
+
+function domify(){
+    alert(new W.X2doc(W.$('code').value));
+};
+</script>
+
+<body bgcolor='black'>
+<input type='button' onclick='parse(document.getElementById("path").value)' value='URL2DOM' /><br>
+<input type=text id='path' value='../lib/sample/xulCounter.xul' style='width:500px;' /><br>
+<br>
+<input type='button' onclick='parse(document.getElementById("url").value)' value='URL2DOM2 : cross-domain' /><br>
+<input type=text id='url' value='http://wednus.com/imod/news_rss.php' style='width:500px;' /><br>
+<br>
+<input type='button' onclick='domify()' value='X2Doc'></input><br>
+
+<textarea id='code' style='width:500px;height:300px;'>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window title="Example for PEAR::XML_XUL" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+</window>
+</textarea>
+</body></html>

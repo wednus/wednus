@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - parser.js</title>
+<script type='text/javascript' src='../../../../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('dxul');
+</script>
+<script type='text/javascript'>
+W.event(window, 'onload', function(){
+    W.dxul.render({
+        code: W.$('code').value
+    });
+});
+</script>
+</head>
+<body>
+
+<textarea id='code' style='width:500px;height:300px;display:none'>
+<window
+    id='myWin'
+    title='My Window'
+    xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'
+    width='300'
+    height='300'>
+<listitem label="Cheddar"/>
+<listitem label="Cheddar"/>
+<listitem label="Cheddar"/>
+</window>
+</textarea>
+
+</body>
+</html>

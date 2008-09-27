@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - parser.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('dxul');
+</script>
+<script type='text/javascript'>
+W.event(window, 'onload', function(){
+    var xul = W.$('code').value;
+    var xulObj = new W.X2doc(xul);
+    W.dxul.interpreter(xulObj.core);
+});
+
+</script>
+</head>
+<body>
+
+<textarea id='code' style='width:500px;height:300px;display:none'>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window title="Example for PEAR::XML_XUL" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <groupbox orient="vertical">
+    <caption label="Using input fields" />
+    <hbox>
+      <label control="name" value="Please enter your name:" />
+      <textbox id="name" size="20" />
+    </hbox>
+    <hbox>
+      <label control="comment" value="Please enter your comment:" />
+      <textbox id="comment" multiline="true" size="20" />
+    </hbox>
+  </groupbox>
+</window>
+</textarea>
+
+</body>
+</html>

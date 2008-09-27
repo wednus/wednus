@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wps.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+W.load('module/scavenger', 'wps', 'module');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+// debugging helper functions
+function getChild(color){
+  var obj = document.createElement('div');
+  obj.style.background = color;
+  return obj;
+}
+
+//-----------------------------------> constructor
+W.test(W.top == 0, 'check wps module loading');
+//<-----------------------------------
+
+
+//-----------------------------------> W.wednusify()
+var b = document.createElement('div');
+b.style.top = '200px';
+b.style.left = '300px';
+b.style.width = '400px';
+b.style.height = '500px';
+b = W.wednusify(b);
+b.core.id = 'test';
+W.test(b.wps == '400,500,left:300,top:200', 'W.wednusfify - extract wps value');
+W.test(b.body, 'W.wednusify - body composition');
+W.test(b.core.id == 'test', 'W.wednusify - core composition');
+
+var a = document.createElement('div');
+W.test(!W.is_wednusified(a), 'W.is_wednusified - before');
+a = W.wednusify(a);
+W.test(W.is_wednusified(a), 'W.is_wednusified - after');
+W.test(a.wps == '100,100,left:100,top:100', 'W.wednusify - default wps value');
+W.add(a);
+W.test(a.body.style.position == 'absolute', 'W.wednusify - style.position');
+W.test(a.parent.path == W.path, 'W.add - the default parent(W)');
+W.test(a.parent.children.length == 1, 'W.add - adding a child to W');
+//<-----------------------------------
+
+
+//-----------------------------------> W.wednusify() : parent wednusifying
+var a1 = document.createElement('div');
+var a2 = document.createElement('div');
+a1 = W.add(a1, a2);
+W.test(W.is_wednusified(a1), 'W.is_wednusified - parent specified');
+W.test(W.is_wednusified(a1.parent), 'W.is_wednusified - converting parent - 1');
+W.test(a1.parent.parent.path == W.path, 'W.is_wednusified - converting parent - 2');
+W.test(a1.parent.children.length == 1, 'W.add - adding a child to other WPS object');
+W.test(a1.parent.children[0] == a1, 'W.add - children validity');
+//<-----------------------------------
+
+
+//-----------------------------------> W.add (simple addition)
+var simple = getChild('black');
+simple.wps = '100,100,right:0,bottom:0';
+simple = W.add(simple);
+W.test(simple.body.style.position == 'absolute', 'checking assigning default wps value');
+//<-----------------------------------
+
+//-----------------------------------> W.add (simple addition)
+simple2 = getChild('pink');
+simple2.wps = '100,100,left:50%,top:50%';
+simple2 = W.add(simple2);
+W.test(simple2.body.style.position == 'absolute', 'checking assigning default wps value');
+//<-----------------------------------
+
+//-----------------------------------> put children in parent(obj)
+// sample obj(1)
+var obj = document.createElement('div');
+obj.style.background = 'blue';
+obj.wps = '30%,30%,xcenter:0,ycenter:0';
+
+// sample obj(2)
+var obj2 = document.createElement('iframe');
+obj2.src = 'http://wednus.com';
+obj2.wps = '30%,30%,left:0,bottom:0';
+
+// sample obj(3)
+var obj3 = document.createElement('img');
+obj3.src = 'http://www.google.com/intl/en/images/logo.gif';
+obj3.wps = '30%,30%,right:0,top:0';
+
+// register objects to WPS
+W.add([obj, obj2, obj3]);
+
+var child1 = getChild('yellow');
+child1.wps = '100%,20,left:0,top:0';
+
+var child2 = getChild('green');
+child2.wps = '50%,20,right:0,bottom:0';
+
+var child3 = getChild('black');
+child3.wps = '20%,20%,xcenter:0,ycenter:0';
+
+var child4 = getChild('pink');
+child4.wps = '20,50%,right:20,bottom:0';
+
+var child5 = getChild('navy');
+child5.wps = '20,20,right:20,top:-20';
+
+// specify parent(anchor) object(obj)
+W.add([child1, child2, child3, child4, child5], obj);
+//<-----------------------------------
+
+function finish(){
+	timer.pause();
+	W.test('If you can see objects on bottom-left, center-middle and top-left, press OK.', 'W.add, W.onload');
+	W.test('Try to resize the browser, do objects on the screen reposition themselves automatically?', 'W.rePos');
+	timer.resume();
+	timer.finish();
+}
+
+
+W.event(window, 'onload', finish);
+</script>
+</head>
+<body>
+</body>
+</html>

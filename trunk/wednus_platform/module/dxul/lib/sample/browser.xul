@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet
+href="chrome://global/skin/" type="text/css"
+?>
+
+<window title="Example for PEAR::XML_XUL" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <box align="center" orient="vertical">
+    <browser height="230" id="myBrowser" src="http://pear.php.net" width="400" />
+    <description>Please use buttons to control the browser.</description>
+    <box align="center" orient="horizontal">
+      <button label="Goto PEAR" onclick="document.getElementById('myBrowser').setAttribute('src', 'http://pear.php.net')" tooltiptext="Click here to go to PEAR" />
+      <button label="Goto PHP.net" onclick="document.getElementById('myBrowser').setAttribute('src', 'http://www.php.net')" tooltiptext="Click here to go to PHP.net" />
+      <button label="Goto PECL" onclick="document.getElementById('myBrowser').setAttribute('src', 'http://pecl.php.net')" tooltiptext="Click here to go to PECL" />
+    </box>
+  </box>
+</window>

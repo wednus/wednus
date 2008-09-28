@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wss.js</title>
+<script type='text/javascript' src='../../../wednus.js?only'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/dkernel', 'wss', 'module');
+W.load('module/debug', 'Timer', 'module');
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//----------------------------------->
+//<-----------------------------------
+//-----------------------------------> constructor
+W.test(typeof W.style == 'function', 'check wss module loading');
+//<-----------------------------------
+
+
+//-----------------------------------> W.wss()
+var a = {style:{}};
+W.style(a, 'top:200px');
+W.test(a.style.top == '200px', 'WSS: W.test style property set (w/o prop def. proceeding)');
+W.style(a, 'top:10px;left:20px');
+W.test(a.style.top == '10px', 'WSS: W.test style property set - normal1');
+W.test(a.style.left == '20px', 'WSS: W.test style property set - normal2');
+W.style(a, 'top:100px;left;width;height')
+W.test(a.style.top == '100px', 'WSS: W.test style property set - 1');
+W.test(a.style.left == '100px', 'WSS: W.test style property set - 2 (relaying value)');
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

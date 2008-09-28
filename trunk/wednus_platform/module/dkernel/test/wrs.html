@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wrs.js</title>
+<script type='text/javascript' src='../../../wednus.js?only'></script>
+<script type='text/javascript'>
+W.load('module/dkernel', 'dkernel', 'module');  // W.body
+W.load('module/dkernel', 'wss', 'module');
+W.load('module/dkernel', 'xdoc', 'module');
+W.load('module/dkernel', 'wrs', 'module');
+W.load('module/debug', 'Timer', 'module');
+</script>
+
+<script type='text/javascript'>
+// add helpers for debugging
+var isLoaded = false;
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.loader != null, 'check wrs module loading');
+//<-----------------------------------
+
+//----------------------------------->
+// load a script
+W.request('wrs/target.txt', callback);
+//W.request('http://api.local.yahoo.com/MapsService/V1/geocode?appid=YahooDemo&street=701+First+Street&city=Sunnyvale&state=CA', callback);
+//W.request('http://wednus.com', callback);
+
+// evaluate script
+function callback(data){
+  eval(data);
+  timer.resume();
+  W.test(isLoaded, 'remote scripting');
+}
+//<-----------------------------------
+
+//TODO need to fix the proxy
+//W.proxy('http://api.local.yahoo.com/MapsService/V1/geocode?appid=dantheurer&location=78705', 'callback2');
+
+function callback2(data){
+  W.test(typeof W.x2doc(data) == 'object', 'remote scripting using proxy');
+  timer.finish();
+};
+
+timer.finish();
+//timer.pause();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>URL2DOM Control - code sample</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('debug');
+W.control('URL2DOM');
+</script>
+
+<script type='text/javascript'>
+var a = new W.URL2DOM('URL2DOM/xulCounter.xul', function(dom){alert(toXML(dom));});
+
+function toXML(dom){
+    if (dom.xml) {
+        return dom.xml;
+    }else if (typeof XMLSerializer != 'undefined') {
+        return new XMLSerializer().serializeToString(dom);
+    }
+}
+
+
+W.scroll(true);
+</script>
+ 
+</head>
+<body>
+</body>
+</html>

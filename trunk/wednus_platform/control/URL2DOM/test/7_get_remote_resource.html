@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>URL2DOM Control - parsing remote file contents</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('debug');
+W.control('URL2DOM');
+W.scroll(true);
+</script>
+
+<script type='text/javascript'>
+var a = new W.URL2DOM('http://xulplanet.com/tutorials/xultu/examples/ex_textimage_1.xul',
+    function(dom, xml){
+	    var result = '';
+	    for(var i = 0; i < dom.childNodes.length; ++i)
+	        result += W.dump(dom.childNodes[i]) + '<br>';
+	    document.write(result);
+	    document.close();
+	}
+);
+
+a.onerror = function(e){
+    alert(e);
+};
+</script>
+ 
+</head>
+<body>
+</body>
+</html>

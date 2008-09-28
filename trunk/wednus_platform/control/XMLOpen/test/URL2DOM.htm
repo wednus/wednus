@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test suit - URL2DOM.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+W.control('URL2DOM');
+</script>
+
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+var xml = new W.URL2DOM();
+W.test(xml == '', 'check the default constructor');
+
+var xml2 = new W.URL2DOM('URL2DOM/sample.xml');
+xml2.onload = function(){
+	W.test(typeof this.core == 'object', 'fetching file content');
+	timer.finish();
+};
+</script>
+
+<script type='text/javascript'>
+// object reusing test
+/*
+xml3.load('resource/sample.xml');
+xml3.onload = function(dom){
+	W.test(this.value == '<?xml version="1.0" encoding="ISO-8859-1"?><sample></sample>', 'URL2DOM object reuse');
+	timer.finish();
+};
+*/
+</script>
+
+</head>
+<body>
+</body>
+</html>

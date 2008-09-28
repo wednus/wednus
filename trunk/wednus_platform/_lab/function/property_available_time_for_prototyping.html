@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - add method to a class property</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+// is a class
+var Parent = function(){
+  // to refer .prop at a prototype, it should be placed after .prop
+  this.method1();
+
+  this.prop = 'prop';
+  this.method2();
+};
+
+Parent.prototype.method1 = function(){
+  W.test(typeof this.prop == 'undefined', '.prop is not available yet for prototyping');
+};
+
+Parent.prototype.method2 = function(){
+  W.test(this.prop == 'prop', '.prop is now available');
+};
+
+var child = new Parent();
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

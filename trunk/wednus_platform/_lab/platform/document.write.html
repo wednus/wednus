@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - _template</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript' src='document.write/include.js'></script>
+<script type='text/javascript'>
+// putting W.include, W.control, W.load is equivalent to doing it at the end of the 'wednus.js'
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+document.write('What is body to you now? : '+ document.body +'<br>');
+</script>
+
+<script type='text/javascript'>
+document.write('What is body to you now? : '+ document.body +'<br>');
+var timer = new W.Timer();
+timer.start();
+W.test(W, 'check Wednus Platform');
+W.test(typeof include == 'function', 'check additional resources');
+// (add more tests)
+
+include('document.write/A.js');
+W.test(typeof A == 'undefined', 'failing load A.js - 1');
+var c;
+A = c;
+
+include2('document.write/A.js');
+W.test(typeof A == 'undefined', 'failing load A.js - 2');
+</script>
+
+<script type='text/javascript'>
+W.test(typeof A == 'object', 'load A.js from a different script block');
+
+include2('document.write/B.js');
+W.test(typeof B == 'undefined', 'failing at dynamic script loading, load B.js');
+</script>
+</head>
+
+
+<body>
+<script type='text/javascript'>
+W.test(include3('document.write/C.js'), 'using dynamic loading');
+W.test(typeof C == 'undefined', 'failing load B.js');
+include('document.write/A.js');
+
+timer.finish();
+</script>
+</body>
+</html>

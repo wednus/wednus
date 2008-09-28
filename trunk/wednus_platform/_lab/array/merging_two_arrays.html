@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Object style enumeration</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+var arr = ['a','b','c'];
+var arr2 = ['d','e'];
+
+arr.splice(arr.length, 0, arr2);
+W.test(arr == 'a,b,c,d,e', 'merging two arrays');
+
+arr.splice(arr.length, 0, 'f,g'.split(','));
+W.test(arr == 'a,b,c,d,e,f,g', 'merging two arrays - 2');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

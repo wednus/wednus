@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - window_ie</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> platform load
+W.test(W, 'check Wednus Platform');
+//<-----------------------------------
+//-----------------------------------> 
+//<-----------------------------------
+var global = this;
+function winLen(){
+	var num = 0;
+	for(var i in global)
+		++num;
+	return num;
+};
+
+function names(){
+	var names = '';
+	for(var i in global)
+		names += i +'\n';
+	return names;
+};
+
+//-----------------------------------> check the moment namespace extension
+var beforeNumTopLevelNamespace = winLen();
+var openANamespace = {};
+var afterNumTopLevelNamespace = winLen();
+W.test(beforeNumTopLevelNamespace == afterNumTopLevelNamespace, 'no dynamic loading');
+//<-----------------------------------
+
+
+//-----------------------------------> 
+//<-----------------------------------
+W.namespace('include/test/wednus', 'json');
+</script>
+</head>
+<body>
+<script type='text/javascript'>
+afterNumTopLevelNamespace = winLen();
+W.test(beforeNumTopLevelNamespace != afterNumTopLevelNamespace, 'IE will fail on this');
+W.test(typeof json == 'object', 'but the included var is accessable');
+W.test(typeof window.json == 'object', 'access var through "window.json"');
+W.test(typeof window['json'] == 'object', 'access var using window["json"]');
+timer.finish();
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - select</title>
+<script type='text/javascript'>
+document.write('<div id="_wednus_platform_" style="display:none;position:absolute;">.</div>');
+document.close();
+
+var select = document.createElement('select');
+select.size = 3;
+document.body.appendChild(select);
+
+var option = document.createElement('option')
+// IE deosn't understand it : option.text = 'test';
+option.appendChild(document.createTextNode('test'));
+select.appendChild(option);
+
+
+
+var option = document.createElement('option')
+// IE deosn't understand it : option.text = 'test';
+option.appendChild(document.createTextNode('test'));
+select.appendChild(option);
+var option = document.createElement('option')
+// IE deosn't understand it : option.text = 'test';
+option.appendChild(document.createTextNode('test'));
+select.appendChild(option);
+
+</script>
+</head>
+<body>
+</body>
+</html>

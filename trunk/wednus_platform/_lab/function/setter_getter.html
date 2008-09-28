@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - setter getter</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+var Foo = function(){var self = this;
+    var dummy = W.style('input');
+    document.body.appendChild(dummy);
+    dummy.value = 2;
+    self = dummy;
+    //dummy.value = this.value;
+};
+
+
+var foo = new Foo();
+W.test(foo.value == 2, 'getter');
+
+foo.value = 3;
+W.test(foo.value == 2, 'premature setter implementation');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

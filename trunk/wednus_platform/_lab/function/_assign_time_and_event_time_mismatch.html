@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - The Power of self</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+W.test(W, 'check Wednus Platform');
+
+var fruits = 'apple,orange,graphs'.split(',');
+function func(){
+  for(var i = 0; i < fruits.length; ++i){
+    var imgBtn = document.createElementById('div');
+    document.body.onmouseover = function(){
+      W.test(fruits[i] == 'graphs', 'check the class name');
+      timer.finish();
+    };
+  }
+};
+
+
+</script>
+</head>
+<body>
+<!-- In complete -->
+  // add block buttons
+  function addBlockButtons(){
+    var myBtnGroup = new W.BtnGroup({wps: '980,66,left:230,top:702'});
+    background.body.appendChild(myBtnGroup.body);
+    var button_width = '131,128,117,136,95,110,89,77,71,62'.split(',');
+    var tmpBtn = {};
+    var step = 0;
+    for(var i = 0; i < blockNames.length; ++i){
+      tmpBtn = new myBtnGroup.Button('image/blank.gif', 'image/button_'+ blockNames[i] +'.png',
+        'image/button_'+ blockNames[i] +'.png', 0, step, button_width[i], 66);
+      step += parseInt(button_width[i]) - 4;
+      var bname = blockNames[i];
+      tmpBtn.body.onclick = function(){
+        myBtnGroup.buttons_selected[0].body.style.display = 'none';
+        blocks[blockNames[i]].body.style.display = 'block';
+      };
+      tmpBtn = null;
+    }
+    // mark the first button to be selected
+    myBtnGroup.buttons_selected[0] = myBtnGroup.buttons[0];
+  };
+</body>
+</html>

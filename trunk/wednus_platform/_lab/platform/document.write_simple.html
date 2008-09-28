@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - doc.write after body is available will erase everything.</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript' src='document.write/include.js'></script>
+<script type='text/javascript'>
+// putting W.include, W.control, W.load is equivalent to doing it at the end of the 'wednus.js'
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+W.test(W, 'check Wednus Platform');
+W.test(typeof include == 'function', 'check additional resources');
+// (add more tests)
+
+function w1() {
+	document.write('hello world - 1<br>');
+}
+
+function w3() {
+	document.write('hello world - 3<br>');
+	document.write(w1);
+}
+</script>
+</head>
+<!--
+will erase everything
+<body onload='w3()'>
+-->
+<body>
+<script type='text/javascript'>
+w1();
+
+function w2() {
+	document.write('hello world - 2<br>');
+}
+
+
+w2();
+w1();
+timer.finish();
+</script>
+<br>
+<br>
+<input type='button' onclick='w3();' value='exec w3 now'></input>
+<br>
+<input type='button' onclick='W.clear();alert(W);' value='clear workarea'></input>
+<br>
+<input type='button' onclick='W.halt();alert(W);' value='Halt Wednus Platform'></input>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - typeof</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, W.dump...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+
+var a = new Object();
+W.test(typeof a == 'object', 'object type checking');
+
+var b;
+W.test(b == null, 'undeclared var is a null');
+W.test(typeof b == 'undefined', 'declared but not yet defined is also undefined');
+
+var b = 1;
+W.test(b != 'undefined', 'redeclare with value is not undefined');
+
+var b;
+W.test(b == 1, 'check reundeclaribility');
+W.test(b != 'undefined', 'reundeclare makes a var undefined (failed)');
+
+var b = null;
+var b;
+W.test(typeof b != 'undefined', 'try reundeclaration - 1 (failed)');
+
+// namespace experiment
+var numNamespaces = window.length;
+var c;
+b = c;
+W.test(typeof b == 'undefined', 'try reundeclaration - 2 (succeed)');
+W.test(b == null, 'also it is a null');
+W.test(numNamespaces == window.length, 'but it has not removed from the global namespace');
+W.test(window.b == null, 'double checking it (null)');
+W.test(typeof window.b == 'undefined', 'double checking it (typeof)');
+
+
+var k = {};
+k.name = 1;
+W.test((delete k.name), 'we can "delete" a member of an object');
+W.test(typeof k.name == 'undefined', 'so the member is no longer available');
+// and it is really delete the prop. try:
+// 	document.write(W.dumpobj(k));
+
+
+var d = 1;
+W.test(!(delete d), 'however, cannot "delete" global var, window[var]');
+W.test(d == 1, 'so the var is still there');
+
+
+numNamespaces = window.length;
+W.test(typeof d == 'undefined', 'try reundeclaration - 2 (succeed)');
+W.test(d == null, 'also it is a null');
+W.test(numNamespaces == window.length, 'but it has not removed from the global namespace');
+W.test(window.d == null, 'double checking it (null)');
+W.test(typeof window.d == 'undefined', 'double checking it (typeof)');
+
+function dump(){
+	document.write(W.dumpobj(window));
+};
+W.event(window, 'onload', dump);
+
+
+
+// 'd' has not declared
+// it will say, 'd is not defined'.  but the type of b is 'undefined' too.
+// could be used for checking undeclaribility
+//W.test(d, 'check declaribility in different way');
+
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

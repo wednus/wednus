@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - The Power of self</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+var obj = W.style('div');
+obj[0] = 1;
+//W.test(obj.constructor == 'Object', 'check the constructor prop of an object');
+
+
+W.dump(obj);
+
+var myClass = function(){var self = this;
+  this.name = 'myClass';
+};
+
+W.dump(myClass);
+
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

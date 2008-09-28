@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - The Power of self</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+W.test(W, 'check Wednus Platform');
+
+
+var Element = function(tag){
+    this.core = document.createElement(tag);
+};
+
+
+var Div = function(){
+    if(!this.style){
+        alert('inheritence failed');
+        this.style = {};
+    }
+    this.style.width = '100px';
+    this.style.background = '#f5f5f5';
+};
+
+Div.prototype = new Element('div').core;
+
+var div = new Div();
+
+W.test(document.createElement('div').constructor == div.constructor, 'compare constructors');
+/*
+W.test(obj.name == 'myClass', 'check the class name');
+W.test(obj.id == 'myId', 'adding prop. via self');
+W.test(obj != document.createElement('div'), 'self =! div');
+W.test(obj.id == 'myId', 'dbl checking adding prop. via self');
+*/
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - javascript can NEVER have more than one code block executing at a time.</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('debug');  // W.test, W.Timer
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+var track = W.style('div', 'width:100px;height:100px;background:#f5f5f5;border:1px solid gray;position:absolute;');
+document.body.appendChild(track);
+
+
+var Runner = function(track, name, color){var self = this;
+    this.body = W.style('div', 'top:0px;left:0px;width:4px;height:4px;background:'+ color +';position:absolute;');
+    track.appendChild(this.body);
+
+    this.method1 = function(){
+        var s = self.body.style;
+        // feed line
+        if(parseInt(s.left) + parseInt(s.width) == parseInt(track.style.width)){
+            if(parseInt(s.top) + parseInt(s.height) != parseInt(track.style.height)){
+                s.top = (parseInt(s.top) + parseInt(s.height)) + 'px';
+                s.left = '0px';
+            }else{
+                W.test(true, color +' in');
+                finish();
+                return;
+            }
+        }else s.left = (parseInt(s.left) + 1) +'px';
+
+        for(var i = 0; i < 1000000; ++i){};
+        setTimeout(name +'.method1()', 20);
+    };
+
+
+    // predefine object referencies
+    var s = this.body.style;
+    // calculate constants
+    this.trackWidth = parseInt(track.style.width);
+    this.trackHeight = parseInt(track.style.height);
+    this.method2 = function(){
+        // calculate local constants
+        var sLeft = parseInt(s.left);
+        var sTop = parseInt(s.top);
+        var sWidth = parseInt(s.width);
+        var sHeight = parseInt(s.height);
+        // feed line
+        if(sLeft + sWidth == self.trackWidth){
+            if(sTop + sHeight != self.trackHeight){
+                s.top = sTop + sHeight + 'px';
+                s.left = '0px';
+            }else{
+                W.test(true, color +' in');
+                finish();
+                return;
+            }
+        }else s.left = (sLeft + 1) +'px';
+        setTimeout(name +'.method2()', 20);
+    };    
+};
+
+
+var runner1 = new Runner(track, 'runner1', 'red');
+var runner2 = new Runner(track, 'runner2', 'blue');
+var runner3 = new Runner(track, 'runner3', 'orange');
+runner1.method1();
+runner2.method1();
+runner3.method2();
+
+
+function finish(){
+    timer.finish();
+};
+</script>
+</head>
+<body>
+</body>
+</html>

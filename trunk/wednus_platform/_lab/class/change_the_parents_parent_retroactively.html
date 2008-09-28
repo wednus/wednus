@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - add method to a class property</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+// is a class
+var GrandParent1 = function(){
+  this.name = 'GrandParent1';
+  this.prop1 = 'prop1';
+};
+
+var GrandParent2 = function(){
+  this.name = 'GrandParent2';
+  this.prop2 = 'prop2';
+};
+
+var Parent = function(){};
+Parent.prototype = new GrandParent1();
+
+var Child1 = function(){};
+Child1.prototype = new Parent();
+
+var child1 = new Child1();
+W.test(child1.name == 'GrandParent1', 'normal inheritance');
+W.test(child1.prop1 == 'prop1', 'GrandParent1 unique property check');
+
+var Child2 = function(){};
+// change the parents' parent class retro-actively
+Parent.prototype = new GrandParent2();
+Child2.prototype = new Parent();
+
+var child2 = new Child2();
+W.test(child2.name == 'GrandParent2', 'change the parents\' parent class retro-actively');
+W.test(child2.prop2 == 'prop2', 'GrandParent2 unique property check');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

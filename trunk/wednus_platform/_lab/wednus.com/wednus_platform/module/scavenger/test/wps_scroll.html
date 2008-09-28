@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wps.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+W.load('module/scavenger', 'wps', 'module');
+</script>
+<script type='text/javascript'>
+W.scroll(true);
+
+var timer = new W.Timer();
+timer.start();
+
+// debugging helper functions
+function getChild(color){
+  var obj = document.createElement('div');
+  obj.style.background = color;
+  return obj;
+}
+
+//-----------------------------------> constructor
+W.test(W.top == 0, 'check wps module loading');
+//<-----------------------------------
+
+//-----------------------------------> positioning edge conditions
+var center = getChild('blue');
+center.wps = '20%,20%,xcenter:0,ycenter:0';
+center = W.add(center);
+var centerChild = getChild('navy');
+centerChild.wps = '10%,10%,xcenter:0,top:0';
+centerChild = W.add(centerChild, center);
+//<-----------------------------------
+
+
+//-----------------------------------> positioning edge conditions
+var rightBottom = getChild('black');
+rightBottom.wps = '100,100,right:0,bottom:0';
+rightBottom = W.add(rightBottom);
+//<-----------------------------------
+
+//-----------------------------------> positioning edge conditions - 2
+var leftBottom = getChild('black');
+leftBottom.wps = '100,100,left:0,bottom:0';
+leftBottom = W.add(leftBottom);
+//<-----------------------------------
+
+//-----------------------------------> positioning edge conditions - 3
+var rightTop = getChild('black');
+rightTop.wps = '100,100,right:0,top:0';
+rightTop = W.add(rightTop);
+//<-----------------------------------
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

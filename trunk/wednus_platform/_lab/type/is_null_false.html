@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - typeof</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, W.dump...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+W.test(null != false, 'null is differ from false');
+
+
+var onlyDefined;
+
+W.test(onlyDefined == null, 'not initialized var is a null');
+W.test(!onlyDefined, 'and it works as false on assertion - 1');
+
+
+function test(param){
+  W.test(param == null, 'an empty param is null');
+  W.test(!param, 'and it works as false on assertion - 2');
+}
+test();
+
+
+function Parent(){
+  this.name = 1;
+};
+
+var child = new Parent();
+W.test(child.prop1 == null, 'missing class property is null');
+W.test(!child.prop1, 'and it works as false on assertion - 3');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,52 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - getting list of global vars</title>
+<script type='text/javascript'>
+// load js
+function load(js){
+    document.write('<script type="text/javascript" src="'+ js
++'"><\/script>');
+
+};
+
+// simple assert implementation
+function assert(pred, title){
+        if(!pred){
+                alert('[assertion failure]\n'+ title);
+        }
+
+};
+
+// returns num of window properties
+function numNSpaces(){
+    var num = 0;
+    for(var i in window)
+        ++num;
+    return num;
+
+};
+
+// get the number of enumerable elements of the 'window'
+var numBefore = numNSpaces();
+
+// load a javascript file dynamically at this point.
+// * file, 'json.js' contains a single line of code:
+// var json = {id:0};
+load('json.js');
+</script>
+
+<script type='text/javascript'>
+// get the number of enumerable elements again
+var numAfter = numNSpaces();
+// assertion-1
+assert(numBefore != numAfter, 'all IE versions will fail on this');
+// assertion-2
+assert(typeof json == 'object', 'accessing method - 1');
+// assertion-3
+assert(typeof window.json == 'object', 'accessing method - 2');
+// assertion-4
+assert(typeof window['json'] == 'object', 'accessing method - 3');
+</script>
+</head><body></body></html> 

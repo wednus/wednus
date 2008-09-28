@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - namespace.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/debug', 'Timer,dump', 'module');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.event != null, 'check wom module loading');
+//<-----------------------------------
+
+//-----------------------------------> 
+//<-----------------------------------
+
+//-----------------------------------> check Timer
+var timer2 = new W.Timer();
+timer2.start();
+W.wait(1000);
+timer2.finish();
+//<-----------------------------------
+
+//-----------------------------------> check pause/resume feature
+var timer3 = new W.Timer();
+timer3.start();
+timer3.pause();
+W.wait(1000);
+timer3.resume();
+timer3.finish();
+//<-----------------------------------
+
+
+//-----------------------------------> check other features
+var timer = new W.Timer();
+timer.start();
+
+// test 'W.module('
+W.test(1 == '1', 'number vs. string');	// warnning
+W.test('abc' != 'abc  ', 'string vs. string w/ trailing space');
+
+var a = function(){var a = 1;};
+var b = function(){var a=1;};
+var c = function(){var a = 1;};
+W.test(a != b, 'comparing function object - 1');
+W.test(a != c, 'comparing function object - 2');
+b = a;
+W.test(a == b, 'comparing function object - 3');
+b = null;
+W.test(a != null, 'comparing function object - 4');
+W.test(a != 'function () { var a = 1; }', 'comparing function object - 5');
+
+// test 'W.dumpobj'
+document.write(W.dumpobj(a));
+timer.pause();
+W.test('Click OK if you can see a table with property dumped.', 'W.dumpobj');
+timer.resume();
+
+timer.pause();
+//<-----------------------------------
+
+timer.resume();
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

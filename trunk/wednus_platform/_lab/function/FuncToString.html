@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Stringify a function</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+W.test(W, 'check Wednus Platform');
+
+var arr = [1,2,3];
+W.test(W.serialize(arr) == '[1,2,3]', 'serialize an array of numbers');
+
+var func = function(){return document.createElement('div')};
+var func1 = function(){return document.createElement('img')};
+
+arr = [func, func1];
+W.test(W.serialize(arr) == '[]', 'serialize an array of functions - 1');
+
+var str = '';
+for(var i in arr){
+    str += W.serialize(arr[i]);
+}
+
+W.test(str == 'nullnull', 'serialize an array of functions - 2');
+
+arr[0] = func;
+arr[1] = func1;
+
+str = '';
+for(var i = 0; i < arr.length; ++i){
+  str += W.serialize(arr[i]);
+}
+
+W.test(str == 'nullnull', 'serialize an array of functions - 3');
+
+// so we need a trick to preserve the pure text of functions in a container: Object!
+var obj = {'0': func, '1': func1};
+W.test(W.serialize(obj) == '{}', 'cannot serialize stored objects');
+
+obj['0'] = function(){return document.createElement('div')};
+obj['1'] =  function(){return document.createElement('img')};
+alert(W.serialize(obj));
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

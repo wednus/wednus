@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - namespace.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/debug', 'Timer,assert', 'module');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.assert != null, 'check assert module loading');
+//<-----------------------------------
+
+
+//-----------------------------------> free a namespace
+// test 'W.assert'
+alert('[TESTING ERROR-REPORTING]\n You will see an intended error message on next.');
+W.test(W.assert('a', 'ab', 'number vs. string') == false, 'W.assert');//
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

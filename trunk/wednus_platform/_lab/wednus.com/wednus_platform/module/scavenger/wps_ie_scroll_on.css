@@ -1,0 +1,8 @@
+/**
+ * this will add scrollbars in IEs
+ * @see http://www.noscope.com/journal/2004/02/horizontal_scrollbar_bug
+ */
+html {
+	overflow-x: auto;
+	overflow-y: auto;
+}

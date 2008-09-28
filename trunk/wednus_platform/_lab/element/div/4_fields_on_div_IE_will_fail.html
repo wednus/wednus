@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Form become not functional.</title>
+<script type='text/javascript'>
+</script>
+</head>
+<body>
+<script type='text/javascript'>
+var div = document.createElement('div');
+var form = document.createElement('form');
+div.appendChild(form);
+
+var table = document.createElement('table');
+form.appendChild(table);
+var tr = table.insertRow(-1);
+
+var td = tr.insertCell(-1);
+td.appendChild(document.createTextNode('name:'));
+
+td = tr.insertCell(-1);
+var field = document.createElement('input');
+td.appendChild(field);
+tr.appendChild(td);
+
+document.body.appendChild(div);
+</script>
+</body>
+</html>

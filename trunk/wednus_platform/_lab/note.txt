@@ -1,0 +1,1 @@
+- avoid not to use argument for constructors: it's not easy to inherit that kind of class

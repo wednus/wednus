@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - passing object argument for easier class extension</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+var Parent1 = function(args){
+  this.prop1 = 'prop1';
+  this.prop2 = 'prop2 - parent1';
+};
+
+var Parent2 = function(args){
+  this.prop2 = 'prop2 - parent2';
+  this.prop3 = 'prop3';
+};
+
+var Child = function(){};
+Child.prototype = new Parent1();
+Child.prototype = new Parent2();
+
+var child = new Child();
+
+W.test(child.prop1 != 'prop1', 'property overriden away');
+W.test(child.prop2 == 'prop2 - parent2', 'duplicated properties will be overriden');
+W.test(child.prop3 == 'prop3', 'inherit unique property, again, no prob.');
+
+
+var Child2 = function(){};
+Parent2.prototype = new Parent1();
+Child.prototype = new Parent2();
+
+var child2 = new Child();
+
+W.test(child2.prop1 == 'prop1', 'inherit unique property');
+W.test(child2.prop2 == 'prop2 - parent2', 'duplicated properties will be overriden');
+W.test(child2.prop3 == 'prop3', 'inherit unique property, again, no prob.');
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

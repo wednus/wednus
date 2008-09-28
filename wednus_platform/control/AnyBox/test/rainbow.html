@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>AnyBox sample - Rainbow</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+
+// (module/control inclusion)
+W.control('AnyBox');
+</script>
+
+<script type='text/javascript'>
+var rainbow = 'red,orange,yellow,green,blue,navy,purple'.split(',');
+var a;
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('div');
+	a.core.style.background = rainbow[i];
+	a.wps = '20%,20%,left:'+ (20 * i) +',top:'+ (20 * i);
+}
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('div');
+	a.core.style.background = rainbow[i];
+	a.wps = '20%,20%,right:-'+ (20 * i) +',top:'+ (20 * i);
+}
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('div');
+	a.core.style.background = rainbow[i];
+	a.wps = '20%,20%,left:'+ (20 * i) +',bottom:-'+ (20 * i);
+}
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('div');
+	a.core.style.background = rainbow[i];
+	a.wps = '20%,20%,right:-'+ (20 * i) +',top:'+ (20 * i);
+}
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('div');
+	a.core.style.background = rainbow[i];
+	a.wps = '20%,20%,right:-'+ (20 * i) +',bottom:-'+ (20 * i);
+}
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('img');
+	a.wps = '20%,20%,xcenter:0,top:'+ (20 * i);
+	a.core.src = 'http://www.google.com/intl/en/images/logo.gif';
+}
+
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('input');
+	a.wps = '20%,20%,left:'+ (20 * i) +',ycenter:0';
+	a.core.type = 'button';
+	a.core.value = 'click me';
+	a.core.onclick = function(){alert('Hello, world!');};
+}
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('select');
+	a.wps = '20%,20%,right:-'+ (20 * i) +',ycenter:0';
+}
+for(var i = 0; i < rainbow.length; ++i){
+	a = new W.AnyBox('textarea');
+	a.wps = '20%,20%,xcenter:0,bottom:-'+ (20 * i);
+	a.core.value = 'textarea\n\n\n\n\n\n\n\n\n';
+}
+
+var b = new W.AnyBox('iframe');
+b.wps = '20%,20%,xcenter:0,ycenter:0';
+b.core.src = 'http://wednus.com';
+</script>
+</head>
+<body>
+</body>
+</html>

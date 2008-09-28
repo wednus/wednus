@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - namespace.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/debug', 'Timer,wjson', 'module');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.json != null, 'check wjson module loading');
+//<-----------------------------------
+
+
+//-----------------------------------> free a namespace
+var test = W.json.stringify(W);
+W.test(typeof W.json.parse('{a: 1}') == 'object', 'W.json.parse()');
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+<textarea id='source' style='position:absolute;top:300px;width:500px;height:300px'></textarea>
+<script type='text/javascript'>
+document.getElementById('source').value = test;
+</script>
+
+</body>
+</html>

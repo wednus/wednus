@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - FGraph.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+// include modules or controls
+W.control('FGraph');
+</script>
+<script type='text/javascript'>
+var g = new W.FGraph();
+
+var node1 = g.addNode( null, 2, true, 40 );
+g.getNode( node1.id ).style.backgroundColor="#eeee66";
+g.getNode( node1.id ).style.border="1px solid #bebe36";
+
+var node2 = g.addNode( null, 2, true, 40 );
+g.getNode( node2.id ).style.backgroundColor="#eeee66";
+g.getNode( node2.id ).style.border="1px solid #bebe36";
+
+var node3 = g.addNode( null, 2, true, 40 );
+g.getNode( node3.id ).style.backgroundColor="#eeee66";
+g.getNode( node3.id ).style.border="1px solid #bebe36";
+
+var node4 = g.addNode( null, 2, true, 40 );
+g.getNode( node4.id ).style.backgroundColor="#eeee66";
+g.getNode( node4.id ).style.border="1px solid #bebe36";
+
+    
+var node5 = g.addNode( null, 2, false );
+g.getNode( node5.id ).style.backgroundColor="#6688ee";
+g.getNode( node5.id ).style.border="1px solid #3658be";
+    
+var node6 = g.addNode( null, 2, false );
+g.getNode( node6.id ).style.backgroundColor="#6688ee";
+g.getNode( node6.id ).style.border="1px solid #3658be";
+   
+
+var node7 = g.addNode( null, 2, false );
+g.getNode( node7.id ).style.backgroundColor="#6688ee";
+g.getNode( node7.id ).style.border="1px solid #3658be";
+
+var node8 = g.addNode( null, 2, false );
+g.getNode( node8.id ).style.backgroundColor="#6688ee";
+g.getNode( node8.id ).style.border="1px solid #3658be";
+   
+
+var node9 = g.addNode( null, 2, false );
+g.getNode( node9.id ).style.backgroundColor="#6688ee";
+g.getNode( node9.id ).style.border="1px solid #3658be";
+                
+var node10 = g.addNode( null, 2, false );
+g.getNode( node10.id ).style.backgroundColor="#6688ee";
+g.getNode( node10.id ).style.border="1px solid #3658be";
+
+                
+g.addEdge( node1, node5, 30 );
+g.addEdge( node1, node6, 30 );
+
+g.addEdge( node2, node7, 30 );
+g.addEdge( node2, node8, 30 );
+
+g.addEdge( node3, node9, 30 );
+
+g.addEdge( node4, node10, 30 );
+
+</script>
+</head>
+<body>
+</body>
+</html>

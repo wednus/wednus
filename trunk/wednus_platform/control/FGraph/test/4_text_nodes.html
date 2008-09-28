@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - FGraph.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+
+<script type='text/javascript'>
+W.control('FGraph');
+</script>
+
+<script type='text/javascript'>
+var g = new W.FGraph();
+
+var node1 = g.addNode('abcde');
+var node2 = g.addNode('bcdef');
+var node3 = g.addNode('cdefg');
+var node4 = g.addNode('defgh');
+var node5 = g.addNode('efghi');
+var node6 = g.addNode('fghij');
+var node7 = g.addNode('ghijk');
+var node8 = g.addNode('hijkl');
+var node9 = g.addNode('ijklm');
+var node10 = g.addNode('jklmn');
+                
+g.addEdge( node1, node5, 30 );
+g.addEdge( node1, node6, 30 );
+g.addEdge( node2, node7, 30 );
+g.addEdge( node2, node8, 30 );
+g.addEdge( node3, node9, 30 );
+g.addEdge( node4, node10, 30 );
+
+g.setOrigin('core');
+</script>
+</head>
+<body>
+</body>
+</html>

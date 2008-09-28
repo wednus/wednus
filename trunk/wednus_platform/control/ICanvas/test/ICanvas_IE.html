@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - ICanvas.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+// include modules or controls
+W.control('ICanvas');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+//-----------------------------------> constructor with string argument
+var ic = new W.ICanvas({
+    src: '../lib/dummy.html',
+    name: 'main',
+	scroll: false,
+	border: false,
+	background: 'silver',
+	wps: '50%,50%,xcenter:0,ycenter:0'
+});
+//ic.core.style.border = '2px';
+//<-----------------------------------
+
+var ic2 = new W.ICanvas({
+    name: 'link',
+    target: 'main',
+	scroll: false,
+	border: false,
+	content: '<a href="http://google.com">google</a>',
+	background: 'silver',
+	wps: '200,100,right:0,top:0'
+});
+
+W.scroll(true);
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

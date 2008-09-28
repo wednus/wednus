@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - FormGen.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+// include modules or controls
+W.control('FormGen');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//W.test(typeof W.FormGen == 'object', 'required library loaded');
+var myFormGen = new W.FormGen();
+//-----------------------------------> constructor
+W.test(myFormGen.name == 'FormGen', 'check the default constructor');
+//<-----------------------------------
+
+//-----------------------------------> construction with arguments
+var props = new W.FormGen({
+    target: 'main',
+	scroll: false,
+	action: '#',  // either an URL or function
+	caption: 'apply',
+	showSubmitButton: false,
+	wps: '20%,30%,left:0,top:0'
+});
+//<-----------------------------------
+
+//-----------------------------------> FormGen::add
+var id = props.add({
+	id: 'id',
+	value: 'default id'
+});
+W.test(id.type == 'text', 'FormGen::add()');
+//<-----------------------------------
+
+//-----------------------------------> FormGen::length
+W.test(props.length == 1, 'FormGen::length');
+//<-----------------------------------
+
+//-----------------------------------> FormGen::get
+var field = props.get('id');
+W.test(field == 'default id', 'FormGen::get()');
+//<-----------------------------------
+
+//-----------------------------------> FormGen::set
+field = props.set('id', 'new id');
+W.test(field == 'new id', 'FormGen::set()');
+//<-----------------------------------
+
+//-----------------------------------> FormGen::remove
+props.remove('id');
+W.test(props.length == 0, 'FormGen::length()');
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - FGraph.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+// include modules or controls
+W.control('FGraph');
+</script>
+<script type='text/javascript'>
+var g = new W.FGraph();
+
+var node1 = g.addNode( null, 3, true, 55 );
+g.getNode( node1.id ).style.backgroundColor="#99ee55";
+g.getNode( node1.id ).style.border="1px solid #69be25";
+
+var node2 = g.addNode( null, 2, true, 55 );
+g.getNode( node2.id ).style.backgroundColor="#eeee66";
+g.getNode( node2.id ).style.border="1px solid #bebe36";
+
+var node3 = g.addNode( null, 1, true, 55 );
+g.getNode( node3.id ).style.backgroundColor="#ee9944";
+g.getNode( node3.id ).style.border="1px solid #be6914";
+
+var node4 = g.addNode( null, 3, true, 55 );
+g.getNode( node4.id ).style.backgroundColor="#6688ee";
+g.getNode( node4.id ).style.border="1px solid #3658be";
+
+g.addEdge( node1, node2, 45 );
+
+</script>
+</head>
+<body>
+</body>
+</html>

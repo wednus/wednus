@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>FormGen Control - code sample</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.control('FormGen');
+</script>
+
+<script type='text/javascript'>
+var props = new W.FormGen({
+	scroll: false,
+    target: '_self',
+    method: 'post',
+	action: 'http://wednus.com/index.php',
+	defTag: 'input',
+	defType: 'text',
+	caption: 'submit',
+	color: 'silver',
+	background: '#F5F5F5',
+	labelColumeWidth: '80px',
+	showSubmitButton: true,
+	wss: 'fontSize:11px;fontFamily:Tahoma,Verdana;color:navy;',
+	wps: '80%,80%,xcenter:0,ycenter:0'
+});
+
+// override the default submission method
+props.submit = function(fields){
+	alert('submission forwarded.');
+}
+
+var fields = 'id,password,input1,input2,input3,input4'.split(',');
+for(var i = 0; i < fields.length; ++i){
+	props.add({
+		id: fields[i],
+		name: fields[i],
+		className: '',
+		tag: 'input',
+		type: 'text',
+		value: '',
+		caption: fields[i] +' : ',
+		width: '100%',
+		labelBorder: '0px',
+		fieldBorder: '1px',
+		color: 'white',
+		tooltip: 'please enter '+ fields[i] +' here.'
+	});
+}
+//alert(props.body.innerHTML);
+
+</script>
+ 
+</head>
+<body>
+</body>
+</html>

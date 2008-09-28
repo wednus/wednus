@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><umlet_diagram><element><type>com.umlet.element.custom.ActiveClass</type><coordinates><x>0</x><y>0</y><w>370</w><h>130</h></coordinates><panel_attributes>_Analytics (type3)_
+ 
+- no presentation layer (abstract)
+- only one instance per page
+
+ 
+e.g. function objects, 3rd-party resources</panel_attributes><additional_attributes></additional_attributes></element></umlet_diagram>

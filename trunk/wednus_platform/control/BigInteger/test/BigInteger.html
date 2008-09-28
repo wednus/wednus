@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - BigInteger.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+
+// (module/control inclusion)
+W.control('BigInteger');
+</script>
+
+
+<script type='text/javascript'>
+var timer = new W.Timer;
+timer.start();
+
+var MAX = 999999999999999;
+var BIG = '123456789123456789123456789123456789';
+
+{  // constructor tests
+    var a = new W.BigInteger;
+    W.test('0' == a, 'test default constructor');
+    a = new W.BigInteger(12345);
+    W.test('12345' == a, 'constructor w/ number argument');
+    a = new W.BigInteger('12345');
+    W.test('12345' == a, 'constructor w/ string argument');
+}
+
+{  // test loosing precision flag, 'lostPrecision'
+    W.test(Math.pow(2, 53) == Math.pow(2, 53) + 1, "lostPrecition");
+    var a = new W.BigInteger(MAX);
+    W.test(!a.lostPrecision, 'loosing precision flag - 1');
+    a = new W.BigInteger(MAX + 1);
+    W.test(a.lostPrecision, 'loosing precision flag - 2');
+}
+{ // test inequality
+    var a = new W.BigInteger(12345);
+    var b = new W.BigInteger(45678);
+    W.test(!(a == b), 'inequality');
+}
+{  // test big number
+    var a = new W.BigInteger(BIG);
+    W.test(BIG == a, 'big number');
+}
+
+{  // test BigInterger::add
+    var a = new W.BigInteger(1);
+    W.test('2' == a.add(1), 'BigInterger::add - 1');
+    var a = new W.BigInteger(123);
+    W.test('124' == a.add(1), 'BigInterger::add - 2');
+    var a = new W.BigInteger(MAX);
+    W.test((MAX + 1 + '') ==  a.add(1), 'BigInterger::add - carry1');
+    
+    var a = new W.BigInteger(MAX);
+    W.test((MAX + MAX + '') == a.add(MAX), 'BigInterger::add - carry2');
+    
+    a = new W.BigInteger(BIG);
+    var result = '123456789123456789123456789123456790';
+    W.test(result == a.add(1), 'BigInterger::add - 1');
+
+    // teaser test
+    a = new W.BigInteger(BIG);
+    W.test('246913578246913578246913578246913578' == a.add(BIG),
+      'BigInterger::add - 2');
+    
+    var a = new W.BigInteger(10);
+    var temp = a.value();
+    for(var i = 1; i < 10; ++i)
+        a.add(temp);
+    W.test('100' == a, 'BigInterger::add - 3');
+    var a = new W.BigInteger(MAX);
+    var temp = a.value();
+    for(var i = 1; i <= 10; ++i)
+        a.add(i);
+    W.test('100' == a, 'BigInterger::add - 4');
+}
+
+{  // test BigInterger::mult
+    var a = new W.BigInteger(MAX);
+    W.test((MAX + MAX + MAX +'') == a.mul(3), 'BigInterger::mul - 1');
+
+    function fact(base){
+        var result = new W.BigInteger(1);
+        for(var i = 1; i <= base; ++i)
+        	result.mul(i);
+        return result;
+    };
+    //alert(fact(3));
+    //alert(fact(20));
+}
+{  // test BigInterger::mult
+    var a = new W.BigInteger(MAX);
+    //alert(a.pow(2));
+    W.test((MAX + MAX + MAX +'') == a.mul(3), 'BigInterger::mul - 2');
+}
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Creature.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+W.module('darwin');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//----------------------------------->
+//<-----------------------------------
+//-----------------------------------> constructor
+W.test(typeof W.darwin == 'object', 'check darwin module loading');
+//<-----------------------------------
+
+// define an oracle
+var oracle = new W.Oracle();
+var world = new W.World({
+   cols: 10,
+   rows: 10
+});
+world.showGrid(true);
+world.delay = 6;
+oracle.add(world);
+oracle.showClock(true);
+
+// define a creature
+var creature = new W.Creature({
+  act: 'walk',
+  uwidth: 2,
+  uheight: 2
+});
+
+
+// add skills
+creature.add({name: 'walk', img: 'module/darwin/test/image/walk.gif',
+  north: '0:0,0:48,0:96',
+  east:  '48:0,48:48,48:96',
+  south: '96:0,96:48,96:96',
+  west:  '144:0,144:48,144:96'
+});
+world.add(creature);
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

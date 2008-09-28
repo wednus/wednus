@@ -1,0 +1,28 @@
+<html><head><title>Wednus RPG</title>
+<script language='javascript' src='../../wrpg.js'></script>
+
+
+<script>
+var world = new Wednus.RPG.World(6, 8, 10, 124);
+world.background(0, 0, 262, 309, 'map/smallroom.jpg');
+//world.setGrid(true);
+
+/*
+var me = world.insert('you', 2, 6, 'west', 'walk', 'myTeam');
+me.ifAttacked  = 'damage,die,still';
+*/
+
+for(var i = 0; i < 7; ++i){
+  world.insert('b04', 1, i, 'south', 'walk', 'Alians');
+  world.insert('me', 4, i, 'north', 'walk', 'Humen');
+}
+</script>
+
+
+
+</head><body bgcolor='black'>
+<!-- 
+attack, damage, die, faint, magic, poison
+scream, stone, tilt, walk
+-->
+</body></html>

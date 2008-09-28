@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Wednus Oracle</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+W.module('darwin');
+</script>
+
+<script type='text/javascript'>
+// define an oracle
+var oracle = new W.Oracle();
+// define world
+var world = new W.World({
+    top: 10,
+    left: 12,
+    cols: 11,
+    rows: 13,
+    image: 'module/darwin/test/image/underground.jpg'
+});
+world.delay = 3;
+oracle.add(world);
+
+// define creatures
+var human = new W.Creature();
+human.team = 2;
+human.name = 'sundew';
+human.species = 'human';
+human.dir = 'south';
+human.col = 9;
+human.row = 11;
+human.power = 1;
+human.speed = 8;
+human.uwidth = 2;
+human.uheight = 2;
+human.energy = 30;
+human.act = 'walk';
+// add skills
+human.add({name: 'walk', img: 'module/darwin/test/image/walk.gif',
+  north: '0:0,0:48,0:96',
+  east:  '48:0,48:48,48:96',
+  south: '96:0,96:48,96:96',
+  west:  '144:0,144:48,144:96'
+});
+human.add({name: 'attack', img: 'module/darwin/test/image/attack.gif'});
+human.add({name: 'damage', img: 'module/darwin/test/image/damage.gif'});
+human.add({name: 'die', img: 'module/darwin/test/image/die.gif'});
+
+var evilBrother = new W.Creature();
+evilBrother.team = 1;
+evilBrother.name = 'sundew';
+evilBrother.species = 'human';
+evilBrother.dir = 'south';
+evilBrother.power = 1;
+evilBrother.speed = 3;
+evilBrother.uwidth = 2;
+evilBrother.uheight = 2;
+evilBrother.energy = 30;
+evilBrother.act = 'walk';
+evilBrother.add({name: 'walk', img: 'module/darwin/test/image/kileen/walk.gif',
+  north: '0:0,0:48,0:96',
+  east:  '48:0,48:48,48:96',
+  south: '96:0,96:48,96:96',
+  west:  '144:0,144:48,144:96'
+});
+evilBrother.add({name: 'attack', img: 'module/darwin/test/image/kileen/atk.gif'});
+evilBrother.add({name: 'damage', img: 'module/darwin/test/image/kileen/fedm.gif'});
+evilBrother.add({name: 'die', img: 'module/darwin/test/image/kileen/sndm.gif'});
+
+for(var i = 0; i < 10; ++i){
+  world.add(evilBrother.clone());
+  world.add(human.clone(), 11, 9);
+}
+
+W.background('black');
+</script>
+</head>
+<body>
+</body></html>

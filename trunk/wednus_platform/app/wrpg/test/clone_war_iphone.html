@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>iPhone </title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('darwin');
+</script>
+
+<script type='text/javascript'>
+// define an oracle
+var oracle = new W.Oracle();
+// define world
+// iphone dimension: 320 x 480
+var world = new W.World({
+  left: 4,
+  cols: 13,
+  rows: 20,
+  image: 'module/darwin/test/image/320x480/spirals.jpg'
+});
+world.showGrid(true);
+world.delay = 5;
+oracle.add(world);
+
+// define creatures
+var human = new W.Creature();
+human.team = 2;
+human.name = 'sundew';
+human.species = 'human';
+human.dir = 'south';
+human.power = 1;
+human.speed = 8;
+human.col = 11;
+human.row = 18;
+human.uwidth = 2;
+human.uheight = 2;
+human.energy = 30;
+human.act = 'walk';
+// add skills
+human.add({name: 'walk', img: 'module/darwin/test/image/walk.gif',
+  north: '0:0,0:48,0:96',
+  east:  '48:0,48:48,48:96',
+  south: '96:0,96:48,96:96',
+  west:  '144:0,144:48,144:96'
+});
+human.add({name: 'attack', img: 'module/darwin/test/image/attack.gif'});
+human.add({name: 'damage', img: 'module/darwin/test/image/damage.gif'});
+human.add({name: 'die', img: 'module/darwin/test/image/die.gif'});
+//human.does('walk');
+
+var turtlex = new W.Creature();
+turtlex.team = 1;
+turtlex.name = 'turtlex';
+turtlex.species = 'evil';
+turtlex.dir = 'south';
+turtlex.power = 1;
+turtlex.speed = 3;
+turtlex.uwidth = 2;
+turtlex.uheight = 2;
+turtlex.energy = 30;
+turtlex.act = 'walk';
+turtlex.add({name: 'walk', img: 'module/darwin/test/image/kileen/walk.gif',
+  north: '0:0,0:48,0:96',
+  east:  '48:0,48:48,48:96',
+  south: '96:0,96:48,96:96',
+  west:  '144:0,144:48,144:96'
+});
+turtlex.add({name: 'attack', img: 'module/darwin/test/image/kileen/atk.gif'});
+turtlex.add({name: 'damage', img: 'module/darwin/test/image/kileen/fedm.gif'});
+turtlex.add({name: 'die', img: 'module/darwin/test/image/kileen/sndm.gif'});
+
+for(var i = 0; i < 10; ++i){
+  world.add(turtlex.clone());
+  world.add(human.clone());
+}
+W.background('black');
+</script>
+</head>
+<body>
+</body></html>

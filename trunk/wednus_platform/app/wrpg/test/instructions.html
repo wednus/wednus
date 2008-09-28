@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Wednus Oracle</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+W.module('darwin');
+</script>
+
+<script type='text/javascript'>
+// define an oracle
+var oracle = new W.Oracle();
+// define a world
+var world = new W.World({
+    top: 10,
+    left: 12,
+    cols: 11,
+    rows: 13,
+    image: 'module/darwin/test/image/underground.jpg'
+});
+world.showGrid(true);
+world.delay = 7;
+oracle.add(world);
+oracle.showClock(true);
+
+// define a creature
+var creature = new W.Creature({
+  id: 0,
+  name: 'haru',
+  control: true,
+  dir: 'south',
+  handicap: 2,
+  uwidth: 2,
+  uheight: 2,
+  speed: 6
+});
+// add skills
+creature.add({name: 'walk', img: 'module/darwin/test/image/walk.gif',
+  north: '0:0,0:48,0:96',
+  east:  '48:0,48:48,48:96',
+  south: '96:0,96:48,96:96',
+  west:  '144:0,144:48,144:96'
+});
+
+creature.add({name: 'attack', img: 'module/darwin/test/image/attack.gif'});
+// add to world
+world.add(creature);
+W.background('black');
+</script>
+</head>
+<body>
+</body></html>

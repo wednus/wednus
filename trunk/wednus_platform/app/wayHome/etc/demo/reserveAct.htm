@@ -1,0 +1,25 @@
+<html><head><title>Wednus RPG</title>
+<script language='javascript' src='../../wrpg.js'></script>
+<script>
+var world = new Wednus.RPG.World(6, 8, 10, 124);
+world.background(0, 0, 262, 309, 'map/smallroom.jpg');
+//world.setGrid(true);
+
+var a = world.insert('me', 0, 0, 'south', 'walk');
+a.reserveAct('walk,die,still');
+
+var b = world.insert('me', 0, 1, 'south', 'walk');
+b.reserveAct('walk,walk,die,still');
+
+var c = world.insert('me', 2, 2, 'south', 'walk');
+c.reserveAct('walk,walk,walk,die,still');
+
+var d = world.insert('me', 3, 3, 'south', 'walk');
+d.reserveAct('walk,walk,walk,walk,die,still');
+
+var e = world.insert('me', 4, 4, 'south', 'walk');
+e.reserveAct('walk,walk,walk,walk,walk,die,still');
+</script>
+</head>
+
+<body bgcolor='black'></body></html>

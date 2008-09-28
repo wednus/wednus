@@ -1,0 +1,18 @@
+<html><head><title>Wednus RPG</title>
+<script language='javascript' src='../../wrpg.js'></script>
+
+<script>
+var world = new Wednus.RPG.World(10, 8, 10, 28);
+world.background(0, 0, 262, 309, 'map/smallroom.jpg');
+//world.setGrid(true);
+world.areaMask('0:0,1,2,4,5,6,7');
+world.areaMask('1:0,1,2,4,5,6,7');
+world.areaMask('2:0,1,2,4,5,6,7');
+world.areaMask('3:0,1,2,4,5,6,7');
+
+world.insert('me', 4, 0, 'north', 'walk');
+var a = world.insert('b05', 4, 4, 'south', 'walk');
+a.ifWall = 'faint,backward,walk';
+</script>
+
+</head><body bgcolor='black'></body></html>

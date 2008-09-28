@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - dump.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.module('debug');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> required module check
+W.test(typeof W.wps != null, 'Scavenger module loaded');
+W.test(typeof W.EReporter != null, 'EReporter control loaded');
+W.test(typeof W.FormGen != null, 'FormGen control loaded');
+W.test(typeof W.Analytics != null, 'Analytics control loaded');
+W.test(typeof W.DragMe != null, 'DragMe control loaded');
+//<-----------------------------------
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

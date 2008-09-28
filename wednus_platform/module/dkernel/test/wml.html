@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wml.js</title>
+<script type='text/javascript' src='../../../wednus.js?only'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/dkernel', 'dkernel', 'module');  // W.module
+W.load('module/dkernel', 'wml', 'module');  // W.control
+W.load('module/debug', 'Timer', 'module');  // W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+W.modules.toString = function(){
+  var str = '';
+  for(var i in this){
+    if(i != 'toString'){
+      str += i +': ';
+      for(var j = 0; j < this[i].length; ++j)
+        str += this[i][j] +',';
+      str += ' | ';
+    }
+  }
+  return str;
+};
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+//-----------------------------------> constructor
+W.test(typeof W.include != null, 'check wom module loading');
+//<-----------------------------------
+
+//----------------------------------->
+//<-----------------------------------
+//-----------------------------------> W.load() : duplicating loading prevention
+// check module loading duplication prevention feature
+W.module('debug');
+W.module('debug');
+W.module('debug');
+W.module('debug');
+W.control('BigInteger');
+W.control('BigInteger');
+W.control('BigInteger');
+W.control('BigInteger');
+W.include('module/test/wednus', 'json');
+W.include('module/test/wednus', 'json');
+W.include('module/test/wednus', 'json');
+W.include('module/test/wednus', 'json');
+// intended dependency error
+//<-----------------------------------
+</script>
+
+<script type='text/javascript'>
+//-----------------------------------> W.modules
+W.test(W.modules == 'module: dkernel,wml,Timer,wes,wss,wrs,serialize,debug,assert,'+
+  'dump,namespace,system, | control: BigInteger, | include: json, | ',
+  'W.modules, module library sanity check');
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

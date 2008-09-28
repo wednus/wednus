@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wes.js</title>
+<script type='text/javascript' src='../../../wednus.js?only'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/dkernel', 'wes', 'module');
+W.load('module/debug', 'Timer', 'module');
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.event != null, 'check wom module loading');
+//<-----------------------------------
+
+//----------------------------------->
+//<-----------------------------------
+
+//-----------------------------------> W.events
+function a(arg){W.test(arg == 'hello, world!', 'event handler reserving, W.event');};
+// add an event handler to 'window.onload' event
+W.event(window, 'onload', a, 'hello, world!');
+W.test(typeof W.events[window]['onload'][0] == 'object', "W.events[window]['onload'] sanity check");
+W.event(window, 'onresize', alert, 'resized.');
+W.test(typeof W.events[window]['onresize'][0] == 'object', "adding event library - 2");
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

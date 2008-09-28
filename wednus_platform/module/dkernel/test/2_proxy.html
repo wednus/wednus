@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wrs.js</title>
+<script type='text/javascript'>
+var W = {};
+W.js = function(url){
+    document.write('<script type="text/javascript" src="'+ url +'"><\/script>');
+};
+document.write('<div id="_wednus_platform_" style="display:none;position:absolute;">.</div>');
+W.body = document.body;
+
+// using debugging utilities
+W.js('../wss.js');
+W.js('../wrs.js');
+</script>
+<script type='text/javascript'>
+// load a script
+W.proxy('http://xulplanet.com/tutorials/xultu/examples/ex_textimage_1.xul', 'callback');
+
+function callback(data){
+    alert(data);
+}
+</script>
+</head>
+<body>
+</body>
+</html>

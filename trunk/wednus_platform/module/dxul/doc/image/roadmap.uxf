@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><umlet_diagram><element><type>com.umlet.element.custom.Node</type><coordinates><x>400</x><y>230</y><w>100</w><h>50</h></coordinates><panel_attributes>platforms
+</panel_attributes><additional_attributes>transparentSelection=true</additional_attributes></element><element><type>com.umlet.element.custom.Node</type><coordinates><x>180</x><y>230</y><w>130</w><h>120</h></coordinates><panel_attributes>Plugin-based
+Architecture
+</panel_attributes><additional_attributes>transparentSelection=true</additional_attributes></element><element><type>com.umlet.element.custom.Node</type><coordinates><x>60</x><y>20</y><w>110</w><h>50</h></coordinates><panel_attributes>
+</panel_attributes><additional_attributes>transparentSelection=true</additional_attributes></element></umlet_diagram>

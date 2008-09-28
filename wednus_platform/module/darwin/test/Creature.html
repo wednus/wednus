@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Oracle.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.load('module/darwin', 'Creature');
+</script>
+
+<script type='text/javascript'>
+var creature = new W.Creature({
+  uwidth: 6,
+  uheight: 9,
+  dir: 'south',
+  act: 'stand'
+});
+
+// add skills
+creature.add({name: 'stand', img: 'module/darwin/test/image/creatures/bongu.png',
+  south: '0:0'
+});
+
+document.body.appendChild(creature.body);
+creature.resize(24);
+creature.action();
+</script>
+</head>
+<body>
+</body></html>

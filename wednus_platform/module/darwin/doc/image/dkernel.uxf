@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><umlet_diagram><element><type>com.umlet.element.custom.PackageAggregationHierarchy</type><coordinates><x>360</x><y>140</y><w>130</w><h>130</h></coordinates><panel_attributes>
+wednus
+doc
+module
+control</panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.custom.State</type><coordinates><x>0</x><y>0</y><w>320</w><h>270</h></coordinates><panel_attributes></panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>0</x><y>290</y><w>490</w><h>110</h></coordinates><panel_attributes>DOM Browsers
+--
+- IE: Maxton
+- Gekco: Mozilla, Firefox, Netscape
+- Rhino: IceBrowser
+- KHTML: Konqueror, Safari
+- others: Opera</panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>280</x><y>26</y><w>100</w><h>54</h></coordinates><panel_attributes>lt=&lt;.
+Acess</panel_attributes><additional_attributes>80;34;20;34</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>280</x><y>46</y><w>100</w><h>54</h></coordinates><panel_attributes>lt=&lt;.
+Import</panel_attributes><additional_attributes>20;34;80;34</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>280</x><y>176</y><w>100</w><h>54</h></coordinates><panel_attributes>lt=&lt;.
+Load</panel_attributes><additional_attributes>20;34;80;34</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>20</x><y>140</y><w>280</w><h>110</h></coordinates><panel_attributes>[ WML ]
+Wednus Module Loader</panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>140</x><y>230</y><w>40</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>20;20;20;60</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>40</x><y>100</y><w>40</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>20;20;20;40</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>20</x><y>20</y><w>80</w><h>100</h></coordinates><panel_attributes>[ WED ]
+Wednus
+Extreme
+Debugger</panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>140</x><y>100</y><w>40</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>20;20;20;40</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>120</x><y>20</y><w>80</w><h>100</h></coordinates><panel_attributes>[ WES ]
+Wednus
+Event
+System</panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.base.Package</type><coordinates><x>360</x><y>20</y><w>130</w><h>100</h></coordinates><panel_attributes>W. Server</panel_attributes><additional_attributes>transparentSelection=true</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>370</x><y>60</y><w>110</w><h>50</h></coordinates><panel_attributes>Server Side
+--
+Listener</panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>240</x><y>100</y><w>40</w><h>60</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>20;20;20;40</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>220</x><y>20</y><w>80</w><h>100</h></coordinates><panel_attributes>[ WRS ]
+Wednus
+Remote
+Scripter</panel_attributes><additional_attributes>transparentSelection=false</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>180</x><y>50</y><w>60</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>40;20;20;20</additional_attributes></element></umlet_diagram>

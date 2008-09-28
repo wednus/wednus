@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="counter" onload="document.getElementById('count').value=counter">
+<script type='text/javascript'>
+<![CDATA[
+var counter=0;
+function increment(){
+   counter++;
+   document.getElementById('count').value=counter;
+}
+function decrement(){
+   counter--;
+   document.getElementById('count').value=counter;
+}
+function clear(){
+   counter=0;
+   document.getElementById('count').value=counter;
+}
+]]>
+</script>
+
+   <description>DXUL</description>
+   <groupbox>
+     <caption label="Counter"/>
+     <textbox id="count" readonly="yes" />
+   </groupbox>
+   <hbox pack="center">
+     <button label="Dec (-)"  oncommand="decrement()"   />
+     <button label="Clear"    oncommand="clear()" />
+     <button label="Inc (+)"   oncommand="increment()"   />
+   </hbox>
+
+</window>

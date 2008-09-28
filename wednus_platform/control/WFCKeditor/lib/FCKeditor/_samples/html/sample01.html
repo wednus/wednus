@@ -1,0 +1,80 @@
+<!--
+ * FCKeditor - The text editor for internet
+ * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * 
+ * Licensed under the terms of the GNU Lesser General Public License:
+ * 		http://www.opensource.org/licenses/lgpl-license.php
+ * 
+ * For further information visit:
+ * 		http://www.fckeditor.net/
+ * 
+ * "Support Open Source software. What about a donation today?"
+ * 
+ * File Name: sample01.html
+ * 	Sample page.
+ * 
+ * File Authors:
+ * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>FCKeditor - Sample</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="robots" content="noindex, nofollow">
+		<link href="../sample.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="../../fckeditor.js"></script>
+		<script type="text/javascript" src="../../../../../../wednus.js"></script>
+		<script type="text/javascript" src="../../../../../wednus_wel.js"></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('wednus_debug');	// W.test, W.Timer, ...
+W.module('wednus_wps');
+
+
+// apply modification
+FCKeditor.prototype.Create = function()
+{
+	// Check for errors
+	if ( !this.InstanceName || this.InstanceName.length == 0 )
+	{
+		this._ThrowError( 701, 'You must specify an instance name.' ) ;
+		return ;
+	}
+    this.body = document.createElement('div');
+    this.Width = '100%';
+    this.Height = '100%';
+    var str = '';
+	if ( !this.CheckBrowser || this._IsCompatibleBrowser() )
+	{
+		str += '<input type="hidden" id="' + this.InstanceName + '" name="' + this.InstanceName + '" value="' + this._HTMLEncode( this.Value ) + '" style="display:none" />'  ;
+		str += this._GetConfigHtml();
+		str += this._GetIFrameHtml() ;
+	}
+	else
+	{
+		var sWidth  = this.Width.toString().indexOf('%')  > 0 ? this.Width  : this.Width  + 'px' ;
+		var sHeight = this.Height.toString().indexOf('%') > 0 ? this.Height : this.Height + 'px' ;
+		str += '<textarea name="' + this.InstanceName + '" rows="4" cols="40" style="WIDTH: ' + sWidth + '; HEIGHT: ' + sHeight + '">' + this._HTMLEncode( this.Value ) + '<\/textarea>';
+	}
+    this.body.innerHTML = str;
+}
+FCKeditor.prototype.wps = '';
+FCKeditor.prototype.parent = {};
+</script>
+
+
+<script type="text/javascript">
+var sBasePath = document.location.pathname.substring(0,document.location.pathname.lastIndexOf('_samples')) ;
+var oFCKeditor = new FCKeditor( 'FCKeditor1' ) ;
+oFCKeditor.BasePath	= sBasePath ;
+oFCKeditor.Value	= 'This is some <strong>sample text<\/strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor<\/a>.' ;
+oFCKeditor.wps = '80%,80%,xcenter:0,ycenter:0';
+oFCKeditor.Create() ;
+W.add(oFCKeditor);
+</script>
+</head>
+
+<body>
+	</body>
+</html>

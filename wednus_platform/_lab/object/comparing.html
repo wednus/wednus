@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Comparing Object</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+
+
+W.test(W, 'check Wednus Platform');
+// (add more tests)
+var a = {name:'a', test:{name: 'a'}};
+var b = {name:'a', test:{name: 'b'}};
+var c = {name:'a', test:{name: 'b'}};
+W.test(a != b, 'direct comparison problem - 1');
+W.test(b != c, 'direct comparison problem - 2');
+W.test(b !== c, 'direct comparison problem - 3');
+W.test(b == b, 'direct comparison problem - 4');
+W.test(!isSame(a, b), 'isSame object comparing - 1');
+W.test(isSame(b, c), 'isSame object comparing - 2');
+
+
+var json = {"menu": {  "id": "file",  "value": "File:",  "popup": {    "menuitem": [      {"value": "New", "onclick": "CreateNewDoc()"},      {"value": "Open", "onclick": "OpenDoc()"},      {"value": "Close", "onclick": "CloseDoc()"}    ]  }}};
+var json1 = {"menu": {  "id": "file",  "value": "File:",  "popup": {    "menuitem": [      {"value": "New", "onclick": "CreateNewDoc()"},      {"value": "Open", "onclick": "OpenDoc()"},      {"value": "Close", "onclick": "CloseDoc()"}    ]  }}};
+W.test(isSame(json, json1), 'comparing a json - 1');
+json1.menu.popup.menuitem[0].value = 'Old';
+W.test(!isSame(json, json1), 'comparing a json - 2');
+
+
+function isSame(source, target){
+	if(typeof source != typeof target){
+	    msg(source, target)
+		return false;
+	}
+
+	// base case
+	if(typeof source != 'object'){
+	    if(source != target)
+	       msg(source, target)
+		return source == target;
+	}
+
+	// n-case
+    for(var i in source){
+    	if(target[i] == null){
+    	    alert('target is not object');
+    		return false;
+    	}
+    	if(typeof source[i] == 'object'){
+    		return isSame(source[i], target[i]);
+    	}
+    	if(source[i] != target[i]){
+    	    msg(source[i], target[i]);
+    		return false;
+    	}
+    }
+    return true;
+
+    function msg(a, b){
+        alert('[source]\n'+ a +'\n\n[target]\n'+ b);
+    };
+};
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

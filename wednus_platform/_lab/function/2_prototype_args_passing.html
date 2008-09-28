@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - passing argument to super class</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+W.test(W, 'check Wednus Platform');
+
+var Foo = function(){};
+
+var Bar = function(id){};
+Bar.prototype = new Foo();
+
+var bar = new Bar('myId');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - DIV</title>
+<script type='text/javascript'>
+
+</script>
+</head>
+<body>
+<script type='text/javascript'>
+// Shell a regular DIV
+var div = document.createElement('div');
+var s = div.style;
+s.width = '300px';
+s.height = '300px';
+s.background = 'red';
+document.body.appendChild(div);
+</script>
+
+<script type='text/javascript'>
+var wrap = document.createElement('div');
+document.body.appendChild(wrap);
+wrap.appendChild(div);
+</script>
+</body>
+</html>

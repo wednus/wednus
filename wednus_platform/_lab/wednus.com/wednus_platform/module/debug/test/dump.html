@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - dump.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/debug', 'Timer,dump', 'module');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.dump != null, 'check dump module loading');
+//<-----------------------------------
+
+
+//----------------------------------->  test 'W.dumpobj'
+var a = function(){var a = 1;};
+document.write(W.dumpobj(a));
+timer.pause();
+W.test('Click OK if you can see a table with property dumped.', 'W.dumpobj');
+timer.resume();
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

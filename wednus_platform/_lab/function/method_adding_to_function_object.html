@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - adding prop to a function object</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+// is a class
+var Func = function(){
+    this.id = 'myId';
+};
+
+Func.name = 'myName';
+
+var f = new Func();
+
+W.test(f.name != 'myName', 'adding member prop on-the-fly - 1 (not work)');
+W.test(Func.name != 'myName', 'neither it added to the object member');
+
+Func.prototype.name = 'myName2';
+
+var f2 = new Func();
+
+W.test(f2.name == 'myName2', 'adding member prop on-the-fly - 2 (work)');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

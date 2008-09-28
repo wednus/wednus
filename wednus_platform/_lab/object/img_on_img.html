@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Putting an Image on an Image</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> platform load
+W.test(W, 'check Wednus Platform');
+//<-----------------------------------
+
+//-----------------------------------> 
+var img = document.createElement('img');
+img.src = 'img_on_img/bar.jpg';
+img.style.position = 'absolute';
+document.body.appendChild(img);
+
+var img2 = document.createElement('img');
+img2.style.position = 'absolute';
+img2.src = 'img_on_img/11.gif';
+document.body.appendChild(img2);
+
+
+//<-----------------------------------
+
+//----------------------------------->
+ 
+//<-----------------------------------
+
+
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

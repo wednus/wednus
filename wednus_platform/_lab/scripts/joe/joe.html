@@ -1,0 +1,1227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+  <TITLE>JOE Javascript Object Editor</TITLE>
+  <META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+
+<SCRIPT language=Javascript>
+
+
+////////////////////////////////////////////////////////////////////////////////
+// PORTABILITY FUNCTIONS                                                      //
+////////////////////////////////////////////////////////////////////////////////
+
+
+// simulates the ownerDocument property if it isn't available (IE5)
+function setOwnerDocument(obj, ownerDocument) {
+  if(!obj.ownerDocument) {    
+    try{obj.ownerDocument = ownerDocument;}catch(exception){};
+  }
+}
+
+
+// adds an event handler to obj for the event eventName
+// ex: addEvent(button, "onclick", onclickHandler);
+function addEvent(obj, eventName, eventHandler) {
+  if(obj.addEventListener != null) {
+    // remove the "on" prefix of the name vor NS
+    eventName = eventName.substr(2);
+    obj.addEventListener(eventName, eventHandler, false); //NS6
+  }
+  else if(obj.attachEvent != null) {
+    obj.attachEvent(eventName, eventHandler); //IE5
+  }
+  else {
+    errorMsg("addEvent", "no event adding method found for " + obj);
+  }
+}
+
+
+// returns the DOM object wich caused the event (and registers it)
+function getEventSource(event) {
+  if(event == null) { errorMsg("getEventSource", "event == null"); }
+  if(event.currentTarget != null) {    
+    return event.currentTarget; //NS6
+  }
+  else if(event.srcElement != null) {
+    return event.srcElement; //IE5
+  }
+  else {
+    errorMsg("getEventSource", "no event source property found in " + event);
+  }
+}
+
+
+// returns the DOM object wich was the original event target
+function getEventTarget(event) {
+  if(event == null) { errorMsg("getEventTarget", "event == null"); }
+  if(event.target != null) {    
+    return event.target; //NS6
+  }
+  else if(event.srcElement != null) {
+    return event.srcElement; //IE5
+  }
+  else {
+    errorMsg("getEventTarget", "no event source property found in " + event);
+  }
+}
+
+
+// stop Propagation of the event
+function stopEvent(event) {
+  if(event == null) { errorMsg("stopEvent", "event == null"); }
+  if(event.stopPropagation != null) {
+    event.stopPropagation(); // NS6
+  }
+  else {
+    event.cancelBubble = true; //IE5
+  }
+}
+
+
+// is true for Netscape NodeLists where the elements do not show up in 
+// for(property in obj)
+function objectListsSeparate(obj) {
+  try{
+    if(obj.toString() == "[object NodeList]" && obj.item !=null) {
+      return true;
+    }
+  }catch(exception){}
+  return false;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// LIBRARY FUNCTIONS                                                          //
+////////////////////////////////////////////////////////////////////////////////
+
+
+// shows an internal error message
+function errorMsg(msg1, msg2) {
+  alert("ERROR: " + msg1 + " \n: " + msg2);
+}
+
+// some objects throw an exception if you access toString, so we encapsulate if
+function toString(any) {
+  if(any == null) {
+    return "null";
+  }
+  try {
+    return any.toString();
+  }
+  catch(exception) {}
+  return '';
+}
+
+
+// access to same properties can cause an exception, so we catch this
+function getProperty(obj, propertyName) {
+  try {
+    return obj[propertyName];
+  }
+  catch(exception) {}
+  return null;
+}
+
+
+// returns the number of properties of obj
+function countProperties(obj) {
+  if(obj == null) return 0;
+  var count = 0;
+  try {
+    for(var name in obj) { 
+      count++; 
+    }
+    if(objectListsSeparate(obj)) {
+      count += obj.length;
+    }
+  }catch(exception){}
+
+  return count;
+}
+
+
+// deletes all elements of a html page
+function clearBody(body) {
+  for(var i; body.childNodes.length>0; ) {
+    body.removeChild(body.lastChild);
+  }
+}
+
+// creates a new HTML element of type and ads it to parent
+// if text is supplied, the new element is created with a TextNode
+// containing text.
+// returns the new element
+// ex: val header = addElement(body, "H1", "Hello World");
+function addElement(parent, type, text) {
+  var element;
+  if(type == "text") {
+    element = parent.ownerDocument.createTextNode(text);
+  }
+  else {
+    element = parent.ownerDocument.createElement(type);
+    if(text != null) {
+      element.appendChild(parent.ownerDocument.createTextNode(text));
+    }
+  }
+  parent.appendChild(element);
+  setOwnerDocument(element, parent.ownerDocument);
+  return element;
+}
+
+
+
+// handles the onclick event of a radio button created by addRadioControll
+// privat function
+function onclickRadioControll(event) {
+  var radio = getEventSource(event);
+  // uncheck the other radiobuttons
+  for(var i=0; i < radio.parent[radio.name].length; i++) {
+    radio.parent[radio.name][i].checked = false;
+  }
+  radio.checked = true;
+  // write value to the dataObject's property
+  if(radio.dataObject != null) {
+    radio.dataObject[radio.dataObjectProperty] = radio.value;
+    // update the dataObject if a handler is available
+    if(radio.dataObject.updateView != null) {
+      radio.dataObject.updateView(radio.dataObjectProperty);
+    }
+  }
+}
+
+// adds a radio button to parent. All radio buttons of the same name
+// will be in one group. If the button is checked, value is asigned to 
+// the property with the name dataObjectProperty of dataObject
+// if at creation the property equals value the button will be checked
+function addRadioControll(parent, name, text, value, 
+                          dataObject, dataObjectProperty) {
+  var radio;
+  radio = parent.ownerDocument.createElement("input");
+  radio.type = "radio";
+  radio.name = name;
+  parent.appendChild(radio);
+  setOwnerDocument(radio, parent.ownerDocument);
+
+  // create an array in parent to contain all radio buttons
+  radio.parent = parent;
+  addEvent(radio, "onclick", onclickRadioControll);
+  if(parent[name] == null) { parent[name] = new Array(); }
+  parent[name][parent[name].length] = radio;
+
+  if(text != null) {
+    parent.appendChild(parent.ownerDocument.createTextNode(text));
+  } 
+  // connection to the dataObject
+  if(value != null) { radio.value = value; } 
+  if(dataObject != null && dataObjectProperty != null) { 
+    radio.dataObject = dataObject; 
+    radio.dataObjectProperty = dataObjectProperty; 
+    radio.checked = (dataObject[dataObjectProperty] == value) ;
+  }
+  return radio;
+}
+
+
+// handles the onclick event of a checkbox created by addCheckboxControll
+// private function
+function onclickCheckboxControll(event) {
+  var checkbox = getEventSource(event);
+  if(checkbox.dataObject == null) { return; }
+
+  // set attached dataObject property
+  checkbox.dataObject[checkbox.dataObjectProperty] = checkbox.checked;
+  // update the dataObject if a handler is available
+  if(checkbox.dataObject.updateView != null) {
+    checkbox.dataObject.updateView(checkbox.dataObjectProperty);
+  }
+  // read the value back (i.e. it was read only)
+  checkbox.checked = checkbox.dataObject[checkbox.dataObjectProperty];
+}
+
+// adds a checkbox to parent. The value will be synchronized with the
+// boolean dataObjectProperty of dataObject
+function addCheckboxControll(parent, text, dataObject, dataObjectProperty) {
+  var checkbox;
+  checkbox = parent.ownerDocument.createElement("input");
+  checkbox.type = "checkbox";
+  addEvent(checkbox, "onclick", onclickCheckboxControll);
+  parent.appendChild(checkbox);
+  setOwnerDocument(checkbox, parent.ownerDocument);
+
+  if(text != null) {
+    parent.appendChild(parent.ownerDocument.createTextNode(text));
+  } 
+
+  // connection to the dataObject
+  if(dataObject != null && dataObjectProperty != null) { 
+    checkbox.dataObject = dataObject; 
+    checkbox.dataObjectProperty = dataObjectProperty; 
+    checkbox.checked = dataObject[dataObjectProperty];
+  }
+
+  return checkbox;
+}
+
+
+// if the inputControll loses focus this restores the text
+// to the value of the data property
+// privat function for addInputControll
+function onchangeInputControll(event) {
+  var input = getEventSource(event);
+  if(input.dataObject == null) { return; }
+  input.value = input.dataObject[input.dataObjectProperty];
+}
+
+
+// if the return key is pressed the value of the inputControll is writen
+// to the attached property of the dataObject
+// privat function for addInputControll
+function onkeypressInputControll(event) {
+  var input = getEventSource(event);
+  if(input.dataObject == null)                 { return; }
+  if(event.keyCode > 14 || event.keyCode < 10) { return; }
+
+  try{
+    input.dataObject[input.dataObjectProperty] = input.value;
+  }catch(error) {}
+  
+  // update the dataObject if a handler is available
+  if(input.dataObject.updateView != null) {
+    input.dataObject.updateView(input.dataObjectProperty);
+  }
+  // read the value back (i.e. it was read only)
+  input.value = input.dataObject[input.dataObjectProperty];
+}
+
+
+// adds a text inputControll to parent. Its value is synchronised with
+// the specified property of dataObject
+function addInputControll(parent, dataObject, dataObjectProperty) {
+  var input;
+  input = parent.ownerDocument.createElement("input");
+  input.type = "text";
+  addEvent(input, "onkeypress", onkeypressInputControll);
+  addEvent(input, "onchange", onchangeInputControll);
+  parent.appendChild(input);
+
+  // connection to the dataObject
+  if(dataObject != null && dataObjectProperty != null) { 
+    input.dataObject         = dataObject; 
+    input.dataObjectProperty = dataObjectProperty; 
+    input.value              = dataObject[dataObjectProperty];
+  }
+
+  setOwnerDocument(input, parent.ownerDocument);
+  return input;
+}
+
+
+// if the textareaControll loses focus this restores the text
+// to the value of the data property
+// private function of addTextareaControll
+function onchangeTextareaControll(event) {
+  var textarea = getEventSource(event);
+  if(textarea.dataObject == null) { return; }
+  textarea.value = textarea.dataObject[textarea.dataObjectProperty];
+}
+
+
+// if the return key is pressed together with shift or alt, the text of 
+// the textarea is writen to the attached property of the dataObject
+// private function of addTextareaControll
+function onkeypressTextareaControll(event) {
+  var textarea = getEventSource(event);
+  if(textarea.dataObject == null)                 { return; }
+  if(event.keyCode > 14 || event.keyCode < 10) { return; }
+  if(!event.shiftKey && !event.altKey ) { return; }
+  try{
+    textarea.dataObject[textarea.dataObjectProperty] = textarea.value;
+  }catch(error) {}
+
+  // update the dataObject if a handler is available
+  if(textarea.dataObject.updateView != null) {
+    textarea.dataObject.updateView(textarea.dataObjectProperty);
+  }
+  // read the value back (i.e. it was read only)
+  textarea.value = textarea.dataObject[textarea.dataObjectProperty];
+  return false;
+}
+
+
+// adds a textarea Controll to parent. Its value is synchronised with
+// the specified property of dataObject
+function addTextareaControll(parent, dataObject, dataObjectProperty) {
+  var textarea;
+  textarea = parent.ownerDocument.createElement("textarea");
+  addEvent(textarea, "onkeypress", onkeypressTextareaControll);
+  addEvent(textarea, "onchange", onchangeTextareaControll);
+  parent.appendChild(textarea);
+
+  // connection to the dataObject
+  if(dataObject != null && dataObjectProperty != null) { 
+    textarea.dataObject         = dataObject; 
+    textarea.dataObjectProperty = dataObjectProperty; 
+    textarea.value              = dataObject[dataObjectProperty];
+  }
+
+  setOwnerDocument(textarea, parent.ownerDocument);
+  return textarea;
+}
+
+
+// synchronizes the selected value with the property of the attached dataObject
+// private function for addDropdownControll
+function onchangeDropdownControll(event) {
+  var select = getEventSource(event);
+  if(select.dataObject == null) { return; }
+
+  if(typeof select.dataObject[select.dataObjectProperty] == "boolean") {
+    try {
+      select.dataObject[select.dataObjectProperty] = (select.selectedIndex == 1);
+    }catch(error) {}
+
+    if(select.dataObject.updateView != null) {
+      select.dataObject.updateView(select.dataObjectProperty);
+    }
+    if(select.dataObject[select.dataObjectProperty]) {
+      select.selectedIndex = 1; 
+    }
+    else {
+      select.selectedIndex = 0; 
+    }
+  }
+}
+
+
+// adds a dropdown Controll to parent. Its value is synchronised with
+// the specified property of dataObject
+// works so far only for boolean
+function addDropdownControll(parent, dataObject, dataObjectProperty) {
+  var select;
+  select = parent.ownerDocument.createElement("select");
+  addEvent(select, "onchange", onchangeDropdownControll);
+  parent.appendChild(select);
+  setOwnerDocument(select, parent.ownerDocument);
+
+  if(dataObject != null && dataObjectProperty != null) { 
+    select.dataObject         = dataObject; 
+    select.dataObjectProperty = dataObjectProperty; 
+
+    if(typeof dataObject[dataObjectProperty] == "boolean") {
+      addElement(select, "option", false).value = false;
+      addElement(select, "option", true).value = true;
+      if(dataObject[dataObjectProperty]) {select.selectedIndex = 1; }
+      else {select.selectedIndex = 0; }
+    }
+    select.value = dataObject[dataObjectProperty];
+  }
+
+  return select;
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// GLOBAL VARIABLES                                                           //
+////////////////////////////////////////////////////////////////////////////////
+
+
+// the object containing global application information
+var application = new Object();
+application.version      = "1.2";
+application.fileName     = "joe.html";
+application.homePageURL  = "http://www.informatrix.ch";
+application.helpURL      = application.homePageURL + "/joe/joehelp.html";
+application.helpFileName = "joehelp.html";
+application.helpWindow   = null;       // the handler for the help window
+
+
+////////////////////////////////////////////////////////////////////////////////
+// DEBUG WINDOW                                                               //
+////////////////////////////////////////////////////////////////////////////////
+
+// the object handling the window to debug
+var debug = new Object();  
+
+debug.window = null;      // the browser window which is anlaysed
+debug.url    = null;      // the url of debug.window
+debug.object = null;      // the object currently shown in detailFrame
+debug.name   = null;      // the name of debug.object
+debug.WAIT   = 1000;      // milliseconds to wait until window should be loaded
+
+
+// shows the property of an html object if the user clicks on it in the debug
+// window
+debug.onclick = function(event) {
+  debug.object = getEventTarget(event);
+  debug.name   = debug.object.nodeName;
+  showDetail();
+}
+
+
+// event handler if the content changes or the window is closed
+// calls connectWindow to synchronize joe
+debug.onunload = function() {
+  setTimeout('debug.connectWindow();', debug.WAIT);
+}
+
+
+// is true if the debug window is open
+debug.isOpen = function() {
+  if(debug.window != null && !debug.window.closed) {
+    return true;
+  }
+  return false;
+}
+
+// is true if the debug window is open and the browser allows access to its
+// properties
+debug.isAccessible = function() {
+  if(debug.window == null) { return false; }
+  if(debug.window.closed)  { return false; }
+  // test is property is accessible
+  try{
+    var url = debug.window.document.URL;
+  }
+  catch(exception) {
+    return false;  
+  }
+  return true;
+}
+
+
+// open site to debug
+debug.openWindow = function(url) {
+  debug.url = url;
+
+  if(debug.window && !debug.window.closed) {
+    debug.window.location.replace(debug.url);
+  }
+  else {
+    debug.window = window.open(debug.url, "debugWindow");
+  }
+  try{
+    debug.window.focus(); // throws an exception in IE5
+  }catch(exception) {}
+
+  // wait until window is loaded and then connect
+  setTimeout("debug.connectWindow()", debug.WAIT); 
+  return false;
+}
+
+
+// connects joe to the open debug window and show properties
+debug.connectWindow = function () {
+  if(debug.isAccessible()) {
+    // add mouse select handler to window and subframes
+    if(options.mouseSelect) {
+      try {
+        addEvent(debug.window.document.body, "onclick", debug.onclick);
+        for(var i=0; i < window.frames.length; i++) {
+          addEvent(debug.window.frames[i].document.body, 
+                   "onclick", debug.onclick);
+        }
+      }catch(exception) {}
+    }
+    // add unload event
+    addEvent(debug.window, "onunload", debug.onunload);
+
+    // set current object to show in detailFrame
+    debug.url    = debug.window.document.URL;
+    debug.object = debug.window;
+    debug.name   = debug.url;
+  }
+  else {
+    debug.url    = null;
+    debug.object = null;
+    debug.name   = null;
+  }
+
+  // refresh frames
+  showTree();
+  showDetail();
+}
+
+  
+////////////////////////////////////////////////////////////////////////////////
+// OPTIONS WINDOW                                                             //
+////////////////////////////////////////////////////////////////////////////////
+
+// the object containing the options :-)
+var options                 = new Object();  
+options.window              = null;          // the window to toggle the options
+
+// the constants allowed for options.showInTree
+options.SHOWINTREE_ALL      = "SHOWINTREE_ALL";
+options.SHOWINTREE_OBJECTS  = "SHOWINTREE_OBJECTS";
+options.SHOWINTREE_DHTML    = "SHOWINTREE_DHTML";
+options.showInTree          = options.SHOWINTREE_OBJECTS;
+
+// the sort order of the properties
+options.SORTORDER_NONE      = "SORTORDER_NONE";
+options.SORTORDER_ALPHABETIC= "SORTORDER_ALPHABETIC";
+options.SORTORDER_TYPE      = "SORTORDER_TYPE";
+options.sortOrder           = options.SORTORDER_ALPHABETIC;
+
+options.mouseSelect         = true;
+options.editing             = true;
+
+
+// update joe if some options have changed
+options.updateView = function(changedPropertieName) {
+  if(changedPropertieName == "showInTree") {
+    showTree();
+  }
+  else if(changedPropertieName == "sortOrder") {
+    if(options.showInTree != options.SHOWINTREE_DHTML) {
+      showTree();
+    }
+    showDetail();
+  }
+  else if(changedPropertieName == "mouseSelect") {
+    if(debug.isAccessible()) {
+      debug.openWindow(debug.url);
+    }
+  }
+  else if(changedPropertieName == "editing") {
+    showDetail();
+  }
+  else {
+    errorMsg('options.updateView', 
+             'unknown changedPropertieName: ' + changedPropertieName);
+  }
+}
+
+
+// shows the option windows
+options.openWindow = function () {
+  if(!options.window || options.window.closed) {
+    options.window = window.open("", "optionsWindow", 
+                                 'resizable,width=300,height=400');
+  }
+  options.window.focus();
+
+  var body = options.window.document.body;
+  clearBody(body);
+  setOwnerDocument(body, options.window.document);
+
+  // what to show in the tree frame
+  addElement(body, "text", "in the tree window show:");
+  addElement(body, "br");
+
+  addRadioControll(body, "showInTree", "all Elements", 
+                    options.SHOWINTREE_ALL, options, "showInTree");
+  addElement(body, "br");
+  addRadioControll(body, "showInTree", "only Objects with properties", 
+                    options.SHOWINTREE_OBJECTS, options, "showInTree");
+  addElement(body, "br");
+  addRadioControll(body, "showInTree", "HTML Elements", 
+                    options.SHOWINTREE_DHTML, options, "showInTree");
+  addElement(body, "br");
+  addElement(body, "br");
+
+  // how to sort the properties
+  addElement(body, "text", "sort properties by:");
+  addElement(body, "br");
+  addRadioControll(body, "sortOrder", "original order", 
+                    options.SORTORDER_NONE, options, "sortOrder");
+  addElement(body, "br");
+  addRadioControll(body, "sortOrder", "alphabeticaly", 
+                    options.SORTORDER_ALPHABETIC, options, "sortOrder");
+  addElement(body, "br");
+  addRadioControll(body, "sortOrder", "object type", 
+                    options.SORTORDER_TYPE, options, "sortOrder");
+  addElement(body, "br");
+  addElement(body, "br");
+
+  addCheckboxControll(body, "enable editing", options, "editing");
+  addElement(body, "br");
+  addCheckboxControll(body, "enable object selection with mouse", 
+                      options, "mouseSelect");
+
+  options.window.document.title = "JOE Options";
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// TOP WINDOW                                                                 //
+////////////////////////////////////////////////////////////////////////////////
+
+// to store the user input
+var urlInput = null;
+
+// loads the homepage entered in urlInput into the debug.window and opens if
+function showDebugWindow() {
+  // input variable url is side passed via urlInput.value 
+
+  // do we have a url?
+  if(urlInput.value == null || urlInput.value.length < 1) {
+    alert("enter first an URL in the input field to open");
+    return false;
+  }
+  try {
+    debug.openWindow(urlInput.value);
+  }
+  catch(exception) {
+    alert("unable to open the URL: \n" + urlInput.value);
+  }
+}
+
+// opens a new browser window that shows the help page
+function showHelpWindow() {
+  var helpWindowOptions = "resizable,width=400,height=400,scrollbars=yes";
+
+  // try to open local help file for IE
+  if(!application.helpWindow || application.helpWindow.closed) {
+    try {
+      application.helpWindow = window.open(application.helpFileName, 
+        "helpWindow", helpWindowOptions);
+    }catch(exception) {}
+  }
+  // try to open local help file for NS
+  if(!application.helpWindow || application.helpWindow.closed) {
+    try {
+      // create a local access URL for the help file
+      var url = window.document.URL.replace(application.fileName, 
+                                            application.helpFileName);
+      application.helpWindow = window.open(url, "helpWindow", helpWindowOptions);
+    }catch(exception) {}
+  }
+  // try to open help file over the internet
+  if(!application.helpWindow || application.helpWindow.closed) {
+    try {
+      application.helpWindow = window.open(application.helpURL, "helpWindow", 
+                                           helpWindowOptions);
+    }catch(exception) {}
+  }
+  if(!application.helpWindow || application.helpWindow.closed) {
+    alert("Unable to find help file"); 
+  }
+  else {
+    application.helpWindow.focus();
+  }
+}
+
+
+// loads the url in the urlInput field if the return key is pressed
+function onkeypressUrlInput(event) {
+  if(event.keyCode > 14 || event.keyCode < 10) { return; }
+  showDebugWindow();
+}
+
+
+// shows the top frame
+function showTop() {
+  var body = window.topFrame.document.body;
+  setOwnerDocument(body, window.topFrame.document);
+
+  // create buttons and link
+  var openButton = addElement(body, "button", "open");
+  addEvent(openButton, "onclick", showDebugWindow);
+
+  var optionsButton = addElement(body, "button", "options");
+  addEvent(optionsButton, "onclick", options.openWindow);
+
+  var helpButton = addElement(body, "button", "help");
+  addEvent(helpButton, "onclick", showHelpWindow);
+
+  var link = addElement(body, "a", " JOE ver " + application.version);
+  link.href=application.homePageURL;
+  link.target="_blank";
+  addElement(body, "br");
+
+  // create urlInput field
+  urlInput = addElement(body, "input");
+  addEvent(urlInput, "onkeypress", onkeypressUrlInput);
+  urlInput.size="100";
+  //urlInput.value="http://";
+  urlInput.value="http://www.informatrix.ch/joe/testframe.html";
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// TREE WINDOW                                                                //
+////////////////////////////////////////////////////////////////////////////////
+
+
+// adds a new tree list node to parent wich must be of type "ul"
+function addListNode(parent, debugObject, debugObjectName) {
+  var node;
+  node = addElement(parent, "li", debugObjectName);
+  node.debugObjectName = debugObjectName; 
+  node.debugObject     = debugObject; 
+  addEvent(node, "onclick", onclickTree);
+  addEvent(node, "ondblclick", ondblclickTree);
+  return node;
+}
+
+
+// the sort function to order the nodes or properties alphabeticaly
+// the passed objects must have a name propertie, wich is used
+function nodeListCompareAlphabetic(node1, node2) {
+  var name1 = node1.name.toUpperCase();
+  var name2 = node2.name.toUpperCase();
+
+  var type1 = (isNaN(name1-0) ? 'string' : 'number');
+  var type2 = (isNaN(name2-0) ? 'string' : 'number');
+
+  if (type1 == 'number' && type2 == 'number') { 
+    return 0 + name1 - name2; 
+  }
+  if (type1 == 'number' && type2 == 'string') {
+    return -1;
+  }
+  if (type1 == 'string' && type2 == 'number') {
+    return 1;
+  }
+
+  // compare alphabetics
+  try{
+    if (name1 < name2) { return -1; }
+    if (name1 > name2) { return  1; }
+  }
+  catch (exception){}  
+  return 0;
+}
+
+
+// orders the nodes by type and alphabetically among the same type
+// the passed objects must have a name and an object property, 
+// wich is used therefore
+function nodeListCompareType(node1, node2) {
+  var type1 = typeof node1.object;
+  var type2 = typeof node2.object;
+
+  // order the equal types by name
+  if(type1 == type2)    { 
+    return  nodeListCompareAlphabetic(node1, node2); 
+  }
+
+  // list objects last
+  if(type2 == 'object') { return -1; }
+  if(type1 == 'object') { return  1; }
+
+  if(type1 < type2) { return -1; }
+  if(type1 > type2) { return  1; }
+  return nodeListCompareAlphabetic(node1, node2);
+}
+
+
+// handler for a single click on a tree item
+// shows detail information of the selected object in the detail frame
+function onclickTree(event) {
+  stopEvent(event);
+  var source   = getEventSource(event);
+  debug.name   = source.debugObjectName;
+  debug.object = source.debugObject;
+  showDetail();
+}
+
+
+// handler for a double click on a tree item
+// expands or collapses the selected branche
+function ondblclickTree(event) {
+  stopEvent(event);
+  var source = getEventSource(event);
+
+  if(source.childNodes != null && source.childNodes.length > 1) {
+    collapseTree(source);
+  }
+  else {
+    expandTree(source);
+  }
+  return false;
+}
+
+
+// removes the children of source from tree
+function collapseTree(source) {
+  for(var i; source.childNodes.length>1; ) {
+    source.removeChild(source.lastChild);
+  }
+}
+
+
+// shows the children of source.debugObject according to the selected options
+function expandTree(source) {
+  if(source.debugObject == null) return;
+  var debugObject = source.debugObject;  
+  var propertyName= null;
+  // a list containing all children in the 
+  // form: nodeList[i].name, nodeList[i].object
+  var nodeList    = new Array();
+
+  // show all the properties of the debugObject of source
+  if(   options.showInTree == options.SHOWINTREE_ALL 
+     || options.showInTree == options.SHOWINTREE_OBJECTS) {
+    // build list witch children
+    for(propertyName in debugObject) {
+      var nodeData              = new Object();
+      nodeData.name             = propertyName;
+      nodeData.object           = getProperty(debugObject, propertyName); 
+      if(options.showInTree == options.SHOWINTREE_ALL 
+         || countProperties(nodeData.object) > 0 ) {
+        nodeList[nodeList.length] = nodeData;
+      }
+    }
+
+    // add nodes if parent is a Netscape NodeList
+    if(objectListsSeparate(debugObject)) {
+      for(var i=0; i <debugObject.length; i++) {
+        var nodeData              = new Object();
+        nodeData.name             = "" + i;
+        nodeData.object           = debugObject.item(i);
+        if(options.showInTree == options.SHOWINTREE_ALL 
+           || countProperties(nodeData.object) > 0 ) {
+          nodeList[nodeList.length] = nodeData;
+        }
+      }
+    }
+
+    // is your browser strong enough
+    if( nodeList.length > 150 &&
+      !window.confirm("there are " + nodeList.length + " subelements"
+                      + "\n Some browsers may crash on this"
+                      + "\n Do you really want to expand?")
+      ) { return; }
+
+    // sort nodeList
+    if(options.sortOrder == options.SORTORDER_ALPHABETIC) {
+      nodeList.sort(nodeListCompareAlphabetic);
+    }
+    if(options.sortOrder == options.SORTORDER_TYPE) {
+      nodeList.sort(nodeListCompareType);
+    }
+
+    // make the tree list with the elements of nodeList and add it to source 
+    list = addElement(source, "ul");
+    for(var i=0; i < nodeList.length; i++) {
+      addListNode(list, nodeList[i].object , nodeList[i].name);
+    }
+  }
+  // extract only the html structure
+  else if(options.showInTree == options.SHOWINTREE_DHTML) {
+    var childNodes = null;
+
+    // find the childNodes list containing the html children
+    if(debugObject.nodeName == "FRAME" ) {
+      // access frame children directly NS
+      if(debugObject.contentDocument != null) {
+        childNodes = debugObject.contentDocument.childNodes;
+      }
+      // access frame children from top window (for IE)
+      // first try if a name exists and if not create a temporary one
+      // so the frame can be accessed through its name
+      else if(debugObject.name != null && debugObject.name != "") {
+        childNodes = debug.window[debugObject.name].document.childNodes;
+      }
+      else if(debugObject.id != null && debugObject.id != "") {
+        childNodes = debug.window[debugObject.id].document.childNodes;
+      }
+      else {
+        var id = "LABELTHIS" + Math.random();
+        debugObject.id = id;
+        childNodes = debug.window[id].document.childNodes;
+        debugObject.id = "";
+      }
+    }
+    else if(debugObject.childNodes != null){ 
+      // if it isn't a frame we take its childNodes directly
+      childNodes = debugObject.childNodes; 
+    }
+    else if(debugObject.document != null)  { 
+      // if there is a document, use the html children of it
+      childNodes = debugObject.document.childNodes; 
+    }
+    else {return; } // there are no children
+
+    // create a tree list from childNodes
+    list = addElement(source, "ul");
+    if(childNodes != null) {
+      for(var i=0; i < childNodes.length; i++) {
+        addListNode(list, childNodes[i], childNodes[i].nodeName);
+      }
+    }
+  }
+  else {
+    errorMsg('expandTree', 'invalid value in options.showInTree');
+  }
+}
+
+
+// show the contents of the tree frame
+function showTree() {
+  var body = window.treeFrame.document.body;
+  clearBody(body);
+  setOwnerDocument(body, window.treeFrame.document);
+
+  if(!debug.isOpen()) {
+    // nothing to show
+    addElement(body, "p", "no browser window opened");
+  }
+  else if(!debug.isAccessible()) {
+    // access denied
+    addElement(body, "p", "due to security restrictions of your browser,"
+               + " access to foreign URL's is denied. Open another URL");
+  }
+  else {
+    // show root of DOM tree
+    var list = addElement(body, "ul");    
+    var rootNode = addListNode(list, debug.window, debug.url);
+    // expand the first level automatically
+    expandTree(rootNode);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// DETAIL WINDOW                                                              //
+////////////////////////////////////////////////////////////////////////////////
+
+// creates a table with up to 3 row captions and a main caption
+function addTable(parent, tableCaption, head1, head2, head3) {
+  var table, tableHead, tableBody;
+
+  if(tableCaption != null) {
+    addElement(parent, "H4", tableCaption).align="center";
+  }
+
+  // create object table
+  table = addElement(parent, "table");
+  tableHead = addElement(table, "thead");
+  tableBody = addElement(table, "tbody");
+  table.width="100%";
+  table.rules="all";
+  table.border="2";
+    
+  // create caption
+  row = addElement(tableHead, "tr");
+  if(head1 != null) addElement(row, "th", head1);
+  if(head2 != null) addElement(row, "th", head2);
+  if(head3 != null) addElement(row, "th", head3);
+  return tableBody;
+}
+
+
+// if the user clicks on an object this handler shows the properties of the
+// selected object in the detail frame
+function onclickObjectLink(event) {
+  var source = getEventSource(event);
+  debug.name   = source.name;
+  debug.object = source.object;
+  if(debug.object == null) { return false; }
+  showDetail();
+  return false;
+}
+
+
+// adds a link element to parent which links to the property propertyName of obj
+function addObjectLink(parent, obj, propertyName) {
+  var link = addElement(parent, "a", propertyName);
+  if(getProperty(obj, propertyName) != null) {
+    link.href   = "dummy";
+    link.name   = propertyName;
+    link.object = obj[propertyName];
+    addEvent(link, "onclick", onclickObjectLink ); 
+  }
+  return link;
+}
+
+
+// adds a simple table for javascript objects to parent
+function addObjectHeader(parent, obj, objName) {
+  var  tableBody = addTable(parent, "JavaScript Object: " + objName, 
+                            "Name", "Type", "Value");
+  var  row = addElement(tableBody, "tr");
+  addElement(row, "td", " " + objName);
+  addElement(row, "td", " " + typeof obj);
+  addElement(row, "td", " " + obj);
+  addElement(parent, "br");    
+  return tableBody;
+}
+
+
+// adds a table header to parent for html objects
+function addDHTMLHeader(parent, obj) {
+  if(obj == null) { return; }
+  if(obj.nodeName == null) { return; }
+
+  var  tableBody = addTable(parent, "DHTML Object: " + obj.nodeName, 
+                            "Name", "Type", "Value");
+  var  row, td, link;
+
+  // show some main properties
+  row = addElement(tableBody, "tr");
+  addElement(row, "td", " " + toString(obj.nodeName));
+  addElement(row, "td", " " + toString(obj.nodeType));
+  addElement(row, "td", " " + toString(obj.nodeValue));
+
+  // add links to navigate the html hierarchy
+  row  = addElement(tableBody, "tr");
+  td   = addElement(row, "td");
+  addObjectLink(td, obj, "previousSibling");
+  td   = addElement(row, "td");
+  addObjectLink(td, obj, "parentNode");
+  td   = addElement(row, "td");
+  addObjectLink(td, obj, "nextSibling");
+
+  row  = addElement(tableBody, "tr");
+  td   = addElement(row, "td");
+  addObjectLink(td, obj, "firstChild");
+  td   = addElement(row, "td", " ");
+  //addObjectLink(td, obj, "childNodes");
+  td   = addElement(row, "td");
+  addObjectLink(td, obj, "lastChild");
+
+  addElement(parent, "br");    
+  return tableBody;
+}
+
+
+// shows the properties of debug.object in the detail frame
+function showDetail() {
+  var body = window.detailFrame.document.body;
+  clearBody(body);
+  setOwnerDocument(body, window.detailFrame.document);
+
+  var obj = debug.object;
+  if(!debug.isOpen()) {
+    // nothing to show
+    addElement(body, "p", "Please enter an URL and press open to debug it");
+  }
+  if(!debug.isAccessible()) {
+    // nothing to show
+  }
+  else {
+    var tableBody, row;
+
+    // header table
+    if(obj != null && obj.nodeName != null) {
+      addDHTMLHeader(body, obj);
+    }
+    else {
+      addObjectHeader(body, obj, debug.name);
+    }
+    if(obj == null) { return; }
+
+    // property table
+    tableBody = addTable(body, "Properties", "Name", "Type", "Value");
+
+    // build a list with all properties
+    var propertyList = new Array();
+    for(propertyName in obj) {
+      var property = new Object();
+      property.name   = propertyName;
+      property.object = getProperty(obj, propertyName);
+      propertyList[propertyList.length] = property;
+    }
+
+    //get nodeList elements for Netscape
+    if(objectListsSeparate(obj)) {
+      for(var i=0; i < obj.length; i++) {
+        var property = new Object();
+        property.name   = i;
+        property.object = obj.item(i);
+        propertyList[propertyList.length] = property;
+      }
+    }
+
+    // sort
+    if(options.sortOrder == options.SORTORDER_ALPHABETIC) {
+      propertyList.sort(nodeListCompareAlphabetic);
+    }
+    if(options.sortOrder == options.SORTORDER_TYPE) {
+      propertyList.sort(nodeListCompareType);
+    }
+
+    // create table content
+    for(var i=0; i < propertyList.length; i++) {
+      // create row
+      var propertyName  = propertyList[i].name;
+      var propertyType  = typeof propertyList[i].object;
+      var propertyValue = toString(propertyList[i].object);
+      row = addElement(tableBody, "tr");      
+
+      // show property name
+      if(propertyType == "object") {
+        var td = addElement(row, "td");
+        addObjectLink(td, obj, propertyName);
+      }
+      else {
+        addElement(row, "td", " " + propertyName);
+      }
+
+      // show property type
+      addElement(row, "td", " " + propertyType);
+
+      // show property value
+      if(!options.editing) {
+        // show text only if editing is disabled
+        addElement(row, "td", " " + propertyValue);
+      }
+      else {
+        // show editing controlls for string, number and boolean
+        var td = addElement(row, "td");
+        if( propertyType == "string" ) {
+          if(propertyValue.indexOf("\n") > -1) {
+            var textarea = addTextareaControll(td, obj, propertyName);
+            textarea.cols = 40;
+            textarea.rows = 6;
+            textarea.wrap = "off";
+          }
+          else {
+            var inputControll = addInputControll(td, obj, propertyName);
+            inputControll.size = 40;
+          }
+        }
+        else if( propertyType == "number" ) {
+          var inputControll = addInputControll(td, obj, propertyName);
+          inputControll.size = 40;
+        }
+        else if(propertyType == "boolean") {
+          addDropdownControll(td, obj, propertyName);
+        }
+        else {
+          addElement(td, "text", " " + propertyValue);
+        }
+      }
+    } //for    
+
+  }  //else
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// INITIALIZATION                                                             //
+////////////////////////////////////////////////////////////////////////////////
+
+
+function init() {
+  showTop();
+  showTree();
+  showDetail();
+}
+
+
+function cleanup() {
+  try{ debug.window.close();           }catch(e){}
+  try{ options.window.close();         }catch(e){}
+  try{ application.helpWindow.close(); }catch(e){}
+}
+
+
+</SCRIPT>
+
+
+</HEAD>
+
+<FRAMESET onload=init(); onunload=cleanup(); rows="20%, 80%">
+  <FRAME name=topFrame>
+  <FRAMESET cols="20%, 80%" onload=init(); onunload=cleanup();>
+    <FRAME name=treeFrame>
+    <FRAME name=detailFrame>
+  </FRAMESET>
+</FRAMESET>
+
+</HTML>

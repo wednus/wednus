@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wml.js</title>
+<script type='text/javascript'>
+var W = {
+    // pool for modules
+    modules: {'module':[], 'control':[], 'include':[]}
+};
+
+W.js = function(url){
+    document.write('<script type="text/javascript" src="'+ url +'"><\/script>');
+};
+
+W.load = function(subpath, name, lib){  // script loader
+    name = name.split(',');
+    // do batch load when name is a comma seperated list
+    if(name.length != 1){
+        for(var i = 0; i < name.length; ++i)
+            this.load(subpath, name[i], lib);
+        return;
+    }
+    // register only when its not loaded yet
+    if(getIndex(lib, name) != -1){
+        return;
+    }else this.modules[lib][this.modules[lib].length] = name +'';
+    // load module
+    this.js(this.path + subpath + '/'+ name +'.js');
+
+    function getIndex(lib, name){
+        // search previous loading
+        for(var i = 0; i < W.modules[lib].length; ++i)
+            if(W.modules[lib][i] == name)
+                return i;
+        return -1;
+    };
+};
+
+W.modules.toString = function(){
+    var str = '';
+    for(var i in this){
+        if(i != 'toString'){
+            str += i +': ';
+            for(var j = 0; j < this[i].length; ++j){
+                str += this[i][j] +',';
+            }
+            str += ' | ';
+        }
+    }
+    return str;
+};
+
+// using debugging utilities
+W.js('../wml.js');
+W.js('../../../module/debug/Timer.js');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+//-----------------------------------> constructor
+W.test(typeof W.include != null, 'check wom module loading');
+//<-----------------------------------
+
+//-----------------------------------> 
+//<-----------------------------------
+//-----------------------------------> W.load() : duplicating loading prevention
+// check module loading duplication prevention feature
+W.module('debug');
+W.module('debug');
+W.module('debug');
+W.module('debug');
+W.control('BigInteger');
+W.control('BigInteger');
+W.control('BigInteger');
+W.control('BigInteger');
+W.include('module/test/wednus', 'json');
+W.include('module/test/wednus', 'json');
+W.include('module/test/wednus', 'json');
+W.include('module/test/wednus', 'json');
+// intended dependency error
+//<-----------------------------------
+</script>
+
+<script type='text/javascript'>
+//-----------------------------------> W.modules
+W.test(W.modules == 'module: debug, | control: BigInteger, | include: json, | ',
+	'W.modules, module library sanity check');
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

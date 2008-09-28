@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wrs.js</title>
+<script type='text/javascript'>
+var W = {};
+W.js = function(url){
+    document.write('<script type="text/javascript" src="'+ url +'"><\/script>');
+};
+document.write('<div id="_wednus_platform_" style="display:none;position:absolute;">.</div>');
+
+// using debugging utilities
+W.js('../wrs.js');
+W.js('../../../module/debug/Timer.js');	// W.test, W.Timer, ...
+
+// add helpers for debugging
+var isLoaded = false;
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+W.test(typeof W.loader != null, 'check wrs module loading');
+//<-----------------------------------
+
+//-----------------------------------> 
+// load a script
+W.request('wrs/target.txt', callback);
+
+// evaluate script
+function callback(data){
+alert(data);
+	eval(data);
+	timer.resume();
+	W.test(isLoaded, 'remote scripting');
+	timer.finish();
+}
+//<-----------------------------------
+
+timer.pause();
+</script>
+</head>
+<body>
+</body>
+</html>

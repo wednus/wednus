@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - DIV - append an object</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+</head>
+<body>
+<script type='text/javascript'>
+// Shell a regular DIV
+var div = document.createElement('div');
+var s = div.style;
+s.width = '300px';
+s.height = '300px';
+s.background = 'red';
+document.body.appendChild(div);
+
+var obj = {a: 'hello', b: 'world'};
+
+var timer = new W.Timer();
+timer.start();
+
+try{
+    div.appendChild(obj);
+}catch(err){
+    W.test(true, 'an object cannot be appended to a DIV');
+}
+
+timer.finish();
+</script>
+</body>
+</html>

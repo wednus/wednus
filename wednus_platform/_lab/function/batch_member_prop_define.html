@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Batch member prop(class) definition</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+W.test(W, 'check Wednus Platform');
+
+
+var myClass = function(){var self = this;
+    var def = {
+        name: 'myClass',
+        id: 'myId'
+    };
+    //self = def;  // fail at all tests
+    for(var i in def) self[i] = self[i]?self[i]:def[i];
+};
+
+var obj = new myClass();
+
+W.test(obj.name == 'myClass', 'check the class name');
+W.test(obj.id == 'myId', 'adding prop. via self');
+W.test(obj != document.createElement('div'), 'self =! div');
+W.test(obj.id == 'myId', 'dbl checking adding prop. via self');
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

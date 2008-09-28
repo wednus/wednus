@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Object style enumeration</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+var arr = [1,2,3,4,5,6,7,8,9];
+
+var result = 0;
+for(var i in arr)
+    result += arr[i];  
+
+W.test(result == 45, 'enumerating an array in object style');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

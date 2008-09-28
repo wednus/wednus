@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - add method to a class property</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+// is a class
+var Func = function(){
+    this.id = 'myId';
+};
+
+Func.name = 'myName';
+
+var f = new Func();
+
+W.test(f.name != 'myName', 'adding member prop on-the-fly - 1 (not work)');
+W.test(Func.name != 'myName', 'neither it added to the object member');
+
+Func.prototype.name = 'myName2';
+
+var f2 = new Func();
+
+W.test(f2.name == 'myName2', 'adding member prop on-the-fly - 2 (work)');
+
+var Func2 = function(){
+  this.div = document.createElement('div');
+};
+
+Func2.prototype = {
+  div: document.createElement('div'),
+  div.style.color: 'red'
+}
+/*
+Func2.prototype = function(){
+  this.div.style.color = 'red';
+}
+*/
+var f3 = new Func2();
+
+W.test(f3.div.style.color == 'red', 'set the value');
+
+timer.finish();
+document.write(f3.div.style.color);
+</script>
+</head>
+<body>
+</body>
+</html>

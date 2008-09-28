@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Deep Copy?</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+
+
+
+W.test(W, 'check Wednus Platform');
+// (add more tests)
+var a = new Object(0);
+var b = new Object(1);
+b = a;
+W.test(b == 0, 'simple copying');
+b = 5;
+W.test(b == 5, 'change value on a copy');
+W.test(a == 0, 'deep copy');
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

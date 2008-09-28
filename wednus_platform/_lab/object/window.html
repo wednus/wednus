@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type"
+        content="text/html; charset=iso-8859-1">
+<script type="text/javascript">
+
+var globalVar = 'Global Variable';
+
+function getWindow(){
+  return window;
+}
+
+function getGlobal(){
+  return this;
+
+}
+
+window.onload = (function(){
+  var localFnc;
+  /* Identifier corresponding with IDed DIV element */
+  var testDiv = 'Outer Function variable';
+
+  /* Identifiers corresponding with ECMA global object properties */
+  var Math = 'Outer Function variable';
+  var Array = 'Outer Function variable';
+  var Object = 'Outer Function variable';
+  var eval = 'Outer Function variable';
+  /* Identifiers corresponding with browser object model global
+  properties. */
+  var clipboardData = 'Outer Function variable';
+  var setTimeout = 'Outer Function variable';
+  var alert = 'Outer Function variable';
+  var window = 'Outer Function variable';
+
+  /* Identifier corresponding with a declared global variable */
+  var globalVar = 'Outer Function variable';
+
+  /* Explicitly add a property to the - window - object:- */
+  getWindow()['foo'] = 'Assigned to window object'
+  /* Identifier corresponding with an property explicitly added
+  to the window object */
+  var foo = 'Outer Function variable';
+
+  /* Explicitly add a property to the - this - object:- */
+  this['bar'] = 'Assigned to window object'
+  /* Identifier corresponding with an property explicitly added
+  to the window object */
+  var bar = 'Outer Function variable';
+
+  /* Cannot use the - window - reference directly as it is defined
+     as a local string variable in this scope so call a function
+     that will return - window - instead:- */
+  with( getWindow() ){ // Add the - window - object to the inner
+                       // function's scope chain.
+    localFnc = (function(){
+      alert(
+        '*Identifier corresponding with IDed DIV element\n'+
+        'testDiv = '+testDiv+
+
+        '\n\n*Identifiers corresponding with ECMA global object'+
+        ' properties\n'+
+        '\nMath = '+Math+
+        '\nArray = '+Array+
+        '\nObject = '+Object+
+        '\neval = '+eval+
+
+        '\n\n*Identifiers corresponding with browser object model'+
+        ' global properties.\n'+
+        '\nclipboardData = '+clipboardData+
+        '\nsetTimout = '+setTimeout+
+        '\nalert = '+alert+
+        '\nwindow = '+window+
+
+        '\n\n*Identifier corresponding with a declared global'+
+        ' variable\n'+
+        '\nglobalVar = '+globalVar+
+
+        '\n\n*Identifier corresponding with an property explicitly'+
+        ' added to the window object'+
+        '\nfoo = '+foo+
+
+        '\n\n*Identifier corresponding with an property explicitly'+
+        ' added to the global - this - object'+
+        '\nbar = '+bar+
+        ''
+      );
+    });
+  }
+  /* Return the inner function so it can be assigned to
+     - window.onload -:- */
+  return localFnc;
+
+})();
+
+</script>
+  </head>
+  <body>
+<div id="testDiv">XXX</div>
+  </body>
+</html> 

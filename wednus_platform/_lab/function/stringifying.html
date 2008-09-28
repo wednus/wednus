@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Stringifying a function</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+var func = function(){var a = 1;};
+
+W.test(typeof func == 'function', 'typeof a function is function');
+var str = func + '';
+W.test(typeof str == 'string', 'function (implicit) type conversion into string');
+var str2 = 'function () {\n'+
+    '    var a = 1;\n'+
+    '}';
+W.test(str == str2, 'stringified function');
+
+var func2 = eval('('+ str +')');
+W.test(typeof func2 == 'function', 'function reconstruction');
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

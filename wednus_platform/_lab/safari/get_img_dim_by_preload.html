@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - Getting image dimension info by preloading</title>
+<script type='text/javascript' src='../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> platform load
+W.test(W, 'check Wednus Platform');
+//<-----------------------------------
+
+//----------------------------------->
+var img = new Image();
+img.src = 'get_img_dim_by_preload/grid.gif';
+W.test(img.width == 0, 'On using Safari: failed at getting the width of the image');
+//<-----------------------------------
+
+//----------------------------------->
+var img2 = document.createElement('img');
+img2.src = 'get_img_dim_by_preload/grid.gif';
+//<-----------------------------------
+
+img.onload = function(){
+  W.test(img2.width == 24, 'On using Safari: has to use onload event');
+  timer.finish();
+};
+
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - DIV</title>
+<script type='text/javascript'>
+</script>
+</head>
+<body>
+<script type='text/javascript'>
+var div = document.createElement('div');
+var form = document.createElement('form');
+div.appendChild(form);
+
+var table = document.createElement('table');
+form.appendChild(table);
+
+var tr = document.createElement('tr');
+table.appendChild(tr);
+
+var td = document.createElement('td');
+td.appendChild(document.createTextNode('name:'));
+tr.appendChild(td);
+
+td = document.createElement('td');
+var field = document.createElement('input');
+td.appendChild(field);
+tr.appendChild(td);
+
+document.body.appendChild(div);
+</script>
+</body>
+</html>

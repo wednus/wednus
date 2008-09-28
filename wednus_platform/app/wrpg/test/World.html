@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>World.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.include('module/darwin', 'World');
+</script>
+
+<script type='text/javascript'>
+// define a world
+var world = new W.World();
+world.showGrid(true);
+document.body.appendChild(world.body);
+</script>
+</head>
+
+<body>
+<!-- page source dumper -->
+<textarea id='source'>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>World.js</title>
+<script type='text/javascript' src='../../../wednus_compact.js'></script>
+<script type='text/javascript'>
+W.include('module/darwin', 'World');
+</script>
+
+<script type='text/javascript'>
+// define a world
+var world = new W.World();
+world.showGrid(true);
+document.body.appendChild(world.body);
+</script>
+</head>
+
+<body>
+</body></html>
+</textarea>
+<script type='text/javascript'>
+W.dump = function(){
+  W.refresh();
+  W.style(W.source, 'top:'+ (W.height/3)*2 +'px;left:0px;width:'+ W.width
+    +'px;height:'+ (W.height/3) +'px;position:absolute;'
+    +'background:silver;border:0px;');
+};
+W.source = W.style(W.$('source'), 'position:absolute');
+W.dump();
+W.event(window, 'onresize', W.dump);
+</script>
+</body></html>

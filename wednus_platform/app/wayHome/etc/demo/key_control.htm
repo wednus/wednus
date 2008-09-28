@@ -1,0 +1,16 @@
+<html><head><title>Wednus RPG</title>
+<script language='javascript' src='../../wrpg.js'></script>
+<script>
+var world = new Wednus.RPG.World(10, 10);
+world.setGrid(true);
+
+var a = world.insert('creature_debug', 0, 0, 'south', 'walk', 'team1');
+a.ifWall = 'walk';
+//a.reserveAct('left,walk,right,walk,right,walk,left,still');
+</script>
+
+
+</head>
+<body bgcolor='black'>
+<script>//world.expandToFit();</script>
+</body></html>

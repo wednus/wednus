@@ -1,0 +1,44 @@
+<html><head><title>Wednus RPG</title>
+<script language='javascript' src='../../wrpg.js'></script>
+
+<script>
+var world = new Wednus.RPG.World(6, 8, 10, 124);
+world.background(0, 0, 262, 309, 'map/smallroom.jpg');
+//world.setGrid(true);
+
+/*
+var me = world.insert('me', 4, 6, 'north', 'walk', 'myTeam');
+me.ifAttacked  = 'damage,die,still';
+*/
+
+var a = world.insert('me', 5, 0, 'east', 'walk', 'myTeam');
+a.ifWall = 'still';
+a.ifDead  = 'damage,die,still';
+a.ifEnemy = 'walk';
+
+a.ifAttacked  = 'damage,walk';
+a.ifEnemy = 'walk';
+a.ifDeadEnemy = 'still';
+a.ifWall = 'still';
+
+var b = world.insert('m43', 0, 0, 'east', 'walk', 'Alians');
+b.ifAttacked  = 'damage,walk';
+
+</script>
+
+
+
+</head><body bgcolor='black'>
+<!-- 
+attack, damage, die, faint, magic, poison
+scream, stone, tilt, walk
+-->
+
+<!--
+<br><br><br><br><br><br><br>
+<br><br><br><br>
+<input type='text' id='b' value=0 size=4></input>
+<input type='text' id='a' value=0 size=4></input><br>
+<input type='text' id='c' size=10></input>
+-->
+</body></html>

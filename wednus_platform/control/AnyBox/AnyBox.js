@@ -19,19 +19,15 @@
  * @bug applying style before WPS reveals the transition. object reveal at the original
  * place first and it moves to the position it supposed to be.  check CodeExample.html
  */
-W.AnyBox = function(args){var args = args?args:{}; var self = this;
+W.AnyBox = function(tag){var self = this;
   // control info.
-  this.version = '0.0.1';
+  this.version = '0.0.2';
   this.name = 'AnyBox';
 
   this.tag = 'textbox';
   this.wps = '80%,80%,xcenter:0,ycenter:0';
   this.body = document.createElement('div');
-
-  // extend/override constructor w/ passed args object
-  for(var i in args)
-    eval('this.'+ i +' = args["'+ i +'"];');
-
+  // construct the core element
   this.core = document.createElement(this.tag);
 
   // if the core itself is a visible widget, we need to append it to the body

@@ -21,7 +21,7 @@ Func.name = 'myName';
 var f = new Func();
 
 W.test(f.name != 'myName', 'adding member prop on-the-fly - 1 (not work)');
-W.test(Func.name != 'myName', 'neither it added to the object member');
+W.test(Func.name == 'myName', 'it added to the object member');
 
 Func.prototype.name = 'myName2';
 
@@ -33,21 +33,23 @@ var Func2 = function(){
   this.div = document.createElement('div');
 };
 
+/*
 Func2.prototype = {
   div: document.createElement('div'),
   div.style.color: 'red'
 }
+*/
+
 /*
 Func2.prototype = function(){
   this.div.style.color = 'red';
 }
 */
-var f3 = new Func2();
 
-W.test(f3.div.style.color == 'red', 'set the value');
+//var f3 = new Func2();
+//W.test(f3.div.style.color == 'red', 'set the value');
 
 timer.finish();
-document.write(f3.div.style.color);
 </script>
 </head>
 <body>

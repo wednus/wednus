@@ -28,7 +28,7 @@ W.AnyBox = function(tag){var self = this;
   this.wps = '80%,80%,xcenter:0,ycenter:0';
   this.body = document.createElement('div');
   // construct the core element
-  this.core = document.createElement(this.tag);
+  this.core = document.createElement(tag);
 
   // if the core itself is a visible widget, we need to append it to the body
   this.body.appendChild(this.core);

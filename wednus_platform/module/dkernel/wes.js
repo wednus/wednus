@@ -46,12 +46,16 @@ W.event = function(source, evt, func, arg1){
     // create a new library for this event if there no exist yet.
     W.events[source][evt] = [];
     // extend the original event handler
-    source[evt] = function(){
+    source[evt] = function(e){
       // execute reserved tasks
       for(var i = 0; i < W.events[source][evt].length; ++i){
         task = W.events[source][evt][i];
         // BUG: Error on firefox, onresize
-        task[0](task[1]);
+				if(typeof task[1] != 'undefined'){
+          task[0](task[1]);
+			  }else if (typeof e != 'undefined'){ // handle document.onkeydown
+					task[0](e);
+				}
       }
     };
   }

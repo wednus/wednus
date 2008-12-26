@@ -12,7 +12,7 @@
  */
 
 
-W.dkernel = {version: '0.0.2'};
+W.dkernel = {version: '0.0.3'};
 
 
 /**
@@ -114,7 +114,7 @@ W.init = function(){
   W.check_namespace = function(){};
   // initialize system
   W.init();
-  W.load('module/dkernel', 'wes,wml,wss,wrs,serialize', 'module');
+  W.load('module/dkernel', 'wes,wml,wss,wrs,serialize,Oracle', 'module');
 })();
 //!\endcond
 
@@ -128,7 +128,8 @@ W.init = function(){
  * - <b>WED</b> - Includes functions for debugging
  * - <b>WES</b> - Add an event to the corresponding event library.
  * - <b>WRS</b> - Load remote JS.
- *
+ * - <b>Oracle</b> - The Oracle introduces the concept of time to the objects
+ * with the receptor method.: .tick()
  * <hr>
  * \section diagram Architecture
  * \image   html    dkernel.jpg

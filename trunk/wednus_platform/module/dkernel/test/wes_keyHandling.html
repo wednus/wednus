@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - wes.js</title>
+<script type='text/javascript' src='../../../wednus.js?only'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.load('module/dkernel', 'wes', 'module');
+W.load('module/debug', 'Timer', 'module');
+</script>
+
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//-----------------------------------> constructor
+var input = document.createElement('input');
+input.type = 'text';
+document.body.appendChild(input);
+
+var keys = [];
+function onkeydownkeyHandler(e){
+    if(!e) e = window.event;
+    keys[e.keyCode] = true;
+		keyDisplay();
+};
+
+function onkeyupHandler(e){
+    if(!e) e = window.event;
+		keys[e.keyCode] = false;
+    keyDisplay();
+};
+
+function keyDisplay(){
+	var value = '';
+	for(var i in keys){
+		if(keys[i] != false)
+		  value += '+'+ i;
+	};
+	input.value = value;
+};
+
+W.event(document, 'onkeydown', onkeydownkeyHandler);
+W.event(document, 'onkeyup', onkeyupHandler);
+
+W.test(typeof W.event != null, 'check WES module loading');
+//<-----------------------------------
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

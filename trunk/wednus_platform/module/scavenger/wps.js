@@ -166,6 +166,7 @@ W.repos = function(parent){var self = this;
     if(typeof parent == 'undefined')
         parent = W;	// have to be 'W'
     var children = parent.children;
+    
     for(var i = 0; i < children.length; ++i){
         wps(children[i]);
     }
@@ -263,6 +264,6 @@ W.repos = function(parent){var self = this;
 
 //! \cond    attach
 // add WPS event listener
-W.event(window, 'onresize', W.repos);
+W.event(window, 'onresize', W.repos, W);
 //! \endcond
 //! @}

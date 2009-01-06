@@ -47,8 +47,8 @@ W.children = [];
 /**
  * Wednusification
  *
- * If the parent is a WPS object, then it does establishing the hierarchy thing.
- * It it is not, then it's gonna be just one time smart attachment.
+ * If the parent is a WPS object, then it does establishing the hierarchy structure.
+ * Otherwise, it'll work as just one time smart attachment.
  * @todo    which is the better?  (a != null), (!a.name)
  */
 W.wednusify = function(obj){

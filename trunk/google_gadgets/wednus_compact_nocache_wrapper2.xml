@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Wednus Platform"> 
+    <optional feature="shareable-prefs"/> 
+  </ModulePrefs>
+  <Content type="html">
+  <![CDATA[
+  <script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
+  <script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/google_gadgets/wednus_compact_load_controls.js'></script>
+  <script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/google_gadgets/wednus_compact_nocache.js'></script>
+  ]]>
+  </Content>
+</Module>

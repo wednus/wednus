@@ -3,8 +3,7 @@
  * \brief This is the template of a control definition.
  *
  * (longer description goes here)
- * @author    (your name)
- * @todo    please make me a real control.
+ * @author  Sundew H. Shin
  * @see http://plugins.yme.music.yahoo.com/plugins/docs/webquickstart_page.html
  */
 
@@ -17,21 +16,20 @@
  * @param    snd    (describe what this parameter is for)
  */
 W.ImageBox = function(url){var self = this;
-    this.wps = '80%,80%,xcenter:0,ycenter:0';
-    this.body = document.createElement('div');
-    this.core = document.createElement('img');
-    this.core = new Image();
+  this.name = 'ImageBox';
+  this.wps = '80%,80%,xcenter:0,ycenter:0';
+  this.body = document.createElement('div');
+  this.core = document.createElement('img');
+  this.core = new Image();
  	this.core.src = url;
 	this.width = this.core.width;
-	//alert(this.width);
 	this.height = this.core.height;
-	//alert(this.height);
-    W.event(window, 'onload', addWidget);
+  W.event(window, 'onload', addWidget);
 
-    function addWidget(){
-        // register this instance to WPS
-        W.add(self);
-    };
+  function addWidget(){
+      // register this instance to WPS
+      W.add(self);
+  };
 };
 
 

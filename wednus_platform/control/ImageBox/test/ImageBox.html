@@ -1,21 +1,21 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Test - A_Template.js</title>
+<title>Test - ImageBox.js</title>
 <script type='text/javascript' src='../../../wednus.js'></script>
 <script type='text/javascript'>
 // using debugging utilities
 W.module('debug');	// W.test, W.Timer, ...
 // include modules or controls
-W.control('A_Template');
+W.control('ImageBox');
 </script>
 <script type='text/javascript'>
 var timer = new W.Timer();
 timer.start();
 //W.test(typeof W.A_Template == 'object', 'required library loaded');
-var a = new W.A_Template();
+var a = new W.ImageBox();
 //-----------------------------------> constructor
-W.test(a.name == 'A_Template', 'check the default constructor');
+W.test(a.name == 'ImageBox', 'check the default constructor');
 //<-----------------------------------
 //<-----------------------------------
 

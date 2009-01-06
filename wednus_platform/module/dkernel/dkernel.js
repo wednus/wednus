@@ -77,6 +77,7 @@ W.background = function(bg){
  */
 W.init = function(){
   // build initial namespace library
+	W.names = '';
   for(var i in window) W.names += i +',';
 
   // append the mother of all presentation layers

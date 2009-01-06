@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs 
-    title="Wednus Platform"
-    scrolling="true"> 
+  <ModulePrefs title="Wednus Platform"> 
     <optional feature="shareable-prefs"/> 
-   </ModulePrefs>
-  <UserPref name="mylist" 
-    display_name="Add items" 
-    datatype="list" />
+  </ModulePrefs>
   <Content type="html">
   <![CDATA[
+
+Test:
 
 <script type='text/javascript' src='../wednus_compact.js'></script>
 

@@ -6,13 +6,8 @@
   <Content type="html">
   <![CDATA[
 
-Test:
-
 <script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
-
 <script type='text/javascript'>
-alert(W);
-//document.write(W.path);
 W.control('AnyBox');
 </script>
 
@@ -22,6 +17,6 @@ a.wps = '100,100,xcenter:0,ycenter:0';
 a.core.style.background = 'red';
 </script>
 
-  ]]> 
+  ]]>
   </Content>
 </Module>

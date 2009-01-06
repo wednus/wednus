@@ -14,6 +14,7 @@
 <script type='text/javascript' src='../wednus_compact.js'></script>
 
 <script type='text/javascript'>
+alert(W);
 W.control('AnyBox');
 </script>
 

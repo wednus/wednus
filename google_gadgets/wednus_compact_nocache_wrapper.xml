@@ -5,19 +5,8 @@
   </ModulePrefs>
   <Content type="html">
   <![CDATA[
-
-<script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
-<script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/google_gadgets/wednus_compact_nocache.js'></script>
-<script type='text/javascript'>
-W.control('AnyBox');
-</script>
-
-<script type='text/javascript'>
-var a = new W.AnyBox('div');
-a.wps = '100,100,xcenter:0,ycenter:0';
-a.core.style.background = 'red';
-</script>
-
+  <script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
+  <script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/google_gadgets/wednus_compact_nocache.js'></script>
   ]]>
   </Content>
 </Module>

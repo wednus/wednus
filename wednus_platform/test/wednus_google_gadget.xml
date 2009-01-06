@@ -8,7 +8,7 @@
 
 Test:
 
-<script type='text/javascript' src='../wednus_compact.js'></script>
+<script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
 
 <script type='text/javascript'>
 alert(W);

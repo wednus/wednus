@@ -2,7 +2,7 @@
  * \file AnyBox.js
  * \brief Creates HTML elements
  *
- * It creates any HTML elements in WPS way.
+ * It creates any HTML elements in the WPS way.
  * @author    Sundew H. Shin
  * @see WSS
  * @todo    need to be revised
@@ -70,7 +70,7 @@ W.module('scavenger');
 /**
  * \mainpage
  * \section req Requirement
- *  - wednus.js
+ *  - wednus_platform.js
  *  - wps.js
  *
  *<hr>

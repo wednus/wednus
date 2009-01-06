@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs 
+    title="Wednus Platform"
+    scrolling="true"> 
+    <optional feature="shareable-prefs"/> 
+   </ModulePrefs>
+  <UserPref name="mylist" 
+    display_name="Add items" 
+    datatype="list" />
+  <Content type="html">
+  <![CDATA[
+
+<script type='text/javascript' src='../wednus_compact.js'></script>
+
+<script type='text/javascript'>
+W.control('AnyBox');
+</script>
+
+<script type='text/javascript'>
+var a = new W.AnyBox('div');
+a.wps = '100,100,xcenter:0,ycenter:0';
+a.core.style.background = 'red';
+</script>
+
+  ]]> 
+  </Content>
+</Module>

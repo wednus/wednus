@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="__UP_myname__" author="wednus" author_email="wednus@gmail.com" author_affiliation="wednus" screenshot="" thumbnail="" author_location="Seoul" directory_title="iframe" title_url="__UP_mylink__" description="Embed your favorite webpages within your Google Personalized Homepage within this iframe gadget"> 
+  <ModulePrefs title="__UP_myname__" author="Sundew H. Shin" author_email="wednus@gmail.com" author_affiliation="Wednus Project" screenshot="" thumbnail="" author_location="Seoul" directory_title="iframe" title_url="__UP_mylink__" description="Embed your favorite webpages within your Google Personalized Homepage within this iframe gadget"> 
     <Require feature="dynamic-height"/>
   </ModulePrefs>
   <UserPref name="myname" display_name="Title" required="true" default_value="iframe" />
   <UserPref name="mylink" display_name="Title link" />
   <UserPref name="myurl" display_name="URL" required="true" />
   <UserPref name="mywidth" display_name="Width" default_value="100%" />
-  <UserPref name="myheight" display_name="Height" />
-  <UserPref name="myborder" display_name="Border" />
+  <UserPref name="myheight" display_name="Height" default_value="100%" />
+  <UserPref name="myborder" display_name="Border Width" />
+  <UserPref name="myscroll" display_name="Scrolling" default_value="auto" />
   <UserPref name="myalign" display_name="Align" datatype="enum" default_value="center">
     <EnumValue value="left" display_value="Left"/>
     <EnumValue value="center" display_value="Center"/>
@@ -19,7 +20,7 @@
   <script type="text/javascript">
     _IG_AdjustIFrameHeight();
   </script>
-  <iframe border="" name="MyIframe" src="__UP_myurl__" frameborder="__UP_myborder__" scrolling="auto" width="__UP_mywidth__" height="__UP_myheight__"></iframe>
+  <iframe border="" name="MyIframe" src="__UP_myurl__" frameborder="__UP_myborder__" scrolling="__UP_myscroll__" width="__UP_mywidth__" height="__UP_myheight__"></iframe>
   </div>
    ]]> 
   </Content> 

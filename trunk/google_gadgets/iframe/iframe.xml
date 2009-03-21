@@ -21,7 +21,7 @@
     _IG_AdjustIFrameHeight();
   </script>
   <div align="__UP_myalign__" style="margin: __UP_mymargin__px; padding: __UP_mymargin__px; border: __UP_myborder__px solid rgb(204, 204, 204);">
-  <iframe name="MyIframe" src="__UP_myurl__" frameborder="0" scrolling="__UP_myscroll__" width="100%" height="__UP_myheight_"></iframe>
+  <iframe name="MyIframe" src="__UP_myurl__" frameborder="0" scrolling="__UP_myscroll__" width="100%" height="__UP_myheight__"></iframe>
   </div>
    ]]> 
   </Content>

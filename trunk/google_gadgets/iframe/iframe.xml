@@ -8,6 +8,7 @@
   <UserPref name="myurl" display_name="URL" required="true" />
   <UserPref name="mywidth" display_name="Width" default_value="100%" />
   <UserPref name="myheight" display_name="Height" />
+  <UserPref name="myborder" display_name="Border" />
   <UserPref name="myalign" display_name="Align" datatype="enum" default_value="center">
     <EnumValue value="left" display_value="Left"/>
     <EnumValue value="center" display_value="Center"/>
@@ -18,9 +19,8 @@
   <script type="text/javascript">
     _IG_AdjustIFrameHeight();
   </script>
-  <div align="__UP_myalign__" style="margin-top:7px;">
-  <iframe name="MyIframe" src="__UP_myurl__" frameborder="0" scrolling="auto" width="__UP_mywidth__" height="__UP_myheight__"></iframe>
-   </div>
+  <iframe border="" name="MyIframe" src="__UP_myurl__" frameborder="__UP_myborder__" scrolling="auto" width="__UP_mywidth__" height="__UP_myheight__"></iframe>
+  </div>
    ]]> 
   </Content> 
 </Module>

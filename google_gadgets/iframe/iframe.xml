@@ -6,6 +6,7 @@
   <UserPref name="myname" display_name="Title" required="true" default_value="iframe" />
   <UserPref name="mylink" display_name="Title link" />
   <UserPref name="myurl" display_name="URL" required="true" />
+  <UserPref name="myid" display_name="Frame ID" default_value="MyIframe"/>
   <UserPref name="myheight" display_name="Frame Height" default_value="200"/>
   <UserPref name="myborder" display_name="Border Width" default_value="0"/>
   <UserPref name="mymargin" display_name="Border Margin" default_value="0"/>
@@ -21,7 +22,7 @@
     _IG_AdjustIFrameHeight();
   </script>
   <div align="__UP_myalign__" style="margin: __UP_mymargin__px; padding: __UP_mymargin__px; border: __UP_myborder__px solid rgb(204, 204, 204);">
-  <iframe name="MyIframe" src="__UP_myurl__" frameborder="0" scrolling="__UP_myscroll__" width="100%" height="__UP_myheight__"></iframe>
+  <iframe name="__UP_myid__" src="__UP_myurl__" frameborder="0" scrolling="__UP_myscroll__" width="100%" height="__UP_myheight__"></iframe>
   </div>
    ]]> 
   </Content>

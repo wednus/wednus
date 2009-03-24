@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Wednus Platform" author="Sundew H. Shin" author_email="wednus@gmail.com" author_affiliation="Wednus Project" screenshot="" thumbnail="" author_location="Seoul" directory_title="iframe" title_url="__UP_mylink__" description="Embed the Wednus Platform within your Google Personalized Homepage as a gadget."> 
+    <Require feature="dynamic-height"/>
+  </ModulePrefs>
+  <UserPref name="path" display_name="Wednus Platform Path" required="true" default_value="http://wednus.googlecode.com/svn/trunk/wednus_platform" />
+  <UserPref name="controls" display_name="Controls" required="true" default_value="AnyBox" />
+  <UserPref name="code" display_name="Code" required="true" default_value="var a = new W.AnyBox('div');a.wps = '100,100,xcenter:0,ycenter:0';a.core.style.background = 'red';" />
+  <Content type="html">
+  <![CDATA[
+<script type='text/javascript' src='__UP_path__/wednus_compact.js'></script>
+<script type='text/javascript'>
+W.control('__UP_controls__');
+</script>
+
+<script type='text/javascript'>
+__UP_code__
+</script>
+  ]]>
+  </Content>
+</Module>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-	<ModulePrefs title="__UP_myname__" author="Sundew H. Shin" author_email="wednus@gmail.com" author_affiliation="Wednus Project" screenshot="" thumbnail="" author_location="Seoul" directory_title="iframe" title_url="__UP_mylink__" description="Embed your favorite webpages within your Google Personalized Homepage within this iframe gadget">
+	<ModulePrefs title="__UP_myname__" author="Sundew H. Shin" author_email="wednus@gmail.com" author_affiliation="Wednus Project" screenshot="" thumbnail="" author_location="Seoul" directory_title="Wednus Iframe" title_url="__UP_mylink__" description="Embed your favorite webpages within your Google Personalized Homepage within this iframe gadget">
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>
 	<UserPref name="myname" display_name="Title" required="true" default_value="iframe" />

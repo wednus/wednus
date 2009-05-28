@@ -3,13 +3,13 @@
 	<ModulePrefs title="__UP_myname__" author="Sundew H. Shin" author_email="sundew@wednus.com" author_affiliation="Wednus Project" screenshot="" thumbnail="" author_location="Seoul" directory_title="Wednus Iframe" title_url="__UP_mylink__" description="Embed your favorite webpages within your Google Personalized Homepage within this iframe gadget">
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>
-	<UserPref name="myurl" display_name="Target URL" required="true" />
-	<UserPref name="myid" display_name="Frame ID" default_value="MyIframe"/>
-	<UserPref name="myborder" display_name="Border Width" default_value="0"/>
-	<UserPref name="mymargin" display_name="Border Margin" default_value="0"/>
+	<UserPref name="myurl" display_name="Target URL" required="true"/>
+	<UserPref name="myid" display_name="Frame ID" default_value="MyIframe" required="true"/>
+	<UserPref name="myborder" display_name="Wra00er Border Width" default_value="0"/>
+	<UserPref name="mymargin" display_name="Wra00er Border Margin" default_value="0"/>
 	<UserPref name="myWrapperStyle" display_name="Wrapper Style" default_value=""/>
 	<UserPref name="myIframeStyle" display_name="Iframe Style" default_value=""/>
-	<UserPref name="myscroll" display_name="Scrolling" datatype="enum" default_value="auto">
+	<UserPref name="myscroll" display_name="Iframe Scrolling" datatype="enum" default_value="auto">
 		<EnumValue value="auto" display_value="auto"/>
 		<EnumValue value="no" display_value="no"/>
 		<EnumValue value="yes" display_value="yes"/>

@@ -66,7 +66,7 @@ W.BigInteger = function(number){var self = this;
 
   this.add = function(source){
     if(typeof source == 'number') source += '';
-    var source = new W.BigInteger(source);
+    source = new W.BigInteger(source);
     var result = new W.BigInteger;
     result.data.pop();  // empty data holder
     var bigger = this.data;

@@ -13,7 +13,7 @@
  * (longer description of this function)
  * @param    args    argument object
  */
-W.BtnGroup = function(args){var args = args?args:{}; var self = this;
+W.BtnGroup = function(_args){var args = _args?_args:{}; var self = this;
   // control info.
   this.version = '0.0.1';
   this.name = 'BtnGroup';

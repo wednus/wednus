@@ -4,7 +4,7 @@
  *
  * (longer description goes here)
  * @author    Sundew H. Shin
- * @todo    please make me a real control.
+ * @todo    NEED TO UPDATE
  * @see http://plugins.yme.music.yahoo.com/plugins/docs/webquickstart_page.html
  */
 
@@ -84,7 +84,7 @@ W.ICanvas = function(args){var self = this;
     // when src has passed, it works as a plain iframe.
     if(this.src)
         this.onload = function(){};
-    
+
     this.body = document.createElement('div');
     // register to WPS
     W.add(this);
@@ -92,7 +92,7 @@ W.ICanvas = function(args){var self = this;
     // solve IE targeting problem
     if(top[this.core.id])
         top[this.core.id].name = this.name;
-    
+
     //window.onerror = function(){alert('error')};
     // same args struct as the constructor
     this.write = function(args){
@@ -124,7 +124,7 @@ W.module('scavenger');
 
 //! \cond   namespace
 // open a namespace for control variables
-W.c.ICanvas = {};              
+W.c.ICanvas = {};
 W.c.ICanvas.id = 0;
 //! \endcond
 
@@ -201,7 +201,7 @@ W.c.ICanvas.id = 0;
  *<hr>
  *
  * \section license License
- * This section describes the license this destribution is destributed under. You
+ * This section describes the license this distribution is distributed under. You
  * may choose an <a href='http://opensource.org/licenses/'>OSI Approved License</a>.
  * The most common option in Open Source today is the <a href='http://opensource.org/licenses/gpl-license.php'>GNU GPL</a>,
  * however, one of the most flexible is the <a href='http://opensource.org/licenses/artistic-license.php'>Artistic License</a>.

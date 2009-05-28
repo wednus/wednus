@@ -5,7 +5,7 @@
 <script type='text/javascript' src='../../../wednus.js'></script>
 <script type='text/javascript'>
 // using debugging utilities
-W.module('debug');	// W.test, W.Timer, ...
+W.module('debug');  // W.test, W.Timer, ...
 
 // (module/control inclusion)
 W.control('Niceforms');
@@ -14,7 +14,7 @@ W.control('Niceforms');
 <script type='text/javascript'>
 var timer = new W.Timer();
 timer.start();
-W.test(typeof replaceRadios == 'function', 'required library loaded');
+W.test(typeof multiSelects == 'function', 'required library loaded');
 
 var a = new W.Niceforms();
 W.test(a.name == 'Niceforms', 'check the default constructor');
@@ -26,39 +26,39 @@ timer.finish();
 <body>
 <div id="container">
 <form action="vars.php" method="post">
-	<select size="1" id="mySelect1" name="mySelect1">
-		<option selected="selected" value="Test area no.1">Test area no.1</option>
-		<option value="Another test option">Another test option</option>
-		<option value="And another one">And another one</option>
-		<option value="One last option for me">One last option for me</option>
-	</select>
-	<br />
-	<select size="1" id="mySelect2" name="mySelect2">
-		<option selected="selected" value="Test area no.2">Test area no.2</option>
-		<option value="Another test">Another test</option>
-		<option value="And another one">And another one</option>
-		<option value="And yet another one">And yet another one</option>
-		<option value="One last option for me">One last option for me</option>
-	</select>
-	<br />
-	<input type="radio" name="radioSet" id="option1" value="foo" /><label for="option1">foo</label><br />
-	<input type="radio" name="radioSet" id="option2" value="bar" /><label for="option2">bar</label><br />
-	<input type="radio" name="radioSet" id="option3" value="another option" /><label for="option3">another option</label><br />
-	<br />
-	<input type="checkbox" name="checkSet1" id="check1" value="foo" /><label for="check1">foo</label><br />
-	<input type="checkbox" name="checkSet2" id="check2" value="bar" /><label for="check2">bar</label><br />
-	<input type="checkbox" name="checkSet3" id="check3" value="another option" /><label for="check3">another option</label><br />
-	<br />
-	<label for="textinput">Username:</label><br />
-	<input type="text" id="textinput" name="textinput" class="textinput" maxlength="25" /><br />
-	<label for="passwordinput">Password:</label><br />
-	<input type="password" id="passwordinput" name="passwordinput" class="textinput" maxlength="25" /><br />
-	<br />
-	<label for="textareainput">Comments:</label><br />
-	<textarea id="textareainput" name="textareainput" class="textarea"></textarea><br />
-	<br />
-	<input type="submit" value="Submit" class="buttonSubmit" />
-	<div id="stylesheetTest"></div>
+  <select size="1" id="mySelect1" name="mySelect1">
+    <option selected="selected" value="Test area no.1">Test area no.1</option>
+    <option value="Another test option">Another test option</option>
+    <option value="And another one">And another one</option>
+    <option value="One last option for me">One last option for me</option>
+  </select>
+  <br />
+  <select size="1" id="mySelect2" name="mySelect2">
+    <option selected="selected" value="Test area no.2">Test area no.2</option>
+    <option value="Another test">Another test</option>
+    <option value="And another one">And another one</option>
+    <option value="And yet another one">And yet another one</option>
+    <option value="One last option for me">One last option for me</option>
+  </select>
+  <br />
+  <input type="radio" name="radioSet" id="option1" value="foo" /><label for="option1">foo</label><br />
+  <input type="radio" name="radioSet" id="option2" value="bar" /><label for="option2">bar</label><br />
+  <input type="radio" name="radioSet" id="option3" value="another option" /><label for="option3">another option</label><br />
+  <br />
+  <input type="checkbox" name="checkSet1" id="check1" value="foo" /><label for="check1">foo</label><br />
+  <input type="checkbox" name="checkSet2" id="check2" value="bar" /><label for="check2">bar</label><br />
+  <input type="checkbox" name="checkSet3" id="check3" value="another option" /><label for="check3">another option</label><br />
+  <br />
+  <label for="textinput">Username:</label><br />
+  <input type="text" id="textinput" name="textinput" class="textinput" maxlength="25" /><br />
+  <label for="passwordinput">Password:</label><br />
+  <input type="password" id="passwordinput" name="passwordinput" class="textinput" maxlength="25" /><br />
+  <br />
+  <label for="textareainput">Comments:</label><br />
+  <textarea id="textareainput" name="textareainput" class="textarea"></textarea><br />
+  <br />
+  <input type="submit" value="Submit" class="buttonSubmit" />
+  <div id="stylesheetTest"></div>
 </form>
 <p>&nbsp;</p>
 <p>Niceforms v.0.9<br>&copy;Lucian Slatineanu - <a href="http://www.badboy.ro/">badboy.media.design</a></p>

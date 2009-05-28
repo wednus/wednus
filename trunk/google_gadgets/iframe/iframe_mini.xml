@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="__UP_myname__" author="Sundew H. Shin" author_email="sundew@wednus.com" author_affiliation="Wednus Project" screenshot="" thumbnail="" author_location="Seoul" directory_title="Wednus Iframe" title_url="__UP_mylink__" description="Embed your favorite webpages within your Google Personalized Homepage within this iframe gadget">
+		<Require feature="dynamic-height"/>
+	</ModulePrefs>
+	<UserPref name="myurl" display_name="Target URL" required="true"/>
+	<UserPref name="myid" display_name="Frame ID" default_value="MyIframe" required="true"/>
+	<UserPref name="myborder" display_name="Wrapper Border Width" default_value="0"/>
+	<UserPref name="mymargin" display_name="Wrapper Border Margin" default_value="0"/>
+	<UserPref name="myWrapperStyle" display_name="Wrapper Style" default_value=""/>
+	<UserPref name="myIframeStyle" display_name="Iframe Style" default_value=""/>
+	<UserPref name="myscroll" display_name="Iframe Scrolling" datatype="enum" default_value="auto">
+		<EnumValue value="auto" display_value="auto"/>
+		<EnumValue value="no" display_value="no"/>
+		<EnumValue value="yes" display_value="yes"/>
+	</UserPref>
+	<Content type="html">
+	<![CDATA[
+	<script type="text/javascript">
+		_IG_AdjustIFrameHeight();
+	</script>
+	<div style="__UP_myWrapperStyle__">
+	<iframe style="__UP_myIframeStyle__" name="__UP_myid__" src="__UP_myurl__" frameborder="0" scrolling="__UP_myscroll__" width="100%" height="100%"></iframe>
+	</div>
+	]]>
+	</Content>
+</Module>

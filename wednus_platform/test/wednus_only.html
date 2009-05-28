@@ -5,23 +5,34 @@
 <script type='text/javascript' src='../wednus.js?only'></script>
 
 <script type='text/javascript'>
+// helper function(s)
+function checkLoading(){
+  if(typeof W.dkernel == 'undefined'){
+    document.write('message: The dkernel module has not loaded yet.')
+  }else{
+    document.write('message: The dkernel module has loaded now.')
+  }
+};
+
 // check the startup batch works
 document.write('[W.path]<br><a href='+ W.path +'>'+ W.path +'</a><br><br>');
-// check the 'wednus.js?only' keyword
-document.write('[W.dkernel]<br>'+ W.dkernel +'<br><br>');
 
-//
+// check the 'wednus.js?only' keyword
+document.write('[W.dkernel]<br>');
+checkLoading();
+document.write('<br><br>');
 
 // check the availability of the document.body
 document.write('[document.body]<br>'+ document.body +'<br><br>');
-
 
 // check W.load
 W.load('module/dkernel', 'dkernel', 'module');
 </script>
 
 <script type='text/javascript'>
-document.write('[W.load]<br>W.dkernel.version: '+ W.dkernel.version +'<br><br>');
+document.write('[W.dkernel]<br>');
+checkLoading();
+document.write('<br><br>');
 
 // check W.css()
 W.css('http://www.w3.org/StyleSheets/home.css');

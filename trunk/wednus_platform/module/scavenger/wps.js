@@ -52,24 +52,24 @@ W.children = [];
  * @todo    which is the better?  (a != null), (!a.name)
  */
 W.wednusify = function(obj){
-  var wobj = {};
-  // check missing elements
-  // 1. check core
-  wobj.core = obj.core?obj.core:obj;
-  // 2. check body
-  wobj.body = obj.body?obj.body:document.createElement('div');
-  // 3. check wps
-  wobj.wps = obj.wps?obj.wps:detect(obj);
-  // detect current pos/size values
-  function detect(obj){
-    var s = obj.style?obj.style:{};
-    return parseInt(s.width?s.width:'100%')
-      +','+ parseInt(s.height?s.height:'100%')
-      +',left:0,top:0';
-      //+',left:'+ parseInt(s.left?s.left:'xcenter:0')
-      //+',top:'+ parseInt(s.top?s.top:'ycenter:0');
-  };
-  return wobj;
+	var wobj = {};
+	// check missing elements
+	// 1. check core
+	wobj.core = obj.core?obj.core:obj;
+	// 2. check body
+	wobj.body = obj.body?obj.body:document.createElement('div');
+	// 3. check wps
+	wobj.wps = obj.wps?obj.wps:detect(obj);
+	// detect current pos/size values
+	function detect(obj){
+		var s = obj.style?obj.style:{};
+		return parseInt(s.width?s.width:'100%')
+			+','+ parseInt(s.height?s.height:'100%')
+			+',left:0,top:0';
+			//+',left:'+ parseInt(s.left?s.left:'xcenter:0')
+			//+',top:'+ parseInt(s.top?s.top:'ycenter:0');
+	};
+	return wobj;
 };
 
 
@@ -77,8 +77,8 @@ W.wednusify = function(obj){
  * Check obj
  */
 W.is_wednusified = function(obj){
-    return (typeof obj.body == 'object') && (typeof obj.core == 'object')
-        && (typeof obj.wps == 'string');
+		return (typeof obj.body == 'object') && (typeof obj.core == 'object')
+				&& (typeof obj.wps == 'string');
 };
 
 
@@ -104,49 +104,49 @@ W.is_wednusified = function(obj){
  * @todo	'100%,100%' doesn't need position data
  */
 W.add = function(obj, parent){
-    // support batch addition
-    if(obj.constructor == Array){
-        for(var i = 0; i < obj.length; ++i)
-        this.add(obj[i], parent);
-        return;
-    }
-    // check whether it is an WPS object
-    if(!this.is_wednusified(obj))
-        obj = this.wednusify(obj);
-    // expand (HTML element) core
-    if(obj.core.style != null){
-        if(obj.core.style.width == '')
-            obj.core.style.width = '100%';
-        if(obj.core.style.height == '')
-            obj.core.style.height = '100%';
-    }
-    // append core to body if it's appendable
-    if(obj.core.appendChild != null && obj.body !== obj.core){
-        obj.body.appendChild(obj.core);
-    }
-    // it's all about positioning.
-    obj.body.style.position = 'absolute';
-    // check whether it is an WPS object
-    if(typeof parent != 'undefined'){
-        if(!this.is_wednusified(parent))
-            parent  = this.add(parent);
-        parent.children = [];
-        //parent.onresize = function(){W.repos(parent);};
-        parent.onresize = function(){W.repos(this);};
-    }else parent = W;
-    // build hierarchy
-    obj.parent = parent;
-    parent.children[parent.children.length] = obj;
-    // add wom
-    if(this.wom != null)
-        this.wom(obj);
-    // reserve onload event
-    if(obj.onload != null)
-        W.event(window, 'onload', obj.onload);
-    this.repos(parent);
-    // put the core into the body
-    parent.body.appendChild(obj.body);
-    return obj;
+		// support batch addition
+		if(obj.constructor == Array){
+				for(var i = 0; i < obj.length; ++i)
+				this.add(obj[i], parent);
+				return obj;
+		}
+		// check whether it is an WPS object
+		if(!this.is_wednusified(obj))
+				obj = this.wednusify(obj);
+		// expand (HTML element) core
+		if(obj.core.style != null){
+				if(obj.core.style.width == '')
+						obj.core.style.width = '100%';
+				if(obj.core.style.height == '')
+						obj.core.style.height = '100%';
+		}
+		// append core to body if it's appendable
+		if(obj.core.appendChild != null && obj.body !== obj.core){
+				obj.body.appendChild(obj.core);
+		}
+		// it's all about positioning.
+		obj.body.style.position = 'absolute';
+		// check whether it is an WPS object
+		if(typeof parent != 'undefined'){
+				if(!this.is_wednusified(parent))
+						parent  = this.add(parent);
+				parent.children = [];
+				//parent.onresize = function(){W.repos(parent);};
+				parent.onresize = function(){W.repos(this);};
+		}else parent = W;
+		// build hierarchy
+		obj.parent = parent;
+		parent.children[parent.children.length] = obj;
+		// add wom
+		if(this.wom != null)
+				this.wom(obj);
+		// reserve onload event
+		if(obj.onload != null)
+				W.event(window, 'onload', obj.onload);
+		this.repos(parent);
+		// put the core into the body
+		parent.body.appendChild(obj.body);
+		return obj;
 };
 
 
@@ -161,104 +161,104 @@ W.add = function(obj, parent){
  * a scrollbar unless contents are overflowed.
  */
 W.repos = function(parent){var self = this;
-    // update workspace size props
-    W.refresh();	// have to be 'W'
-    if(typeof parent == 'undefined')
-        parent = W;	// have to be 'W'
-    var children = parent.children;
-    
-    for(var i = 0; i < children.length; ++i){
-        wps(children[i]);
-    }
+		// update workspace size props
+		W.refresh();	// have to be 'W'
+		if(typeof parent == 'undefined')
+				parent = W;	// have to be 'W'
+		var children = parent.children;
 
-    function wps(obj){
-        var wps = obj.wps.split(',');
-        var os = obj.body.style;
-        var ps = obj.parent.body.style;
+		for(var i = 0; i < children.length; ++i){
+				wps(children[i]);
+		}
 
-        // get width
-        var tmp = wps[0].split('%');
-        var tmp2;
-        // '100%,100%' doesn't need position data
-        //var needToCheck = true;
+		function wps(obj){
+				var wps = obj.wps.split(',');
+				var os = obj.body.style;
+				var ps = obj.parent.body.style;
 
-        if(tmp.length == 2){
-            os.width = getAbsSize(ps.width, tmp[0]) +'px';
-            //if(tmp[0] == '100')
-              //needToCheck = false;
-        }else{
-            // fix http://wednus.com/imod/viewtopic.php?t=2829
-            if(tmp[0])
-                os.width = parseInt(tmp[0]) +'px';
-        }
-        // get left
-        //if(needToCheck){
-          tmp = wps[2].split(':');
-          tmp2 = tmp[1].split('%');
-          if(tmp2.length == 2){
-              os.left = (getAbsSize(ps.width, tmp2[0]) + 1) +'px';
-          }else os.left = getpos(obj, wps[2])+ 'px';
-        //}
+				// get width
+				var tmp = wps[0].split('%');
+				var tmp2;
+				// '100%,100%' doesn't need position data
+				//var needToCheck = true;
 
-        // get height
-        tmp = wps[1].split('%');
-        if(tmp.length == 2){
-            os.height = getAbsSize(ps.height, tmp[0]) +'px';
-            //if(tmp[0] == '100')
-                //needToCheck = false;
-        }else{
-            if(tmp[0])
-                os.height = parseInt(tmp[0]) +'px';
-        }
+				if(tmp.length == 2){
+						os.width = getAbsSize(ps.width, tmp[0]) +'px';
+						//if(tmp[0] == '100')
+							//needToCheck = false;
+				}else{
+						// fix http://wednus.com/imod/viewtopic.php?t=2829
+						if(tmp[0])
+								os.width = parseInt(tmp[0]) +'px';
+				}
+				// get left
+				//if(needToCheck){
+					tmp = wps[2].split(':');
+					tmp2 = tmp[1].split('%');
+					if(tmp2.length == 2){
+							os.left = (getAbsSize(ps.width, tmp2[0]) + 1) +'px';
+					}else os.left = getpos(obj, wps[2])+ 'px';
+				//}
 
-        // get top
-        //if(needToCheck){
-          tmp = wps[3].split(':');
-          tmp2 = tmp[1].split('%');
-          if(tmp2.length == 2){
-              os.top = (getAbsSize(ps.height, tmp2[0]) + 1) +'px';
-          }else os.top = getpos(obj, wps[3])+ 'px';
-        //}
+				// get height
+				tmp = wps[1].split('%');
+				if(tmp.length == 2){
+						os.height = getAbsSize(ps.height, tmp[0]) +'px';
+						//if(tmp[0] == '100')
+								//needToCheck = false;
+				}else{
+						if(tmp[0])
+								os.height = parseInt(tmp[0]) +'px';
+				}
 
-        // relay wps event to children of this obj.
-        if(obj.onresize != null)  obj.onresize();
+				// get top
+				//if(needToCheck){
+					tmp = wps[3].split(':');
+					tmp2 = tmp[1].split('%');
+					if(tmp2.length == 2){
+							os.top = (getAbsSize(ps.height, tmp2[0]) + 1) +'px';
+					}else os.top = getpos(obj, wps[3])+ 'px';
+				//}
 
-        // return absolute size
-        function getAbsSize(px, perc){
-          return Math.floor(parseInt(px) * (perc / 100));
-        };
-        // return absolute distance relative to the parent
-        function getpos(child, pos){
-            if(typeof pos == 'undefined') return;
-            var pWidth = parseInt(child.parent.body.style.width);
-            var pHeight = parseInt(child.parent.body.style.height);
-            var offset = 0;
-            var s = child.body.style;
-            pos = pos.split(':');
-            // get offset
-            switch(pos[0]){
-                case 'top':
-                    offset = parseInt(pos[1]);
-                    break;
-                case 'ycenter':
-                    offset = (pHeight / 2) - (parseInt(s.height) / 2) + parseInt(pos[1]);
-                    break;
-                case 'bottom':
-                    offset = (pHeight - parseInt(s.height)) + parseInt(pos[1]);
-                    break;
-                case 'left':
-                    offset = parseInt(pos[1]);
-                    break;
-                case 'xcenter':
-                    offset = (pWidth / 2) - (parseInt(s.width) / 2) + parseInt(pos[1]);
-                    break;
-                case 'right':
-                    offset = pWidth - parseInt(s.width) + parseInt(pos[1]);
-                    break;
-            };
-            return Math.floor(offset);
-        };
-    };
+				// relay wps event to children of this obj.
+				if(obj.onresize != null)  obj.onresize();
+
+				// return absolute size
+				function getAbsSize(px, perc){
+					return Math.floor(parseInt(px) * (perc / 100));
+				};
+				// return absolute distance relative to the parent
+				function getpos(child, pos){
+						if(typeof pos == 'undefined') return false;
+						var pWidth = parseInt(child.parent.body.style.width);
+						var pHeight = parseInt(child.parent.body.style.height);
+						var offset = 0;
+						var s = child.body.style;
+						pos = pos.split(':');
+						// get offset
+						switch(pos[0]){
+								case 'top':
+										offset = parseInt(pos[1]);
+										break;
+								case 'ycenter':
+										offset = (pHeight / 2) - (parseInt(s.height) / 2) + parseInt(pos[1]);
+										break;
+								case 'bottom':
+										offset = (pHeight - parseInt(s.height)) + parseInt(pos[1]);
+										break;
+								case 'left':
+										offset = parseInt(pos[1]);
+										break;
+								case 'xcenter':
+										offset = (pWidth / 2) - (parseInt(s.width) / 2) + parseInt(pos[1]);
+										break;
+								case 'right':
+										offset = pWidth - parseInt(s.width) + parseInt(pos[1]);
+										break;
+						};
+						return Math.floor(offset);
+				};
+		};
 };
 
 

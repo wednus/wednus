@@ -37,27 +37,27 @@ W.checkNS = function(isDebug){
 
     function mesg(title, message){if(!isDebug) return; alert('[WEDNUS] '+ title +':\n\n'+ message);};
     function isSame(source, target){
-    	if(typeof source != typeof target){
-    	    _alert(source, target);
-    		return false;
-    	}
-    	// base case
-    	if(typeof source != 'object'){
-    	    if(source +'' != target +'')
-    	       _alert(source, target, 'defferent value');
-    		return source +'' == target +'';
-    	}
-    	// n-cases
-    	// fix http://wednus.com/imod/viewtopic.php?p=2926
+      if(typeof source != typeof target){
+          _alert(source, target);
+        return false;
+      }
+      // base case
+      if(typeof source != 'object'){
+          if(source +'' != target +'')
+             _alert(source, target, 'defferent value');
+        return source +'' == target +'';
+      }
+      // n-cases
+      // fix http://wednus.com/imod/viewtopic.php?p=2926
         try{
-	        for(var i in source){
-	        	if(typeof source[i] == 'object')
-	        		return isSame(source[i], target[i]);
-	        	if(source[i] +'' != target[i] +''){
-	        	    _alert(source[i], target[i], 'defferent value');
-	        		return false;
-	        	}
-	        }
+          for(var i in source){
+            if(typeof source[i] == 'object')
+              return isSame(source[i], target[i]);
+            if(source[i] +'' != target[i] +''){
+                _alert(source[i], target[i], 'defferent value');
+              return false;
+            }
+          }
         }catch(e){};
         return true;
 
@@ -66,5 +66,6 @@ W.checkNS = function(isDebug){
             alert('[WEDNUS] namespace confliction detected.');
             alert('reason: '+ mesg +'\n\n[source]\n'+ a +'\n\n[target]\n'+ b);
         };
+        return null;
     };
 };

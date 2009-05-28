@@ -177,29 +177,31 @@ W.json = function () {
                         a[a.length] = ']';
                     } else if (typeof x.hasOwnProperty === 'function') {
                         a[0] = '{';
-                        for (i in x) {
-                        /*
-                            if (x.hasOwnProperty(i)) {
-                                v = x[i];
-                                f = s[typeof v];
-                                if (f) {
-                                    v = f(v);
-                                    if (typeof v == 'string') {
-                                        if (b) {
-                                            a[a.length] = ',';
-                                        }
-                                        a.push(s.string(i), ':', v);
-                                        b = true;
-                                    }
-                                }
-                            }
-                            */
+                        if(typeof i == 'function'){
+                          for (i in x) {
+                          /*
+                              if (x.hasOwnProperty(i)) {
+                                  v = x[i];
+                                  f = s[typeof v];
+                                  if (f) {
+                                      v = f(v);
+                                      if (typeof v == 'string') {
+                                          if (b) {
+                                              a[a.length] = ',';
+                                          }
+                                          a.push(s.string(i), ':', v);
+                                          b = true;
+                                      }
+                                  }
+                              }
+                              */
+                          }
                         }
                         a[a.length] = '}';
                     } else if(typeof x == 'object') {
                         a[a.length] = W.json.stringify(x);
                     } else {
-                        return;
+                        return 'null'; // sundew: to avoid the 'anonymous function does not always return a value'-warning
                     }
                     return a.join('');
                 }

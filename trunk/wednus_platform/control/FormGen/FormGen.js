@@ -22,171 +22,171 @@ W.FormGen = function(args){var self = this;
     // control info.
     this.name = 'FormGen';
     this.version = '0.1.0';
-    
+
     // handle arguments
     var def = {
-	    scroll: false,
+      scroll: false,
         target: '_self',
         method: 'post',
-	    action: '#',
-	    defTag: 'input',
-	    defType: 'text',
-	    caption: 'submit',
-	    color: 'white',
-	    background: '',
-	    labelColumeWidth: '80px',
-	    showSubmitButton: true,
-	    wss: 'fontSize:11px;fontFamily:Tahoma,Verdana',
-	    wps: '80%,80%,xcenter:0,ycenter:0'
+      action: '#',
+      defTag: 'input',
+      defType: 'text',
+      caption: 'submit',
+      color: 'white',
+      background: '',
+      labelColumeWidth: '80px',
+      showSubmitButton: true,
+      wss: 'fontSize:11px;fontFamily:Tahoma,Verdana',
+      wps: '80%,80%,xcenter:0,ycenter:0'
     };
-	if(args){
-	    for(var i in def) args[i] = args[i]?args[i]:def[i];
-	}else args = def;
-    // add member props and override 
+  if(args){
+      for(var i in def) args[i] = args[i]?args[i]:def[i];
+  }else args = def;
+    // add member props and override
     for(var i in def) self[i] = self[i]?self[i]:args[i];
 
     this.fields = [];
     var fieldNodes = [];
-	this.length = 0;  // number of fields
-	
-	// remove a field item
-	this.remove = function(id){
-		var id = getIndex(id);
-		self.fields[id] = self.fields[self.length - 1];
-		self.table.removeChild(fieldNodes[id]);
-		fieldNodes[id] = fieldNodes[self.length - 1];
-		--self.length;
-	};
-	
-	// set value
-	this.set = function(id, value){
-		var id = getIndex(id);
-		self.fields[id].value = value;
-		return self.fields[id].value;
-	};
-	
-	// get field value
-	this.get = function(id){
-		var id = getIndex(id);
-		if(id == -1)
-			return null;
-		return self.fields[id].value;
-	};
-	
-	// provide pragmatic  method of submission
+  this.length = 0;  // number of fields
+
+  // remove a field item
+  this.remove = function(_id){
+    var id = getIndex(_id);
+    self.fields[id] = self.fields[self.length - 1];
+    self.table.removeChild(fieldNodes[id]);
+    fieldNodes[id] = fieldNodes[self.length - 1];
+    --self.length;
+  };
+
+  // set value
+  this.set = function(_id, value){
+    var id = getIndex(_id);
+    self.fields[id].value = value;
+    return self.fields[id].value;
+  };
+
+  // get field value
+  this.get = function(_id){
+    var id = getIndex(_id);
+    if(id == -1)
+      return null;
+    return self.fields[id].value;
+  };
+
+  // provide pragmatic  method of submission
     this.submit = function(){
-    	self.core.submit();
+      self.core.submit();
     };
 
-	// return the index for an field in fields data structure
-	function getIndex(id){
-		for(var i = 0; i < self.length; ++i)
-			if(self.fields[i].id == id)
-				return i;
-		return -1;
-	};
-	
-	// build core
-	this.core = document.createElement('form');
-	this.core.method = this.method;
-	this.core.action = this.action;
-	this.core.target = this.target;
+  // return the index for an field in fields data structure
+  function getIndex(id){
+    for(var i = 0; i < self.length; ++i)
+      if(self.fields[i].id == id)
+        return i;
+    return -1;
+  };
+
+  // build core
+  this.core = document.createElement('form');
+  this.core.method = this.method;
+  this.core.action = this.action;
+  this.core.target = this.target;
     // build body
     this.body = W.style('div', 'background:'+ this.background);
     this.table = W.style('table', 'width:100%;'+ this.wss);
     this.table.style.background = this.color;
-	// apply WSS
-	W.style(this.table, this.wss);
+  // apply WSS
+  W.style(this.table, this.wss);
     this.tbody=document.createElement('tbody')
     this.table.appendChild(this.tbody);
     this.core.appendChild(this.table);
     if(!this.scroll){
-    	this.body.style.overflow = 'hidden';
+      this.body.style.overflow = 'hidden';
     }else this.body.style.overflow = 'auto';
-        
+
     /**
      * add field
      */
-	this.add = function(args){
-	    var def = {
-		    id: self.length,
-		    name: self.length,
-		    className: self.length,
-		    tag: self.defTag,
-		    type: self.defType,
-		    value: '',
-		    caption: self.length,
-		    width: '100%',
-		    labelBorder: '0px',
-		    fieldBorder: '1px',
-		    color: 'white',
-		    tooltip: 'please enter '+ self.caption +' here.'
-	    };
-	    if(args){
-	        for(var i in def) args[i] = args[i]?args[i]:def[i];
-	    }else args = def;
+  this.add = function(args){
+      var def = {
+        id: self.length,
+        name: self.length,
+        className: self.length,
+        tag: self.defTag,
+        type: self.defType,
+        value: '',
+        caption: self.length,
+        width: '100%',
+        labelBorder: '0px',
+        fieldBorder: '1px',
+        color: 'white',
+        tooltip: 'please enter '+ self.caption +' here.'
+      };
+      if(args){
+          for(var i in def) args[i] = args[i]?args[i]:def[i];
+      }else args = def;
 
-		var field = W.style(args.tag, 'width:'+ args.width +';borderWidth:'
-		    + args.fieldBorder +';background:'+ args.color);
-		field.id = args.id;
-		field.name = args.name;
-		field.className = args.className;
-		//field.tabIndex = self.length;
-		field.tooltip = args.tooltip;
-		field.value = args.value;
-		// highlight contents
-		field.onclick = function(){
-			this.focus();
-			if(this.select)
-				this.select();
-		};
-		// apply WSS
-		W.style(field, self.wss);
-		
-		// prepare tr entry
-		var tr = document.createElement('tr');
-		var td_caption = document.createElement('td');
-		// adjust label colume width
-		td_caption.style.width = '1px';
-		// add label
-		var label = document.createElement('input');
-		label.value = ' '+ args.caption;
-		label.readOnly = true;
-		label.style.cursor = 'default';
-		label.style.width = self.labelColumeWidth;
-		// adjust tab order
-		label.onfocus = function(){
-		    field.focus();
-		};
-		W.style(label, self.wss +';borderWidth:'+ args.labelBorder +';background:'
-		    + self.color);
-		td_caption.appendChild(label);
-		// apply WSS
-		W.style(td_caption, self.wss);
-		tr.appendChild(td_caption);
-		var td_field = document.createElement('td');
-		td_field.appendChild(field);
-		// compose entry
-		tr.appendChild(td_field);
-		// append to the layout table
-		self.tbody.appendChild(tr);
-		// add to the internal data structures
-		self.fields[self.length] = field;
-		fieldNodes[self.length] = tr;
-		++self.length;
-		return field;
-	};
+    var field = W.style(args.tag, 'width:'+ args.width +';borderWidth:'
+        + args.fieldBorder +';background:'+ args.color);
+    field.id = args.id;
+    field.name = args.name;
+    field.className = args.className;
+    //field.tabIndex = self.length;
+    field.tooltip = args.tooltip;
+    field.value = args.value;
+    // highlight contents
+    field.onclick = function(){
+      this.focus();
+      if(this.select)
+        this.select();
+    };
+    // apply WSS
+    W.style(field, self.wss);
 
-	this.sbutton = W.style('input', this.wss);
-	this.sbutton.type = 'button';
-	this.sbutton.value = this.caption;
+    // prepare tr entry
+    var tr = document.createElement('tr');
+    var td_caption = document.createElement('td');
+    // adjust label colume width
+    td_caption.style.width = '1px';
+    // add label
+    var label = document.createElement('input');
+    label.value = ' '+ args.caption;
+    label.readOnly = true;
+    label.style.cursor = 'default';
+    label.style.width = self.labelColumeWidth;
+    // adjust tab order
+    label.onfocus = function(){
+        field.focus();
+    };
+    W.style(label, self.wss +';borderWidth:'+ args.labelBorder +';background:'
+        + self.color);
+    td_caption.appendChild(label);
+    // apply WSS
+    W.style(td_caption, self.wss);
+    tr.appendChild(td_caption);
+    var td_field = document.createElement('td');
+    td_field.appendChild(field);
+    // compose entry
+    tr.appendChild(td_field);
+    // append to the layout table
+    self.tbody.appendChild(tr);
+    // add to the internal data structures
+    self.fields[self.length] = field;
+    fieldNodes[self.length] = tr;
+    ++self.length;
+    return field;
+  };
+
+  this.sbutton = W.style('input', this.wss);
+  this.sbutton.type = 'button';
+  this.sbutton.value = this.caption;
     this.sbutton.onclick = function(){
-    	self.submit();
+      self.submit();
     };
 
-	// add submission button
+  // add submission button
     if(this.showSubmitButton){
-    	this.core.appendChild(this.sbutton);
+      this.core.appendChild(this.sbutton);
     }
 
     // *will be called once when window.onload fires

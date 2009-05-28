@@ -25,7 +25,7 @@ var W = {
   // URI to bypass the W.autopath() function running on initialization
   path: '',
   // version info
-  version: '0.1.1',
+  version: '0.2.1',
   // document.getElementById() shortcut
   $: function(id){return document.getElementById(id);},
   /**
@@ -223,7 +223,7 @@ Wednus Platform requires following DOM methods:
 
 <hr>
 
-\section install	Installation
+\section install  Installation
 Like all other Wednus Project products, installing Wednus Platform is quite an
 easy task. Just follow these simple steps:
 
@@ -237,14 +237,14 @@ easy task. Just follow these simple steps:
 @test    <a href='../../test/wednus.html'>testing constructor & member methods</a>
 <hr>
 
-\section diagram	Architecture
+\section diagram  Architecture
 Wednus Platform comprises two parts; Wednus DKernel and Wednus Scavenger.
 Wednus DKernel encapsulates the complexity of cross-browser support and provides
 a robust browser-neutral web application foundation. On top of the that, Wednus
 Scavenger contains the implementation of the Wednus Object Model, WOM, provides
 standardized interface for Web(Web2.0) API controls such as Google's GMap
 control and Amazon.com's book search API to end-users.
-\image	html	platform.jpg
+\image  html  platform.jpg
 <hr>
 
 \section author  Author

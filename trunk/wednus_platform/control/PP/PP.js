@@ -4,7 +4,7 @@
  *
  * (longer description goes here)
  * @author    (your name)
- * @todo    please make me a real control.
+ * @todo    NEED TO UPDATE
  * @see http://plugins.yme.music.yahoo.com/plugins/docs/webquickstart_page.html
  */
 

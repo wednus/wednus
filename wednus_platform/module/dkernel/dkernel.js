@@ -28,7 +28,7 @@ W.refresh = function(){
   }else if(window.opera != null){
     this.width = db.clientWidth;
     this.height = db.clientHeight;
-  }else if(document.documentE1lement != null){  // IE or others
+  }else if(document.documentElement != null){  // IE or others
     this.width = document.documentElement.clientWidth;
     this.height = document.documentElement.clientHeight;
   }

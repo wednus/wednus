@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Wednus Platform">
+  <ModulePrefs title="">
     <optional feature="shareable-prefs"/>
   </ModulePrefs>
   <Content
       view="home"
       type="url"
-      href="http://fa.wednus.com/compact"
+      href="http://fa.wednus.com"
       />
   <Content
       view="canvas"

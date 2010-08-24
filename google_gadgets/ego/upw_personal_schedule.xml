@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="개인별 상세일정">
+    <optional feature="shareable-prefs"/>
+  </ModulePrefs>
+  <Content
+      view="home"
+      type="url"
+      href="http://fa.wednus.com"
+      />
+  <Content
+      view="canvas"
+      type="url"
+      href="http://fa.wednus.com"
+      />
+</Module>
+

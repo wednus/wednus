@@ -6,12 +6,11 @@
   <Content
       view="home"
       type="url"
-      href="http://fa.wednus.com"
+      href="http://sites.google.com/a/wednus.com/upw/home"
       />
   <Content
       view="canvas"
       type="url"
-      href="http://fa.wednus.com"
+      href="http://sites.google.com/a/wednus.com/upw/home"
       />
 </Module>
-

@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="개인별 상세일정">
-    <optional feature="shareable-prefs"/>
+   <ModulePrefs
+       title="개인별 상세 일정"
+       description=""
+       author="Sundew H. Shin"
+       author_email=""
+       author_affiliation="Wednus Inc."
+       author_location="Austin, TX"
+       title_url=""
+       screenshot=""
+       thumbnail=""
+       category=""
+       category2=""
+       >
+    <Require feature="dynamic-height" />
   </ModulePrefs>
   <Content
       view="home"

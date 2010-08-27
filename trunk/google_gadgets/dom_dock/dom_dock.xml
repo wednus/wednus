@@ -49,12 +49,11 @@
           xmlDoc.async="false";
           xmlDoc.loadXML(domdata);
           }
-        dump(xmlDoc);
 
-        //var target = xmlDoc.getElementById(id);
-        //var wrapper = document.getElementById('content_div');
+        var target = xmlDoc.getElementById(id);
+        var wrapper = document.getElementById('content_div');
         //wrapper.innerHTML = target.innerHTML;
-        //wrapper.appendChild(target);
+        wrapper.appendChild(target);
       };
 
 dump = function(obj){

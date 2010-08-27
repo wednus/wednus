@@ -34,9 +34,9 @@
       };
 
       function response(obj) {
-        alert(obj.id);
-        //alert(obj.innerHTML);
-        var target = obj.getElementById(id);
+        var domdata = obj.data;
+        alert(domdata.innerHTML);
+        var target = domdata.getElementById(id);
         var wrapper = document.getElementById('content_div');
         wrapper.innerHTML = target.innerHTML;
         //wrapper.appendChild(target);

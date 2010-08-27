@@ -29,7 +29,7 @@
 
       function makeDOMRequest() {
         var params = {};
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
         gadgets.io.makeRequest(url, response, params);
       };
 

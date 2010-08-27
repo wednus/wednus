@@ -35,11 +35,11 @@
 
       function response(obj) {
         var domdata = obj.data;
-        alert(domdata);
+        alert(domdata.innerHTML);
         var target = domdata.getElementById(id);
         var wrapper = document.getElementById('content_div');
-        wrapper.innerHTML = target.innerHTML;
-        //wrapper.appendChild(target);
+        //wrapper.innerHTML = target.innerHTML;
+        wrapper.appendChild(target);
       };
 
     gadgets.util.registerOnLoadHandler(makeDOMRequest);

@@ -34,7 +34,7 @@
       };
 
       function response(obj) {
-        alert(obj);
+        alert(obj.name);
         //alert(obj.innerHTML);
         var target = obj.getElementById(id);
         var wrapper = document.getElementById('content_div');

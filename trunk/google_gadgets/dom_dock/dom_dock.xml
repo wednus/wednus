@@ -35,7 +35,7 @@
       function response(obj) {
         // Start building HTML string that will be displayed in <div>.
         // Set the style for the <div>.
-        document.getElementById('content_div').appendChild = obj.getElementById(id);
+        document.getElementById('content_div').appendChild(obj.getElementById(id));
       }
 
     };

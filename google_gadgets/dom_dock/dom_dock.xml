@@ -35,11 +35,26 @@
 
       function response(obj) {
         var domdata = obj.data;
-        dump(obj);
-        //var target = domdata.getElementById(id);
-        //var wrapper = document.getElementById('content_div');
+        //dump(obj);
+
+        var xmlDoc;
+        if (window.DOMParser)
+          {
+          var parser=new DOMParser();
+          xmlDoc=parser.parseFromString(text,"text/xml");
+          }
+        else // Internet Explorer
+          {
+          xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+          xmlDoc.async="false";
+          xmlDoc.loadXML(text);
+          }
+        dump(xmlDoc);
+
+        var target = xmlDoc.getElementById(id);
+        var wrapper = document.getElementById('content_div');
         //wrapper.innerHTML = target.innerHTML;
-        //wrapper.appendChild(target);
+        wrapper.appendChild(target);
       };
 
 dump = function(obj){

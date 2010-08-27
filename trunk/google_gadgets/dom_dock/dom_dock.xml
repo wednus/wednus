@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+   <ModulePrefs
+       title="DOM Dock"
+       description="Browse through the DOM structure with idendifier, and parse the target object and dock into the blank host page."
+       author="Sundew H. Shin"
+       author_email="sundew@wednus.com"
+       author_affiliation="Wednus Inc."
+       author_location="Austin, TX"
+       height="200"
+       title_url=""
+       screenshot=""
+       thumbnail=""
+       category="DOM"
+       category2=""
+       >
+    <Require feature="dynamic-height" />
+  </ModulePrefs>
+<UserPref name="url" display_name="URL" default_value="http://sites.google.com/a/wednus.com/upw/components/schedule"/>
+<UserPref name="id" display_name="ID" default_value="JOT_FILECAB_folder__unfiled"/>
+  <Content type="html">
+  <![CDATA[
+    <div id="content_div"></div>
+    <script type="text/javascript">
+      // get prefs
+      var prefs = new gadgets.Prefs();
+      var url = prefs.getString("url");
+      var id = prefs.getString("id");
+
+      function makeDOMRequest() {
+        var params = {};
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+        gadgets.io.makeRequest(url, response, params);
+      };
+      function response(obj) {
+        // Start building HTML string that will be displayed in <div>.
+        // Set the style for the <div>.
+        document.getElementById('content_div').appendChild = obj.getElementById(id);
+      }
+
+    };
+    gadgets.util.registerOnLoadHandler(makeDOMRequest);
+    </script>
+  ]]>
+  </Content>
+</Module>

@@ -37,7 +37,7 @@
         var domdata = obj.data;
         dump(domdata);
 
-
+        alert(domdata.text);
 
 /*
         var xmlDoc;

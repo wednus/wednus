@@ -16,8 +16,8 @@
        >
     <Require feature="dynamic-height" />
   </ModulePrefs>
-<UserPref name="url" display_name="URL" default_value="http://sites.google.com/a/wednus.com/upw/components/schedule"/>
-<UserPref name="id" display_name="ID" default_value="JOT_FILECAB_folder__unfiled"/>
+<UserPref name="url" display_name="URL" default_value="http://http://wednus.com/Main_Page"/>
+<UserPref name="id" display_name="ID" default_value="p-navigation"/>
   <Content type="html">
   <![CDATA[
     <div id="content_div"></div>

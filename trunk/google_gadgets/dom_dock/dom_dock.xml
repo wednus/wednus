@@ -20,7 +20,7 @@
 <UserPref name="id" display_name="ID" default_value="p-navigation"/>
   <Content type="html">
   <![CDATA[
-    <div id="content_div"></div>
+    <div id="content_div">test</div>
     <script type="text/javascript">
       // get prefs
       var prefs = new gadgets.Prefs();
@@ -34,7 +34,8 @@
       };
 
       function response(obj) {
-        alert(obj.innerHTML);
+        alert(obj);
+        //alert(obj.innerHTML);
         var target = obj.getElementById(id);
         var wrapper = document.getElementById('content_div');
         wrapper.innerHTML = target.innerHTML;

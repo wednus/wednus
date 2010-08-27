@@ -34,6 +34,7 @@
       };
 
       function response(obj) {
+        alert(obj.innerHTML);
         // Start building HTML string that will be displayed in <div>.
         // Set the style for the <div>.
         var target = obj.getElementById(id);

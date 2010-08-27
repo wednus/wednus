@@ -41,13 +41,13 @@
         if (window.DOMParser)
           {
           var parser=new DOMParser();
-          xmlDoc=parser.parseFromString(text,"text/xml");
+          xmlDoc=parser.parseFromString(domdata,"text/xml");
           }
         else // Internet Explorer
           {
           xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
           xmlDoc.async="false";
-          xmlDoc.loadXML(text);
+          xmlDoc.loadXML(domdata);
           }
         dump(xmlDoc);
 

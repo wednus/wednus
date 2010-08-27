@@ -30,13 +30,12 @@
       function makeDOMRequest() {
         var params = {};
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+        var url = 'http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/breakfast-data.xml';
         gadgets.io.makeRequest(url, response, params);
       };
 
       function response(obj) {
         alert(obj.innerHTML);
-        // Start building HTML string that will be displayed in <div>.
-        // Set the style for the <div>.
         var target = obj.getElementById(id);
         var wrapper = document.getElementById('content_div');
         wrapper.innerHTML = target.innerHTML;

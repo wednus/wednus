@@ -35,7 +35,7 @@
 
       function response(obj) {
         var domdata = obj.data;
-        dump(obj);
+        //dump(obj);
 
         var xmlDoc;
         if (window.DOMParser)
@@ -49,7 +49,7 @@
           xmlDoc.async="false";
           xmlDoc.loadXML(domdata);
           }
-        //dump(xmlDoc);
+        dump(xmlDoc);
 
         //var target = xmlDoc.getElementById(id);
         //var wrapper = document.getElementById('content_div');

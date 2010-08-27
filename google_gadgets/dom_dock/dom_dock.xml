@@ -51,6 +51,9 @@
           }
 
         var target = xmlDoc.getElementById(id);
+
+        dump(target);
+
         var wrapper = document.getElementById('content_div');
         //wrapper.innerHTML = target.innerHTML;
         wrapper.appendChild(target);

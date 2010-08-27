@@ -16,7 +16,7 @@
        >
     <Require feature="dynamic-height" />
   </ModulePrefs>
-<UserPref name="url" display_name="URL" default_value="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/breakfast-data.xml"/>
+<UserPref name="url" display_name="URL" default_value="http://wednus.com/Main_Page"/>
 <UserPref name="id" display_name="ID" default_value="p-navigation"/>
   <Content type="html">
   <![CDATA[

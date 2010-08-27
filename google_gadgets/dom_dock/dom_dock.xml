@@ -35,12 +35,31 @@
 
       function response(obj) {
         var domdata = obj.data;
-        alert(domdata.length);
+        dump(domdata);
         var target = domdata.getElementById(id);
         var wrapper = document.getElementById('content_div');
         //wrapper.innerHTML = target.innerHTML;
         wrapper.appendChild(target);
       };
+
+dump = function(obj){
+    var c = '<table style="color:#000000;background-color:#F5F5F5;font-size:10px;';
+    c += 'font-family:Tahoma,verdana,arial" cellspacing="0" border="1" width="100%" ';
+    c += 'cellpadding="3"><tr style="background:white;"><th align="center">Property</th>';
+    c += '<th align="center">Value</th></tr>';
+    for(var i in obj){
+        try{
+            c += '<tr><td>'+ i +'</td><td>'+obj[i] + '&nbsp;</td>';
+        }catch(e){
+            c += '<tr><td>'+ i +'</td><td>error: '+ e + '&nbsp;</td>';
+        };
+    }
+    c += '</table>';
+    document.write(c);
+    document.close();
+    return c;
+};
+
 
     gadgets.util.registerOnLoadHandler(makeDOMRequest);
     </script>

@@ -20,7 +20,7 @@
 <UserPref name="id" display_name="ID" default_value="JOT_FILECAB_folder__unfiled"/>
   <Content type="html">
   <![CDATA[
-    <div id="content_div">test</div>
+    <div id="content_div"></div>
     <script type="text/javascript">
       // get prefs
       var prefs = new gadgets.Prefs();
@@ -40,9 +40,8 @@
         var wrapper = document.getElementById('content_div');
         wrapper.innerHTML = target.innerHTML;
         //wrapper.appendChild(target);
-      }
+      };
 
-    };
     gadgets.util.registerOnLoadHandler(makeDOMRequest);
     </script>
   ]]>

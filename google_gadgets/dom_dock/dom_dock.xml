@@ -37,7 +37,6 @@
         var domdata = obj.data;
         dump(domdata);
 
-        alert(domdata.text);
 
 /*
         var xmlDoc;
@@ -54,9 +53,9 @@
           }
 */
 
-        //var target = xmlDoc.getElementById(id);
+        var target = xmlDoc.getElementById(id);
 
-        //dump(target);
+        dump(target);
 
         var wrapper = document.getElementById('content_div');
         //wrapper.innerHTML = target.innerHTML;

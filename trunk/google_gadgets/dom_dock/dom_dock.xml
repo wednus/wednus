@@ -20,7 +20,7 @@
 <UserPref name="id" display_name="ID" default_value="JOT_FILECAB_folder__unfiled"/>
   <Content type="html">
   <![CDATA[
-    <div id="content_div"></div>
+    <div id="content_div">test</div>
     <script type="text/javascript">
       // get prefs
       var prefs = new gadgets.Prefs();
@@ -32,10 +32,14 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
         gadgets.io.makeRequest(url, response, params);
       };
+
       function response(obj) {
         // Start building HTML string that will be displayed in <div>.
         // Set the style for the <div>.
-        document.getElementById('content_div').appendChild(obj.getElementById(id));
+        var target = obj.getElementById(id);
+        var wrapper = document.getElementById('content_div');
+        wrapper.innerHTML = target.innerHTML;
+        //wrapper.appendChild(target);
       }
 
     };

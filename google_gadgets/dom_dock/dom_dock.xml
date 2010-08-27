@@ -35,7 +35,7 @@
 
       function response(obj) {
         var domdata = obj.data;
-        dump(obj);
+        dump(domdata);
 
 
 

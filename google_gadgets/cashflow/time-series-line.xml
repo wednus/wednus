@@ -1,0 +1,134 @@
+<Module>
+<ModulePrefs title="__MSG_default_title__" description="__MSG_description__" author="Google Engineering" author_affiliation="Google Inc." author_email="visualization.api+time-series-line@gmail.com" screenshot="http://www.google.com/ig/modules/time-series-line.png" thumbnail="http://www.google.com/ig/modules/time-series-line-thm.png">
+<Require feature="settitle"/>
+<Require feature="idi"/>
+<Require feature="locked-domain"/>
+<Locale messages="http://www.google.com/ig/modules/timeseriesline_content/en_ALL.xml"/>
+<Locale lang="ar" messages="http://www.google.com/ig/modules/timeseriesline_content/ar_ALL.xml" language_direction="rtl"/>
+<Locale lang="bg" messages="http://www.google.com/ig/modules/timeseriesline_content/bg_ALL.xml"/>
+<Locale lang="ca" messages="http://www.google.com/ig/modules/timeseriesline_content/ca_ALL.xml"/>
+<Locale lang="cs" messages="http://www.google.com/ig/modules/timeseriesline_content/cs_ALL.xml"/>
+<Locale lang="da" messages="http://www.google.com/ig/modules/timeseriesline_content/da_ALL.xml"/>
+<Locale lang="de" messages="http://www.google.com/ig/modules/timeseriesline_content/de_ALL.xml"/>
+<Locale lang="el" messages="http://www.google.com/ig/modules/timeseriesline_content/el_ALL.xml"/>
+<Locale lang="en-GB" messages="http://www.google.com/ig/modules/timeseriesline_content/en_GB.xml"/>
+<Locale lang="es" messages="http://www.google.com/ig/modules/timeseriesline_content/es_ALL.xml"/>
+<Locale lang="et" messages="http://www.google.com/ig/modules/timeseriesline_content/et_ALL.xml"/>
+<Locale lang="fi" messages="http://www.google.com/ig/modules/timeseriesline_content/fi_ALL.xml"/>
+<Locale lang="fr" messages="http://www.google.com/ig/modules/timeseriesline_content/fr_ALL.xml"/>
+<Locale lang="hi" messages="http://www.google.com/ig/modules/timeseriesline_content/hi_ALL.xml"/>
+<Locale lang="hr" messages="http://www.google.com/ig/modules/timeseriesline_content/hr_ALL.xml"/>
+<Locale lang="hu" messages="http://www.google.com/ig/modules/timeseriesline_content/hu_ALL.xml"/>
+<Locale lang="hy" messages="http://www.google.com/ig/modules/timeseriesline_content/hy_ALL.xml"/>
+<Locale lang="id" messages="http://www.google.com/ig/modules/timeseriesline_content/id_ALL.xml"/>
+<Locale lang="is" messages="http://www.google.com/ig/modules/timeseriesline_content/is_ALL.xml"/>
+<Locale lang="it" messages="http://www.google.com/ig/modules/timeseriesline_content/it_ALL.xml"/>
+<Locale lang="iw" messages="http://www.google.com/ig/modules/timeseriesline_content/iw_ALL.xml" language_direction="rtl"/>
+<Locale lang="ja" messages="http://www.google.com/ig/modules/timeseriesline_content/ja_ALL.xml"/>
+<Locale lang="ko" messages="http://www.google.com/ig/modules/timeseriesline_content/ko_ALL.xml"/>
+<Locale lang="lt" messages="http://www.google.com/ig/modules/timeseriesline_content/lt_ALL.xml"/>
+<Locale lang="lv" messages="http://www.google.com/ig/modules/timeseriesline_content/lv_ALL.xml"/>
+<Locale lang="ms" messages="http://www.google.com/ig/modules/timeseriesline_content/ms_ALL.xml"/>
+<Locale lang="nl" messages="http://www.google.com/ig/modules/timeseriesline_content/nl_ALL.xml"/>
+<Locale lang="no" messages="http://www.google.com/ig/modules/timeseriesline_content/no_ALL.xml"/>
+<Locale lang="pl" messages="http://www.google.com/ig/modules/timeseriesline_content/pl_ALL.xml"/>
+<Locale lang="pt-BR" messages="http://www.google.com/ig/modules/timeseriesline_content/pt_BR.xml"/>
+<Locale lang="pt-PT" messages="http://www.google.com/ig/modules/timeseriesline_content/pt_PT.xml"/>
+<Locale lang="ro" messages="http://www.google.com/ig/modules/timeseriesline_content/ro_ALL.xml"/>
+<Locale lang="ru" messages="http://www.google.com/ig/modules/timeseriesline_content/ru_ALL.xml"/>
+<Locale lang="sl" messages="http://www.google.com/ig/modules/timeseriesline_content/sl_ALL.xml"/>
+<Locale lang="sk" messages="http://www.google.com/ig/modules/timeseriesline_content/sk_ALL.xml"/>
+<Locale lang="sr" messages="http://www.google.com/ig/modules/timeseriesline_content/sr_ALL.xml"/>
+<Locale lang="sv" messages="http://www.google.com/ig/modules/timeseriesline_content/sv_ALL.xml"/>
+<Locale lang="th" messages="http://www.google.com/ig/modules/timeseriesline_content/th_ALL.xml"/>
+<Locale lang="tl" messages="http://www.google.com/ig/modules/timeseriesline_content/tl_ALL.xml"/>
+<Locale lang="tr" messages="http://www.google.com/ig/modules/timeseriesline_content/tr_ALL.xml"/>
+<Locale lang="uk" messages="http://www.google.com/ig/modules/timeseriesline_content/uk_ALL.xml"/>
+<Locale lang="vi" messages="http://www.google.com/ig/modules/timeseriesline_content/vi_ALL.xml"/>
+<Locale lang="zh-CN" messages="http://www.google.com/ig/modules/timeseriesline_content/zh_CN.xml"/>
+<Locale lang="zh-TW" messages="http://www.google.com/ig/modules/timeseriesline_content/zh_TW.xml"/>
+</ModulePrefs>
+<UserPref name="_table_query_url" display_name="__MSG_tablequeryurl__" required="true"/>
+<UserPref name="title" display_name="__MSG_title__" required="false"/>
+<UserPref name="_table_query_refresh_interval" display_name="__MSG_tablequeryrefreshinterval__" default_value="300" datatype="enum" required="false">
+<EnumValue value="0" display_value="__MSG_never__"/>
+<EnumValue value="60" display_value="1"/>
+<EnumValue value="300" display_value="5"/>
+<EnumValue value="1800" display_value="30"/>
+</UserPref>
+<UserPref name="scale" display_name="__MSG_scale__" datatype="enum" default_value="fixed" required="false">
+<EnumValue value="fixed" display_value="__MSG_fixed__"/>
+<EnumValue value="maximize" display_value="__MSG_maximize__"/>
+<EnumValue value="allfixed" display_value="__MSG_allfixed__"/>
+<EnumValue value="allmaximize" display_value="__MSG_allmaximize__"/>
+</UserPref>
+<UserPref name="values_suffix" display_name="__MSG_valuessuffix__" required="false"/>
+<UserPref name="annotations_width" display_name="__MSG_annotationswidth__" default_value="25" required="false"/>
+<UserPref name="display_zoom_buttons" display_name="__MSG_displayzoombuttons__" datatype="bool" default_value="true" required="false"/>
+<UserPref name="display_exact_values" display_name="__MSG_displayexactvalues__" datatype="bool" default_value="false" required="false"/>
+<UserPref name="display_annotations_filter" display_name="__MSG_filterannotations__" datatype="bool" default_value="false" required="false"/>
+<UserPref name="display_legend_inNewline" display_name="__MSG_legendPosition__" datatype="bool" default_value="false" required="false"/>
+<Content type="html" view="home,canvas">
+<div id="loading"><img src="http://www.google.com/ig/images/spinner.gif" /></div> <div id="annotatedtimeline-div"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+
+<script type="text/javascript">
+var GS_URL_REGEXP = new RegExp('http://[A-Za-z0-9]*\\.spreadsheets\\.gmodules\\.com/gadgets/ifr');
+var prefs = new _IG_Prefs();
+var gadgetHelper;
+_IG_RegisterOnloadHandler(loadVisualizationAPI);
+
+function loadVisualizationAPI() {
+  google.load('visualization', '1', {packages: ['annotatedtimeline']});
+  google.setOnLoadCallback(initialize);
+};
+
+
+function initialize() {
+  var title = prefs.getString('title');
+  if (title) {
+    _IG_SetTitle(title);
+  }
+  gadgetHelper = new google.visualization.GadgetHelper();
+  var query = gadgetHelper.createQueryFromPrefs(prefs);
+  query.send(responseHandler);
+};
+
+
+function responseHandler(response) {
+  // Remove the loading message (if exists).
+  var loadingMsgContainer = document.getElementById('loading');
+  if (loadingMsgContainer) {
+    loadingMsgContainer.style.display = 'none';
+  }
+  if (!gadgetHelper.validateResponse(response)) {
+    // Default error handling was done, just leave.
+    return;
+  };
+
+  var container = document.getElementById('annotatedtimeline-div');
+  container.style.width = document.body.clientWidth + 'px';
+  container.style.height = document.body.clientHeight + 'px';
+
+  var visualizationObject = new google.visualization.AnnotatedTimeLine(container);
+  var dataTable = response.getDataTable();
+  var options = {};
+  // Annotated chart assumed. If there are annotations, they will be
+  // displayed, and if there are none, the visualization knows to ignore
+  // this flag. options['displayAnnotations'] = true;
+  options['scaleType'] = prefs.getString('scale');
+  options['allValuesSuffix'] = prefs.getString('values_suffix');
+  options['annotationsWidth'] = prefs.getString('annotations_width');
+  options['displayZoomButtons'] = prefs.getBool('display_zoom_buttons');
+  options['displayExactValues'] = prefs.getBool('display_exact_values');
+  options['displayAnnotationsFilter'] = prefs.getBool('display_annotations_filter');
+  options['legendPosition'] = prefs.getBool('display_legend_inNewline') ? 'newRow' : 'sameRow';
+  // In Google Spreadsheets the wmode must be opaque.
+  if (window.location.href.match(GS_URL_REGEXP)){
+    options['wmode'] = 'opaque';
+  }
+  visualizationObject.draw(dataTable, options);
+};
+</script>
+</Content>
+</Module>

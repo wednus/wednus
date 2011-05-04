@@ -1,0 +1,72 @@
+<Module>
+<ModulePrefs title="__MSG_title_pieChart__" description="__MSG_pie_description__" author="Google Engineering" author_affiliation="Google Inc." author_email="visualization.api+pie-chart@gmail.com" screenshot="http://www.google.com/ig/modules/pie-chart.png" thumbnail="http://www.google.com/ig/modules/pie-chart-thm.png">
+<Require feature="settitle"/>
+<Require feature="idi"/>
+<Require feature="locked-domain"/>
+<Locale messages="http://www.google.com/ig/modules/chart_content/en_ALL.xml"/>
+<Locale lang="ar" messages="http://www.google.com/ig/modules/chart_content/ar_ALL.xml" language_direction="rtl"/>
+<Locale lang="bg" messages="http://www.google.com/ig/modules/chart_content/bg_ALL.xml"/>
+<Locale lang="ca" messages="http://www.google.com/ig/modules/chart_content/ca_ALL.xml"/>
+<Locale lang="cs" messages="http://www.google.com/ig/modules/chart_content/cs_ALL.xml"/>
+<Locale lang="da" messages="http://www.google.com/ig/modules/chart_content/da_ALL.xml"/>
+<Locale lang="de" messages="http://www.google.com/ig/modules/chart_content/de_ALL.xml"/>
+<Locale lang="el" messages="http://www.google.com/ig/modules/chart_content/el_ALL.xml"/>
+<Locale lang="en-GB" messages="http://www.google.com/ig/modules/chart_content/en_GB.xml"/>
+<Locale lang="es" messages="http://www.google.com/ig/modules/chart_content/es_ALL.xml"/>
+<Locale lang="et" messages="http://www.google.com/ig/modules/chart_content/et_ALL.xml"/>
+<Locale lang="fi" messages="http://www.google.com/ig/modules/chart_content/fi_ALL.xml"/>
+<Locale lang="fr" messages="http://www.google.com/ig/modules/chart_content/fr_ALL.xml"/>
+<Locale lang="hi" messages="http://www.google.com/ig/modules/chart_content/hi_ALL.xml"/>
+<Locale lang="hr" messages="http://www.google.com/ig/modules/chart_content/hr_ALL.xml"/>
+<Locale lang="hu" messages="http://www.google.com/ig/modules/chart_content/hu_ALL.xml"/>
+<Locale lang="hy" messages="http://www.google.com/ig/modules/chart_content/hy_ALL.xml"/>
+<Locale lang="id" messages="http://www.google.com/ig/modules/chart_content/id_ALL.xml"/>
+<Locale lang="is" messages="http://www.google.com/ig/modules/chart_content/is_ALL.xml"/>
+<Locale lang="it" messages="http://www.google.com/ig/modules/chart_content/it_ALL.xml"/>
+<Locale lang="iw" messages="http://www.google.com/ig/modules/chart_content/iw_ALL.xml" language_direction="rtl"/>
+<Locale lang="ja" messages="http://www.google.com/ig/modules/chart_content/ja_ALL.xml"/>
+<Locale lang="ko" messages="http://www.google.com/ig/modules/chart_content/ko_ALL.xml"/>
+<Locale lang="lt" messages="http://www.google.com/ig/modules/chart_content/lt_ALL.xml"/>
+<Locale lang="lv" messages="http://www.google.com/ig/modules/chart_content/lv_ALL.xml"/>
+<Locale lang="ms" messages="http://www.google.com/ig/modules/chart_content/ms_ALL.xml"/>
+<Locale lang="nl" messages="http://www.google.com/ig/modules/chart_content/nl_ALL.xml"/>
+<Locale lang="no" messages="http://www.google.com/ig/modules/chart_content/no_ALL.xml"/>
+<Locale lang="pl" messages="http://www.google.com/ig/modules/chart_content/pl_ALL.xml"/>
+<Locale lang="pt-BR" messages="http://www.google.com/ig/modules/chart_content/pt_BR.xml"/>
+<Locale lang="pt-PT" messages="http://www.google.com/ig/modules/chart_content/pt_PT.xml"/>
+<Locale lang="ro" messages="http://www.google.com/ig/modules/chart_content/ro_ALL.xml"/>
+<Locale lang="ru" messages="http://www.google.com/ig/modules/chart_content/ru_ALL.xml"/>
+<Locale lang="sl" messages="http://www.google.com/ig/modules/chart_content/sl_ALL.xml"/>
+<Locale lang="sk" messages="http://www.google.com/ig/modules/chart_content/sk_ALL.xml"/>
+<Locale lang="sr" messages="http://www.google.com/ig/modules/chart_content/sr_ALL.xml"/>
+<Locale lang="sv" messages="http://www.google.com/ig/modules/chart_content/sv_ALL.xml"/>
+<Locale lang="th" messages="http://www.google.com/ig/modules/chart_content/th_ALL.xml"/>
+<Locale lang="tl" messages="http://www.google.com/ig/modules/chart_content/tl_ALL.xml"/>
+<Locale lang="tr" messages="http://www.google.com/ig/modules/chart_content/tr_ALL.xml"/>
+<Locale lang="uk" messages="http://www.google.com/ig/modules/chart_content/uk_ALL.xml"/>
+<Locale lang="vi" messages="http://www.google.com/ig/modules/chart_content/vi_ALL.xml"/>
+<Locale lang="zh-CN" messages="http://www.google.com/ig/modules/chart_content/zh_CN.xml"/>
+<Locale lang="zh-TW" messages="http://www.google.com/ig/modules/chart_content/zh_TW.xml"/>
+</ModulePrefs>
+<UserPref name="_table_query_url" display_name="__MSG_tablequeryurl__" required="true"/>
+<UserPref name="title" display_name="__MSG_title__" required="false"/>
+<UserPref name="chartTitle" display_name="__MSG_chartTitle__" required="false"/>
+<UserPref name="legend" display_name="__MSG_legend__" default_value="__MSG_labeled__" datatype="enum" required="false">
+<EnumValue value="0" display_value="__MSG_labeled__"/>
+<EnumValue value="1" display_value="__MSG_onRight__"/>
+<EnumValue value="2" display_value="__MSG_onLeft__"/>
+<EnumValue value="3" display_value="__MSG_onTop__"/>
+<EnumValue value="4" display_value="__MSG_onBottom__"/>
+<EnumValue value="5" display_value="__MSG_noLegend__"/>
+</UserPref>
+<UserPref name="3d" display_name="__MSG_3d__" datatype="bool"/>
+<UserPref name="_table_query_refresh_interval" display_name="__MSG_tablequeryrefreshinterval__" default_value="300" datatype="enum" required="false">
+<EnumValue value="0" display_value="__MSG_never__"/>
+<EnumValue value="60" display_value="1"/>
+<EnumValue value="300" display_value="5"/>
+<EnumValue value="1800" display_value="30"/>
+</UserPref>
+<Content type="html">
+<div id="loading"><img src="http://www.google.com/ig/images/spinner.gif" /></div> <div id="chart"></div> <script src="http://www.google.com/jsapi" type="text/javascript"></script> <script type="text/javascript"> _IG_RegisterOnloadHandler(loadVisualizationAPI); var pieChart = null; var options = {}; var prefs = new _IG_Prefs(); var title = prefs.getString('title'); if (title) { _IG_SetTitle(title); } function loadVisualizationAPI() { google.load('visualization', '1', {packages: ['piechart']}); google.setOnLoadCallback(init); }; var gadgetHelper; function init() { gadgetHelper = new google.visualization.GadgetHelper(); var container = document.getElementById('chart'); container.style.width = document.body.clientWidth; container.style.height = document.body.clientHeight; pieChart = new google.visualization.PieChart(container); options['title'] = prefs.getString('chartTitle'); options['titleX'] = prefs.getString('labelx'); options['titleY'] = prefs.getString('labely'); options['is3D'] = prefs.getBool('3d'); var legendOptions = ['label', 'right', 'left', 'top', 'bottom', 'none']; options['legend'] = legendOptions[prefs.getInt('legend')]; var query = gadgetHelper.createQueryFromPrefs(prefs); query.send(responseHandler); }; function responseHandler(response) { // Remove the loading message (if exists). var loadingMsgContainer = document.getElementById('loading'); loadingMsgContainer.style.display = 'none'; if (!gadgetHelper.validateResponse(response)) { // Default error handling was done, just leave. return; } var dataTable = response.getDataTable(); pieChart.draw(dataTable, options); }; </script>
+</Content>
+</Module>

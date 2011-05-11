@@ -1,0 +1,26 @@
+<Module>
+<ModulePrefs
+  title="__MSG_default_title__"
+  description="__MSG_description__"
+  author="Sundew H. Shin"
+  author_affiliation="Wednus Inc."
+  author_email="sundew@gmail.com"
+  screenshot=""
+  thumbnail="">
+</ModulePrefs>
+<UserPref name="path" display_name="W. Path" default_value="http://http://wednus.googlecode.com/svn/trunk/wednus_platform"/>
+<Content type="html">
+<![CDATA[
+<script type='text/javascript' src='http://http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
+<script type='text/javascript'>
+W.control('AnyBox');
+</script>
+
+<script type="text/javascript">
+var a = new W.AnyBox('div');
+a.wps = '100,100,xcenter:0,ycenter:0';
+a.core.style.background = 'red';
+</script>
+
+]]>
+</Content></Module>

@@ -8,10 +8,10 @@
   screenshot=""
   thumbnail="">
 </ModulePrefs>
-<UserPref name="path" display_name="W. Path" default_value="http://http://wednus.googlecode.com/svn/trunk/wednus_platform"/>
+<UserPref name="path" display_name="W. Path" default_value="http://wednus.googlecode.com/svn/trunk/wednus_platform"/>
 <Content type="html">
 <![CDATA[
-<script type='text/javascript' src='http://http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
+<script type='text/javascript' src='http://wednus.googlecode.com/svn/trunk/wednus_platform/wednus_compact.js'></script>
 <script type='text/javascript'>
 W.control('AnyBox');
 </script>

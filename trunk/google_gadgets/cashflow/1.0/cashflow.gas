@@ -1,0 +1,145 @@
+function main(){
+  // Parse the basic settings
+  var settings = SpreadsheetApp.getActiveSheet().getRange(1, 1, 1, 3).getValues();
+
+  // Construct a Cashier
+  var cashier = new Cashier();
+  cashier.cal = settings[0][0];
+  cashier.start = new Date(settings[0][1]);
+  cashier.end = new Date(settings[0][2]);
+  cashier.run();
+};
+
+
+/**
+ * Cashier class
+ *
+ * This class implements a prototype of Cashflow object containers. (cashier)
+ * @param {Object} args extend/override constructor w/ this passed args object
+ */
+var Cashier = function(args){var self = this;
+  this.sheet = SpreadsheetApp.getActiveSheet();
+  this.cal = "My Cashflow";
+  this.start = new Date();
+  this.end = new Date();
+  this.headers = ["Change", "Title", "Date", "Cash", "Description", "Non-cash", "Description", "Total"];
+  this.headerRow = 2;
+  this.headerCol = 1;
+  // containers
+  this.events = [];  // raw row data
+  this.data = [];  // formatted events
+  // extend/override constructor w/ passed args object
+  for(var i in args)
+    eval('this.'+ i +' = args["'+ i +'"];');
+
+  // main run
+  this.run = function(){
+    if(!self.sanity()) return false;
+    self.clear();
+    self.printHeaders();
+    self.compile();
+    self.print();
+    return true;
+  };
+
+  // Check the sanity
+  this.sanity = function(){
+    if(self.start == "Invalid Date" || self.end == "Invalid Date"){
+      Browser.msgBox("ERROR: The given start or end date is not in valid date format. (format: MM/DD/YYYY)");
+      return false;
+    };
+    self.events = CalendarApp.openByName(self.cal).getEvents(self.start, self.end);
+    switch(self.events.length){
+      case 0:
+        Browser.msgBox("ERROR: The calendar is empty or the calendar name given is not exist in your calendar collection. Nothing to do.");
+        return false;
+      default:
+    };
+    return true;
+  };
+
+  // Print header labels
+  this.printHeaders = function(){
+    self.sheet.getRange(self.headerRow, self.headerCol, 1, self.headers.length).setValues([self.headers]);
+  };
+
+  // Clear data range
+  this.clear = function(){
+    self.sheet.getRange(3,1, self.sheet.getLastRow(), self.sheet.getLastColumn()).clearContent();
+  };
+  // Print the formatted data
+  this.print = function(){
+    // Fill the data
+    self.sheet.getRange(3, 1, self.events.length, self.headers.length).setValues(self.data);
+  };
+  // Format the input
+  this.compile = function(){
+    // Prepare containers
+    var data =[];
+    var amount = 0;
+    var totalCash = 0;
+    var totalNonCash = 0;
+    var isCash = false;
+    // Compile all the row information: optimized the format of the data for the trend chart type
+    for(var i = 0; i < self.events.length; i++){
+      var value = [];
+      // initialization
+      isCash = self.events[i].guestsCanInviteOthers();
+      // Push the changed amount
+      amount = new Number(self.events[i].getLocation());
+      value.push(amount);
+      value.push(self.events[i].getTitle());
+      // Push the info
+      value.push(Utilities.formatDate(self.events[i].getStartTime(), "GMT", "MM/dd/yyyyy"));
+
+      // Handle cash or non-cash transaction
+      if(isCash){
+        totalCash += amount;
+        value.push(totalCash);
+        // Push the cash description
+        value.push(self.events[i].getDescription());
+        // Skip the non-cash columes
+        value.push(totalNonCash);
+        value.push("");
+      }else{
+        // Skip the non-cash columes
+        value.push(totalCash);
+        value.push("");
+        totalNonCash += amount;
+        value.push(totalNonCash);
+        // Push the cash description
+        value.push(self.events[i].getDescription());
+      };
+      // Push the Sum of cash and non-cash
+      value.push(totalCash+totalNonCash);
+      // Push all in series
+      self.data.push(value);
+    };
+  };
+
+  return this;
+};
+
+
+// Add a drop-down memu
+function onOpen() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var menuEntries = [ {name: "Build", functionName: "main"},
+                     {name: "Clear All", functionName: "clear"},
+                     null,
+                     {name: "About This", functionName: "about"} ];
+  ss.addMenu("Cashflow", menuEntries);
+}
+
+function clear() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  sheet.getRange(3,1, sheet.getLastRow(), sheet.getLastColumn()).clearContent();
+}
+
+function about() {
+  Browser.msgBox("EGO Cashflow", "This script generates a transaction table from a calendar and produces cashflow chart.", Browser.Buttons.OK);
+}
+
+function alert(msg){
+  Browser.msgBox(msg);
+};

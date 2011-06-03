@@ -1,6 +1,6 @@
 // PLEASE SPECIFY THE ID OF THE DATA SPREADSHEET.
 // IF YOU DON'T SPECIFY THIS, THIS PROGRAM WILL RUN MUCH SLOWER.
-var DATA_SPREADSHEET_ID = 't2BQVFTf3yF0xsbUUbiu_-A';
+var DATA_SPREADSHEET_ID = '';
 
 
 
@@ -8,15 +8,6 @@ var DATA_SPREADSHEET_ID = 't2BQVFTf3yF0xsbUUbiu_-A';
 // EGO Cashflow2
 var version = '1.0';
 /////////////////////////////
-// TODO:
-// form validation
-// multiple language support
-// setup screen - Script properties..
-//
-// BUG:
-// Empty record addition
-// error on deletion of the final item
-
 var ss = null;
 var docId = null;
 // try to access the user-specified data spreadsheet

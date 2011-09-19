@@ -91,13 +91,16 @@ function sendQuery() {
  */
 function handleQueryResponse(response) {
   //Use the visualization GadgetHelper class to handle errors 
-  if (!gadgetHelper.validateResponse(response)) { return; // Default error handling was done, just leave. }
+  if (!gadgetHelper.validateResponse(response)) {
+    return; // Default error handling was done, just leave.
+  }
   // GET THE DATA FROM THE SPREADSHEET - sorry to scream in caps, but * this is a key step
   var data = response.getDataTable(); 
-  var html = []; // start the HTML output string html.push('<a class="feed" href="__UP_feedUrl__">Subscribe to comments</a><span class="counter">Comments');
+  var html = []; // start the HTML output string
+  html.push('<a class="feed" href="__UP_feedUrl__">Subscribe to comments</a><span class="counter">Comments');
   var row = data.getNumberOfRows()-1;
   var timestamp = data.getFormattedValue(row,0);
-  timestamp=escapeHtml(timestamp);
+  timestamp = escapeHtml(timestamp);
   if (timestamp != 'Timestamp') {
     html.push(' (' + (row+1) + ')');
   }
@@ -105,7 +108,8 @@ function handleQueryResponse(response) {
   // Set the generated html into the container div.
   var topDiv = _gel('topdiv');
   topDiv.innerHTML = html.join('');
-  var html = [];// start the HTML output string var row = data.getNumberOfRows()-1;
+  var html = []; // start the HTML output string
+  var row = data.getNumberOfRows()-1;
   for (__UP_commentsOrder__) { 
     var timestamp = data.getFormattedValue(row,0);
     timestamp=escapeHtml(timestamp);
@@ -121,17 +125,17 @@ function handleQueryResponse(response) {
       }
       html.push('<div class="headers"><span class="numbers">No. ' + (row+1) + '</span>');
       var url = data.getFormattedValue(row,2);
-      url=escapeHtml(url);
+      url = escapeHtml(url);
       if (url == "") {
         html.push('<span class="names">' + name + '</span>');
       } else {
         html.push('<a class="names" href="' + url + '">' + name + '</a>');
       }
       html.push('<span class="timestamps">' + timestamp + '</span></div>');
-      var comment=data.getFormattedValue(row,3);
-      comment=replacer(comment, /\n/g, "jfdklsfjoiejfdklsfjoidsajfkldjsalkfnklvjdoisahrefjfdklshfjldksfjoiaejwkrfl");
-      comment=escapeHtml(comment);
-      comment=replacer(comment, /jfdklsfjoiejfdklsfjoidsajfkldjsalkfnklvjdoisahrefjfdklshfjldksfjoiaejwkrfl/g, "<br>");
+      var comment = data.getFormattedValue(row,3);
+      comment = replacer(comment, /\n/g, "jfdklsfjoiejfdklsfjoidsajfkldjsalkfnklvjdoisahrefjfdklshfjldksfjoiaejwkrfl");
+      comment = escapeHtml(comment);
+      comment = replacer(comment, /jfdklsfjoiejfdklsfjoidsajfkldjsalkfnklvjdoisahrefjfdklshfjldksfjoiaejwkrfl/g, "<br>");
       html.push('<div class="comments">' + comment + '</div></div>');
     }
   } 

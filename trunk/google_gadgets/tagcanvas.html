@@ -1,0 +1,82 @@
+<html>
+<head>
+<STYLE TYPE="text/css"> 
+<!-- 
+body{overflow: hidden; background: black}; 
+--> 
+</STYLE>  
+
+<!--[if lt IE 9]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+<script src="tagcanvas.js" type="text/javascript"></script>
+ <script type="text/javascript">
+  window.onload = function() {
+	TagCanvas.interval = 20;
+	TagCanvas.textFont = 'Impact,Arial Black,sans-serif';
+	TagCanvas.textColour = '#00f';
+	TagCanvas.textHeight = 25;
+	TagCanvas.outlineColour = '#f96';
+	TagCanvas.outlineThickness = 5;
+	TagCanvas.maxSpeed = 0.04;
+	TagCanvas.minBrightness = 0.1;
+	TagCanvas.depth = 0.92;
+	TagCanvas.pulsateTo = 0.2;
+	TagCanvas.pulsateTime = 0.75;
+	TagCanvas.initial = [0.1,-0.1];
+	TagCanvas.decel = 0.98;
+	TagCanvas.reverse = true;
+	TagCanvas.hideTags = false;
+	//TagCanvas.shadow = '#ccf';
+	TagCanvas.shadow = '#fff';
+	TagCanvas.shadowBlur = 3;
+	TagCanvas.weight = true;
+	TagCanvas.weightFrom = 'data-weight';
+	try {
+		TagCanvas.Start('tagcanvas','weightTags',{weightMode:'both'});
+	} catch(e) {
+	}
+  };
+ </script>
+</head>
+<body>
+
+
+
+<div class="centred" style="display:none">
+<ul class="weighted" style="font-size: 50%" id="weightTags">
+	<li><a href="#" data-weight="50" style="font-size: 10.68ex">cost</a></li>
+	<li><a href="#" data-weight="50" style="font-size: 3.16ex">efficiency</a></li>
+
+	<li><a href="#" data-weight="48" style="font-size: 2.65ex">vendor relationship</a></li>
+	<li><a href="#" data-weight="48" style="font-size: 3.32ex">gross surface area</a></li>
+	<li><a href="#" data-weight="48" style="font-size: 4.69ex">warranty</a></li>
+
+	<li><a href="#" data-weight="46" style="font-size: 4.8ex">approvals</a></li>
+	<li><a href="#" data-weight="46" style="font-size: 4.8ex">IEC</a></li>
+	<li><a href="#" data-weight="46" style="font-size: 4.8ex">UL</a></li>
+	<li><a href="#" data-weight="46" style="font-size: 4.8ex">CE</a></li>
+	<li><a href="#" data-weight="46" style="font-size: 3.74ex">rated output</a></li>
+
+	<li><a href="#" data-weight="42" style="font-size: 3.16ex">output tolerance</a></li>
+	<li><a href="#" data-weight="42" style="font-size: 8.36ex">temperature coeff.</a></li>
+	<li><a href="#" data-weight="42" style="font-size: 4.36ex">irradiation coeff.</a></li>
+	<li><a href="#" data-weight="42" style="font-size: 3.16ex">max load</a></li>
+
+	<li><a href="#" data-weight="38" style="font-size: 10.68ex">PTC/NOCT ratings</a></li>
+	<li><a href="#" data-weight="38" style="font-size: 3.74ex">fuse rating</a></li>
+	<li><a href="#" data-weight="38" style="font-size: 5.47ex">lead time</a></li>
+
+	<li><a href="#" data-weight="34" style="font-size: 3.61ex">build material</a></li>
+	<li><a href="#" data-weight="34" style="font-size: 3.46ex">cell type</a></li>
+
+	<li><a href="#" data-weight="30" style="font-size: 4.47ex">framing type</a></li>
+	<li><a href="#" data-weight="30" style="font-size: 12.32ex">contactor type</a></li>
+	<li><a href="#" data-weight="30" style="font-size: 9.64ex">coating</a></li>
+</ul>
+</div>
+
+<canvas id="tagcanvas" width="1366" height="768" style="float: left;"></canvas>
+
+
+</body>
+</html>
+

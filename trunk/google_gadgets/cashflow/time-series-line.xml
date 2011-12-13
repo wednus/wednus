@@ -68,10 +68,8 @@
 <UserPref name="display_exact_values" display_name="__MSG_displayexactvalues__" datatype="bool" default_value="false" required="false"/>
 <UserPref name="display_annotations_filter" display_name="__MSG_filterannotations__" datatype="bool" default_value="false" required="false"/>
 <UserPref name="display_legend_inNewline" display_name="__MSG_legendPosition__" datatype="bool" default_value="false" required="false"/>
-<Content type="html" view="home,canvas">
-<div id="loading"><img src="http://www.google.com/ig/images/spinner.gif" /></div> <div id="annotatedtimeline-div"></div>
+<Content type="html"><div id="loading"><img src="http://www.google.com/ig/images/spinner.gif" /></div> <div id="annotatedtimeline-div"></div>
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-
 <script type="text/javascript">
 var GS_URL_REGEXP = new RegExp('http://[A-Za-z0-9]*\\.spreadsheets\\.gmodules\\.com/gadgets/ifr');
 var prefs = new _IG_Prefs();

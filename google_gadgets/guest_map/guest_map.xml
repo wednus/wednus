@@ -42,7 +42,7 @@ gadgets.util.registerOnLoadHandler(initialize);
     below &nbsp;3. Press the submit button.<br>
     <br>
 
-    <form action="http://spreadsheets.google.com/formResponse?key=__UP_formkey__" method="POST">
+    <form action="http://spreadsheets.google.com/formResponse?formkey=__UP_formkey__" method="POST">
       <span class="ss-q-title">What is your Name?</span>
       <input type="text" class="ss-q-short" id="entry_0" name="entry.0.single" />
       Latitude:

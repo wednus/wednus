@@ -39,6 +39,7 @@ function initialize(){
 gadgets.util.registerOnLoadHandler(initialize);
 </script>
 
+<br><br>
 <div align="center">
   <div id="map_canvas" style="width: 780px; height: 380px" align="right"></div><br>
     1. Click on the map to add your location &nbsp;2. Enter your name in the box

@@ -1,0 +1,60 @@
+<Module>
+<ModulePrefs
+  title="__MSG_default_title__"
+  description="__MSG_description__"
+  author="Sundew H. Shin"
+  author_affiliation="Wednus Inc."
+  author_email="sundew@wednus.com"
+  screenshot=""
+  thumbnail="">
+</ModulePrefs>
+<UserPref name="formkey" display_name="Form Key" default_value="dGlZR21xM01ER2RwbHppNGFzbG9xaGc6MQ"/>
+<UserPref name="mapkey" display_name="Map Key" default_value="ABQIAAAAYSl3wOKt1_93bqAICETgHRTqCeOSfagX7DdDM9Lbk2gT-cFkeBTZ9TuYdXxUPwUvXi3mMhp01DfbFA"/>
+<Content type="html">
+<![CDATA[
+
+<script
+  src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=__UP_mapkey__"
+  type="text/javascript">
+</script>
+
+<script type="text/javascript">
+function initialize(){
+  if(GBrowserIsCompatible()){
+    var map = new GMap2(document.getElementById("map_canvas"));
+    map.setCenter(new GLatLng(37.4419, -122.1419), 2);
+    GEvent.addListener(map, 'click', function(overlay, point) {
+      var latLngStr = "Lat = " + point.y + ", Long = " + point.x;
+      map.openInfoWindow(point, latLngStr);
+      document.getElementById("latbox").value=point.y;
+      document.getElementById("lonbox").value=point.x;
+    });
+    map.addControl(new GSmallMapControl());
+    map.addControl(new GMapTypeControl());
+    map.enableScrollWheelZoom();
+  }
+}
+
+// <body onload="initialize()" onunload="GUnload()">
+gadgets.util.registerOnLoadHandler(initialize);
+</script>
+
+<div align="center">
+  <div id="map_canvas" style="width: 780px; height: 380px" align="right"></div><br>
+    1. Click on the map to add your location &nbsp;2. Enter your name in the box
+    below &nbsp;3. Press the submit button.<br>
+    <br>
+
+    <form action="http://spreadsheets.google.com/formResponse?key=__UP_formkey__" method="POST">
+      <span class="ss-q-title">What is your Name?</span>
+      <input type="text" class="ss-q-short" name="single:0" />
+      Latitude:
+      <input size="19" type="text" id="latbox" class="ss-q-short" name="single:2" value="" >
+      Longitude:
+      <input size="19" type="text" id="lonbox" class="ss-q-short" name="single:1" value="" >
+      <br><br>
+      <input type="submit" value="Submit" name="submit" />
+    </form>
+</div>
+]]>
+</Content></Module>

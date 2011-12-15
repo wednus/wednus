@@ -44,11 +44,11 @@ gadgets.util.registerOnLoadHandler(initialize);
 
     <form action="http://spreadsheets.google.com/formResponse?key=__UP_formkey__" method="POST">
       <span class="ss-q-title">What is your Name?</span>
-      <input type="text" class="ss-q-short" name="entry.0.single" />
+      <input type="text" class="ss-q-short" id="entry_0" name="entry.0.single" />
       Latitude:
-      <input size="19" type="text" id="latbox" class="ss-q-short" name="entry.1.single" value="" >
+      <input size="19" type="text" id="entry_2" class="ss-q-short" name="entry.2.single" value="" >
       Longitude:
-      <input size="19" type="text" id="lonbox" class="ss-q-short" name="entry.2.single" value="" >
+      <input size="19" type="text" id="entry_1" class="ss-q-short" name="entry.1.single" value="" >
       <br><br>
       <input type="submit" value="Submit" name="submit" />
     </form>

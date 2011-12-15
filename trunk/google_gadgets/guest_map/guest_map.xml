@@ -8,16 +8,12 @@
   screenshot=""
   thumbnail="">
 </ModulePrefs>
-<UserPref name="formkey" display_name="Form Key" default_value="dGlZR21xM01ER2RwbHppNGFzbG9xaGc6MQ"/>
+<UserPref name="formkey" display_name="Form Key" default_value="0AtZdcC8CObKRcEh4d011eVFoUmRTd045UWNLYXFXVkE"/>
 <UserPref name="mapkey" display_name="Map Key" default_value="ABQIAAAAYSl3wOKt1_93bqAICETgHRTqCeOSfagX7DdDM9Lbk2gT-cFkeBTZ9TuYdXxUPwUvXi3mMhp01DfbFA"/>
 <Content type="html">
 <![CDATA[
 
-<script
-  src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=__UP_mapkey__"
-  type="text/javascript">
-</script>
-
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=__UP_mapkey__" type="text/javascript"></script>
 <script type="text/javascript">
 function initialize(){
   if(GBrowserIsCompatible()){
@@ -48,11 +44,11 @@ gadgets.util.registerOnLoadHandler(initialize);
 
     <form action="http://spreadsheets.google.com/formResponse?key=__UP_formkey__" method="POST">
       <span class="ss-q-title">What is your Name?</span>
-      <input type="text" class="ss-q-short" name="single:0" />
+      <input type="text" class="ss-q-short" name="entry.0.single" />
       Latitude:
-      <input size="19" type="text" id="latbox" class="ss-q-short" name="single:2" value="" >
+      <input size="19" type="text" id="latbox" class="ss-q-short" name="entry.1.single" value="" >
       Longitude:
-      <input size="19" type="text" id="lonbox" class="ss-q-short" name="single:1" value="" >
+      <input size="19" type="text" id="lonbox" class="ss-q-short" name="entry.2.single" value="" >
       <br><br>
       <input type="submit" value="Submit" name="submit" />
     </form>

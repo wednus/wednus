@@ -32,7 +32,8 @@ function initialize(){
 }
 
 // <body onload="initialize()" onunload="GUnload()">
-gadgets.util.registerOnLoadHandler(initialize);
+// gadgets.util.registerOnLoadHandler(initialize);
+initialize();
 </script>
 
 <br><br>

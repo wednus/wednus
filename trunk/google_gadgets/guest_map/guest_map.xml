@@ -15,7 +15,7 @@
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=__UP_mapkey__" type="text/javascript"></script>
 <script type="text/javascript">
-function initialize(){
+//function initialize(){
   if(GBrowserIsCompatible()){
     var map = new GMap2(document.getElementById("map_canvas"));
     map.setCenter(new GLatLng(37.4419, -122.1419), 2);
@@ -29,11 +29,10 @@ function initialize(){
     map.addControl(new GMapTypeControl());
     map.enableScrollWheelZoom();
   }
-}
+//}
 
 // <body onload="initialize()" onunload="GUnload()">
 // gadgets.util.registerOnLoadHandler(initialize);
-initialize();
 </script>
 
 <br><br>

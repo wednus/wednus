@@ -1,0 +1,1 @@
+Wednus Platform encapsulates the complexity of supporting various web browsers and establishes browser-neutral web application platform.

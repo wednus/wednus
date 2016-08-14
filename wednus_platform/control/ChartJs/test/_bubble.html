@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ChartJs Control - code sample</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.control('ChartJs');
+</script>
+
+<script type='text/javascript'>
+var data = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  animation: {
+    duration: 10000
+  },
+  datasets: [{
+    label: "My First dataset",
+    backgroundColor: 'rgba(220,220,220,0.5)',
+    data: [{
+        x: 3,
+        y: 4,
+        r: Math.abs(11) / 5,
+    }, {
+        x: 5,
+        y: 6,
+        r: Math.abs(22) / 5,
+    }, {
+        x: 7,
+        y: 8,
+        r: Math.abs(33) / 5,
+    }, {
+        x: 9,
+        y: 1,
+        r: Math.abs(27) / 5,
+    }, {
+        x: 5,
+        y: 9,
+        r: Math.abs(35) / 5,
+    }, {
+        x: 6,
+        y: 7,
+        r: Math.abs(42) / 5,
+    }, {
+        x: 9,
+        y: 12,
+        r: Math.abs(51) / 5,
+    }]
+  }, {
+    label: "My Second dataset",
+    backgroundColor: 'rgba(151,187,205,0.5)',
+    data: [{
+        x: 9,
+        y: 3,
+        r: Math.abs(61) / 5,
+    }, {
+        x: 6,
+        y: 8,
+        r: Math.abs(12) / 5,
+    }, {
+        x: 2,
+        y: 9,
+        r: Math.abs(50) / 5,
+    }, {
+        x: 2,
+        y: 5,
+        r: Math.abs(12) / 5,
+    }, {
+        x: 6,
+        y: 3,
+        r: Math.abs(22) / 5,
+    }, {
+        x: 2,
+        y: 4,
+        r: Math.abs(44) / 5,
+    }, {
+        x: 12,
+        y: 3,
+        r: Math.abs(66) / 5,
+    }]
+  }]
+};
+
+var myChartJs = new W.ChartJs({
+  wps: '60%,60%,xcenter:0,ycenter:0',
+  wss: 'overflow:auto;',
+  type: 'bubble',
+  data: data,
+  options: {
+    responsive: true,
+    title:{
+      display: true,
+      text:'Chart.js Bubble Chart'
+    }
+  },
+  control: true
+});
+
+document.write('control name: '+ myChartJs.name);
+</script>
+</head>
+<body>
+</body>
+</html>

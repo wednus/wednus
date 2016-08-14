@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>FChart Control - code sample</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.control('FChart');
+</script>
+
+<script type='text/javascript'>
+var myFChart = new W.FChart({
+  type: 'column2d',
+  dataFormat: 'json',
+  dataSource: {
+    "chart": {
+      "caption": "Monthly Revenue",
+      "subCaption": "Last year",
+      "xAxisName": "Month",
+      "yAxisName": "Amount (In USD)",
+      "numberPrefix": "$",
+      "canvasBgAlpha": "0",
+      "bgColor": "#DDDDDD",
+      "bgAlpha": "50",
+      "theme": "fint",
+      "exportEnabled": "1"
+    },
+    "data": [{
+      "label": "Jan",
+      "value": "420000"
+    }, {
+      "label": "Feb",
+      "value": "810000"
+    }, {
+      "label": "Mar",
+      "value": "720000"
+    }, {
+      "label": "Apr",
+      "value": "550000"
+    }, {
+      "label": "May",
+      "value": "910000"
+    }, {
+      "label": "Jun",
+      "value": "510000"
+    }, {
+      "label": "Jul",
+      "value": "680000"
+    }, {
+      "label": "Aug",
+      "value": "620000"
+    }, {
+      "label": "Sep",
+      "value": "610000"
+    }, {
+      "label": "Oct",
+      "value": "490000"
+    }, {
+      "label": "Nov",
+      "value": "900000"
+    }, {
+      "label": "Dec",
+      "value": "730000"
+    }]
+  }
+});
+
+document.write('control name: '+ myFChart.name);
+</script>
+ 
+</head>
+<body>
+</body>
+</html>

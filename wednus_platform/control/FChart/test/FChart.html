@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test - FChart.js</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+// using debugging utilities
+W.module('debug');	// W.test, W.Timer, ...
+// include modules or controls
+W.control('FChart');
+</script>
+<script type='text/javascript'>
+var timer = new W.Timer();
+timer.start();
+//W.test(typeof W.FChart == 'object', 'required library loaded');
+var myFChart = new W.FChart();
+//-----------------------------------> constructor
+W.test(myFChart.name == 'FChart', 'check the default constructor');
+//<-----------------------------------
+
+//-----------------------------------> 
+
+//<-----------------------------------
+
+
+
+timer.finish();
+</script>
+</head>
+<body>
+</body>
+</html>

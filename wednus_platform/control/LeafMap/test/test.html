@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>LeafMap Control - code sample</title>
+<script type='text/javascript' src='../../../wednus.js'></script>
+<script type='text/javascript'>
+W.control('LeafMap');
+</script>
+
+<script type='text/javascript'>
+var myLeafMap = new W.LeafMap({
+  center: [51.505, -0.09],
+  zoom: 14,
+  add: [{
+    coor: [51.50148, -0.09948],
+    msg: 'hello world here, too',
+    isOpened: false
+  },{
+    coor: [51.50655, -0.10059],
+    msg: 'hello world',
+    isOpened: true
+  }]
+});
+document.write('control name: '+ myLeafMap.name);
+</script>
+ 
+</head>
+<body>
+</body>
+</html>
